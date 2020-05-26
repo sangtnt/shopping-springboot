@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.shelmark.demo.Entity;
 
 import java.util.List;
@@ -11,24 +14,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+/**
+ * @author TanSang
+ *
+ */
 @Entity
-@Table(name = "permission")
-public class Permission {
+@Table(name="cus_order")
+public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PERSMISSION_ID", unique = true, nullable = false)
+	@Column(name="CUSORDER_ID")
 	private Long id;
-
-	@Column(name = "PERSMISSION_NAME", length = 20)
-	private String permissionName;
-
+	
+	@ManyToOne
+	@JoinColumn(name="USER_USERNAME")
+	private User user;
+	
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "USER_PERMISSION", joinColumns = { @JoinColumn(name = "PERMISSION_ID") }, inverseJoinColumns = {
-			@JoinColumn(name = "USER_USERNAME") })
-	private List<User> users;
+	@JoinTable(name = "ORDER_DETAIL", joinColumns = { @JoinColumn(name = "ORDER_ID") }, inverseJoinColumns = {
+			@JoinColumn(name = "PRODUCT_ID") })
+	List<Product> products;
 
 	public Long getId() {
 		return id;
@@ -38,15 +46,19 @@ public class Permission {
 		this.id = id;
 	}
 
-	public String getPermissionName() {
-		return permissionName;
+	public List<Product> getProducts() {
+		return products;
 	}
 
-	public void setPermissionName(String permissionName) {
-		this.permissionName = permissionName;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

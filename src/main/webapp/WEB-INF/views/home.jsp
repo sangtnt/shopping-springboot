@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
@@ -25,7 +25,7 @@
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 				<div class="sidebar-brand-icon">
 					<img height="50px" width="50px" src="img/Logo.png"/>
 				</div>
@@ -39,7 +39,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link"
-				href="index.html"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
+				href="/"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -49,17 +49,17 @@
 			<div class="sidebar-heading">Management</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i> <span>Category</span>
+			<li class="nav-item"><a class="nav-link" href="/category">
+					<i class="fas fa-dice-d6"></i> <span>Category</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i> <span>Products</span>
+			<li class="nav-item"><a class="nav-link" href="/product">
+					<i class="fas fa-boxes"></i> <span>Products</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i> <span>Users</span>
+			<li class="nav-item"><a class="nav-link" href="/user">
+					<i class="fas fa-address-card"></i> <span>Users</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i> <span>Orders</span>
+			<li class="nav-item"><a class="nav-link" href="/order">
+					<i class="fas fa-clipboard-list"></i> <span>Orders</span>
 			</a></li>
 			<hr class="sidebar-divider d-none d-md-block">
 
@@ -245,9 +245,8 @@
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie
-									Luna</span> <img class="img-profile rounded-circle"
-								src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+								class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.user.fullname }</span> <img class="img-profile rounded-circle"
+								src="${sessionScope.user.image }">
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -655,7 +654,7 @@
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+					<a class="btn btn-primary" href="/logout">Logout</a>
 				</div>
 			</div>
 		</div>

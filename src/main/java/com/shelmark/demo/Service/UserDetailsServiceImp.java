@@ -11,26 +11,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.shelmark.demo.Entity.Admin;
+import com.shelmark.demo.Entity.User;
 import com.shelmark.demo.Entity.Permission;
 
-public class AdminDetailsServiceImp implements UserDetailsService {
+public class UserDetailsServiceImp implements UserDetailsService {
 	@Autowired
-	private AdminService adminService;
+	private UserService userService;
 	public final static String ROLE_PREFIX = "ROLE_";// Spring Security 4
-	public final static String PERMISSION_AUTHENTICATED = "AUTH";
+	public final static String PERMISSION_AUTHENTICATED = "";
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-		Admin admin = adminService.findByUserName(userName);
+		User user = userService.findByUserName(userName);
 		Collection<GrantedAuthority> authorities = new
 
 		ArrayList<GrantedAuthority>();
 
 		try {
-			admin = adminService.findByUserName(userName);
-			if (admin == null) {
+			user = userService.findByUserName(userName);
+			if (user == null) {
 				return null;
 			}
 			GrantedAuthority role = new SimpleGrantedAuthority(ROLE_PREFIX
@@ -38,11 +38,11 @@ public class AdminDetailsServiceImp implements UserDetailsService {
 					+ PERMISSION_AUTHENTICATED);// required to
 // login
 			authorities.add(role);
-			if (admin.getPermissions() != null &&
+			if (user.getPermissions() != null &&
 
-					admin.getPermissions().size() > 0) {
+					user.getPermissions().size() > 0) {
 
-				List<Permission> permissions = admin.getPermissions();
+				List<Permission> permissions = user.getPermissions();
 				for (Permission permission : permissions) {
 					GrantedAuthority auth = new SimpleGrantedAuthority(ROLE_PREFIX + permission.getPermissionName());
 
@@ -56,7 +56,7 @@ public class AdminDetailsServiceImp implements UserDetailsService {
 
 		org.springframework.security.core.userdetails.User(
 
-				userName, admin.getPassword(), authorities);
+				userName, user.getPassword(), authorities);
 		return secUser;
 	}
 }

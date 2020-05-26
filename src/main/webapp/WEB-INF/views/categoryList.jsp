@@ -49,13 +49,13 @@
 			<div class="sidebar-heading">Management</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link" href="/category"> <i
+			<li class="nav-item active"><a class="nav-link" href="/category"> <i
 					class="fas fa-dice-d6"></i> <span>Category</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/product"> <i
 					class="fas fa-boxes"></i> <span>Products</span>
 			</a></li>
-			<li class="nav-item active"><a class="nav-link" href="/user">
+			<li class="nav-item"><a class="nav-link" href="/user">
 					<i class="fas fa-address-card"></i> <span>Users</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/order"> <i
@@ -245,7 +245,8 @@
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.user.fullname }</span> <img class="img-profile rounded-circle"
+								class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.user.fullname }</span>
+								<img class="img-profile rounded-circle"
 								src="${sessionScope.user.image }">
 						</a> <!-- Dropdown - User Information -->
 							<div
@@ -277,7 +278,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">User Table</h1>
+					<h1 class="h3 mb-2 text-gray-800">Category Table</h1>
 					<!-- <p class="mb-4">
 						DataTables is a third party plugin that is used to generate the
 						demo table below. For more information about DataTables, please
@@ -288,7 +289,7 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Users
+							<h6 class="m-0 font-weight-bold text-primary">Category
 								Information</h6>
 						</div>
 						<div class="card-body">
@@ -297,47 +298,24 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>Username</th>
-											<th>Full Name</th>
-											<th>Balance</th>
-											<th>Email</th>
-											<th>Gender</th>
-											<th>Phone Number</th>
-											<th>Status</th>
+											<th>#</th>
+											<th>Name</th>
+											<th>Image</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Username</th>
-											<th>Full Name</th>
-											<th>Balance</th>
-											<th>Email</th>
-											<th>Gender</th>
-											<th>Phone Number</th>
-											<th>Status</th>
+											<th>#</th>
+											<th>Name</th>
+											<th>Image</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="user" items="${users}">
+										<c:forEach var="cat" items="${cats}">
 											<tr>
-												<td>${user.username}</td>
-												<td>${user.fullname}</td>
-												<td>${user.balance}</td>
-												<td>${user.email }</td>
-												<td>${user.gender }</td>
-												<td>${user.phone }</td>
-												<td>
-													<c:if test="${user.status}">
-															<span style="color: green">
-																active
-															</span>
-													</c:if>
-													<c:if test="${user.status==false}">
-															<span style="color: red">
-																inactive
-															</span>
-													</c:if>
-												</td>
+												<td>${cat.id}</td>
+												<td>${cat.name}</td>
+												<td><img src="${cat.image }"/></td>
 											</tr>
 										</c:forEach>
 									</tbody>

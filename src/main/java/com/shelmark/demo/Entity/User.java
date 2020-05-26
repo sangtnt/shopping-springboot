@@ -1,12 +1,17 @@
 package com.shelmark.demo.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 @Entity
 @Table(name = "user")
@@ -33,15 +38,25 @@ public class User {
 	@Column(name="USER_BALANCE")
 	private Long balance;
 	
-	@OneToMany(mappedBy="user")
-	List<CusOrder> cusOrders;
-	
 	@Column(name= "USER_STATUS")
 	private boolean status;
-
-	public void setCusOrders(List<CusOrder> cusOrders) {
-		this.cusOrders = cusOrders;
-	}
+	
+	@Column(name= "USER_IMAGE")
+	private String image;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "USER_PERMISSION", 
+			joinColumns = { 
+					@JoinColumn(name = "USER_USERNAME") 
+			}, 
+			inverseJoinColumns = {
+					@JoinColumn(name = "PERMISSION_ID") 
+			})
+	private List<Permission> permissions;
+	
+	@OneToMany(mappedBy="user")
+	private List<Order> orders;
 
 	public String getUsername() {
 		return username;
@@ -75,14 +90,6 @@ public class User {
 		this.gender = gender;
 	}
 
-	public List<CusOrder> getCusOrders() {
-		return cusOrders;
-	}
-
-	public void setOrders(List<CusOrder> cusOrders) {
-		this.cusOrders = cusOrders;
-	}
-
 	public void setBalance(Long balance) {
 		this.balance = balance;
 	}
@@ -113,6 +120,30 @@ public class User {
 
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
+	}
+
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 	
 }
