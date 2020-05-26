@@ -2,16 +2,15 @@ package com.shelmark.demo.Entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,16 +37,14 @@ public class Product {
 	private Long quantity;
 	
 	@Column(name="PRO_DATE")
-	private Long date;
+	private String date;
 	
 	@ManyToOne
 	@JoinColumn(name="CAT_ID", nullable=false)
 	private Category cat;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ORDER_DETAIL", joinColumns = { @JoinColumn(name = "PRODUCT_ID") }, inverseJoinColumns = {
-			@JoinColumn(name = "ORDER_ID") })
-	List<Order> orders;
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	private List<Order_Detail> order_details;
 
 	public Long getId() {
 		return id;
@@ -97,11 +94,12 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public Long getDate() {
+
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Long date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -113,12 +111,15 @@ public class Product {
 		this.cat = cat;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
+	public List<Order_Detail> getOrder_details() {
+		return order_details;
 	}
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setOrder_details(List<Order_Detail> order_details) {
+		this.order_details = order_details;
 	}
+
+
+
 	
 }

@@ -8,13 +8,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -33,25 +33,18 @@ public class Order {
 	@JoinColumn(name="USER_USERNAME")
 	private User user;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ORDER_DETAIL", joinColumns = { @JoinColumn(name = "ORDER_ID") }, inverseJoinColumns = {
-			@JoinColumn(name = "PRODUCT_ID") })
-	List<Product> products;
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade=CascadeType.ALL)
+	private List<Order_Detail> order_details;
+	
+	@Column(name="ORDER_ISACCEPTED")
+	private boolean is_Accepted;
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
 	}
 
 	public User getUser() {
@@ -61,4 +54,22 @@ public class Order {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public List<Order_Detail> getOrder_details() {
+		return order_details;
+	}
+
+	public void setOrder_details(List<Order_Detail> order_details) {
+		this.order_details = order_details;
+	}
+
+	public boolean isIs_Accepted() {
+		return is_Accepted;
+	}
+
+	public void setIs_Accepted(boolean is_Accepted) {
+		this.is_Accepted = is_Accepted;
+	}
+
+	
 }

@@ -1,5 +1,9 @@
 package com.shelmark.demo.Controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shelmark.demo.Entity.Category;
+import com.shelmark.demo.Entity.Order;
 import com.shelmark.demo.Entity.Product;
 import com.shelmark.demo.Entity.User;
 import com.shelmark.demo.Service.HomeService;
@@ -23,6 +28,13 @@ public class HomeController {
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("home");
+		return mv;
+	}
+	
+	@RequestMapping(value="/login", method= RequestMethod.GET)
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("login");
 		return mv;
 	}
 	
@@ -48,8 +60,23 @@ public class HomeController {
 	public ModelAndView getProduct() {
 		ModelAndView mv = new ModelAndView();
 		List<Product> pros = homeService.getAllProduct();
+		DateFormat df = new SimpleDateFormat("dd:MM:yyyy:HH:mm:ss");
+		for (Product pro:pros) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(Long.parseLong(pro.getDate()));
+			pro.setDate(df.format(cal.getTime()));
+		}
 		mv.setViewName("productList");
 		mv.addObject("pros", pros);
+		return mv;
+	}
+	
+	@RequestMapping(value="/order", method= RequestMethod.GET)
+	public ModelAndView getOrder() {
+		ModelAndView mv = new ModelAndView();
+		List<Order> orders = homeService.getAllOrder();
+		mv.setViewName("cusOrder");
+		mv.addObject("orders", orders);
 		return mv;
 	}
 }

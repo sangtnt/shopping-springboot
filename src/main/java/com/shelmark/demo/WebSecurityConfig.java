@@ -36,11 +36,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+			.antMatchers("/lib/bootstrap/**",
+                "/css/**",
+                "/img/**",
+                "/js/**")
+			.permitAll()
 			.antMatchers("/**").hasRole("ADMIN")
 			.anyRequest()
 			.authenticated()
 			.and()
 			.formLogin()
+			.loginPage("/login")
+			.permitAll()
 			.successHandler(authenticationSuccessHandler)
 			.and()
 			.logout()
