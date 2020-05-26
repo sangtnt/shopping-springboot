@@ -23,11 +23,18 @@ public class HomeService {
 		return userRepository.findAll();
 	}
 	
+	public List<User> getUserByPage(Integer start, Integer limit){
+		return userRepository.getUsersByPage(start, limit);
+	}
+	
 	@Autowired
 	private CategoryRepository catRepository;
 	
 	public List<Category> getAllCategory(){
 		return catRepository.findAll();
+	}
+	public List<Category> getCatsByPage(Integer start, Integer limit){
+		return catRepository.getCatsByPage(start, limit);
 	}
 	
 	@Autowired
@@ -36,11 +43,17 @@ public class HomeService {
 	public List<Product> getAllProduct(){
 		return proRepository.findAll();
 	}
+	public List<Product> getProductsByPage(Integer start, Integer limit){
+		return proRepository.getProductsByPage(start, limit);
+	}
 	
 	@Autowired
 	private OrderRepository orderRepository;
 	
 	public List<Order> getAllOrder(){
 		return orderRepository.findAll();
+	}
+	public List<Order> getOrderssByPage(Integer start, Integer limit){
+		return orderRepository.getOrdersByPage(start, limit);
 	}
 }

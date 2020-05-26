@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shelmark.demo.Entity.Category;
@@ -39,27 +40,48 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/user", method= RequestMethod.GET)
-	public ModelAndView getUsers() {
+	public ModelAndView getUsers(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer limit) {
+		if (page==null) {
+			page= 1;
+		}
+		if(limit==null) {
+			limit=10;
+		}
 		ModelAndView mv = new ModelAndView();
-		List<User> users = homeService.getAllUsers();
+		int start = (page-1)*limit;
+		List<User> users = homeService.getUserByPage(start, limit);
 		mv.setViewName("userList");
 		mv.addObject("users", users);
 		return mv;
 	}
 	
 	@RequestMapping(value="/category", method= RequestMethod.GET)
-	public ModelAndView getCategory() {
+	public ModelAndView getCategory(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer limit) {
+		if (page==null) {
+			page= 1;
+		}
+		if(limit==null) {
+			limit=10;
+		}
 		ModelAndView mv = new ModelAndView();
-		List<Category> cats = homeService.getAllCategory();
+		int start = (page-1)*limit;
+		List<Category> cats = homeService.getCatsByPage(start, limit);
 		mv.setViewName("categoryList");
 		mv.addObject("cats", cats);
 		return mv;
 	}
 	
 	@RequestMapping(value="/product", method= RequestMethod.GET)
-	public ModelAndView getProduct() {
+	public ModelAndView getProduct(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer limit) {
+		if (page==null) {
+			page= 1;
+		}
+		if(limit==null) {
+			limit=10;
+		}
 		ModelAndView mv = new ModelAndView();
-		List<Product> pros = homeService.getAllProduct();
+		int start = (page-1)*limit;
+		List<Product> pros = homeService.getProductsByPage(start, limit);
 		DateFormat df = new SimpleDateFormat("dd:MM:yyyy:HH:mm:ss");
 		for (Product pro:pros) {
 			Calendar cal = Calendar.getInstance();
@@ -72,9 +94,16 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/order", method= RequestMethod.GET)
-	public ModelAndView getOrder() {
+	public ModelAndView getOrder(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer limit) {
+		if (page==null) {
+			page= 1;
+		}
+		if(limit==null) {
+			limit=10;
+		}
 		ModelAndView mv = new ModelAndView();
-		List<Order> orders = homeService.getAllOrder();
+		int start = (page-1)*limit;
+		List<Order> orders = homeService.getOrderssByPage(start, limit);
 		mv.setViewName("cusOrder");
 		mv.addObject("orders", orders);
 		return mv;

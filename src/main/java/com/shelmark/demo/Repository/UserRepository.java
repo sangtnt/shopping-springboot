@@ -12,7 +12,6 @@ public interface UserRepository extends JpaRepository<User, String>{
 
 	User findByUsername(String username);
 	
-	@Query("SELECT * FROM")
-	List<User> getUsersByPage(Long page);
-	
+	@Query(value="SELECT * FROM user LIMIT :start, :limit", nativeQuery=true)
+	List<User> getUsersByPage(Integer start, Integer limit);
 }

@@ -304,11 +304,7 @@
 										</tr>
 									</thead>
 									<tfoot>
-										<tr>
-											<th>#</th>
-											<th>Name</th>
-											<th>Image</th>
-										</tr>
+										
 									</tfoot>
 									<tbody>
 										<c:forEach var="cat" items="${cats}">
