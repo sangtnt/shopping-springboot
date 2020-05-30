@@ -28,6 +28,9 @@ public class Order_Detail {
 	@Column(name="ORDER_DETAIL_QUANTITY")
 	private Long quantity;
 
+	@Column(name="ORDER_DETAIL_SUBTOTAL")
+	private Long subTotal;
+	
 	public Order getOrder() {
 		return order;
 	}
@@ -59,6 +62,13 @@ public class Order_Detail {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	public Long getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(Long subTotal) {
+		this.subTotal = subTotal;
+	}
 	
 }

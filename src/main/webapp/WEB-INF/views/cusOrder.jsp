@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+<link href="vendor/fontawesome-free/css/all.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -291,6 +291,13 @@
 						<div class="card-header py-3">
 							<h6 class="m-0 font-weight-bold text-primary">Category
 								Information</h6>
+							<%-- <div class="pagination">
+								<c:forEach var="item" items="${pagi}">
+									<div class="pagination-item">
+										${item}
+									</div>
+								</c:forEach>
+							</div> --%>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -310,21 +317,25 @@
 									</tfoot>
 									<tbody>
 										<c:forEach var="order" items="${orders}">
-											<tr>
-												<td>${order.id}</td>
-												<td>${order.user.username}</td>
-												<td>${order.user.fullname }</td>
-												<td>${order.user.email }</td>
-												<td>${order.user.phone }</td>
-												<td>
-													<c:if test="${order.is_Accepted==false }">
-														<button class="btn btn-primary">Accept</button>
-													</c:if>
-													<c:if test="${order.is_Accepted }">
-														<span style="color: green">Accepted</span>
-													</c:if>
-												</td>
-											</tr>
+												<tr>
+													<td>
+														<a href="/orderDetail?orderId=${order.id }">
+															${order.id}
+														</a>
+													</td>
+													<td>${order.user.username}</td>
+													<td>${order.user.fullname }</td>
+													<td>${order.user.email }</td>
+													<td>${order.user.phone }</td>
+													<td>
+														<c:if test="${order.is_Accepted==false }">
+															<button class="btn btn-primary">Accept</button>
+														</c:if>
+														<c:if test="${order.is_Accepted }">
+															<span style="color: green">Accepted</span>
+														</c:if>
+													</td>
+												</tr>
 										</c:forEach>
 									</tbody>
 								</table>

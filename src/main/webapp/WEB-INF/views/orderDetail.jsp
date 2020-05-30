@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+<link href="vendor/fontawesome-free/css/all.css" rel="stylesheet"
 	type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -14,6 +15,8 @@
 
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.css" rel="stylesheet">
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
 </head>
 <body id="page-top">
 
@@ -49,17 +52,17 @@
 			<div class="sidebar-heading">Management</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item active"><a class="nav-link" href="/category"> <i
+			<li class="nav-item"><a class="nav-link" href="/category"> <i
 					class="fas fa-dice-d6"></i> <span>Category</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/product"> <i
 					class="fas fa-boxes"></i> <span>Products</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/user">
-					<i class="fas fa-address-card"></i> <span>Users</span>
+			<li class="nav-item"><a class="nav-link" href="/user"> <i
+					class="fas fa-address-card"></i> <span>Users</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/order"> <i
-					class="fas fa-clipboard-list"></i> <span>Orders</span>
+			<li class="nav-item active"><a class="nav-link" href="/order">
+					<i class="fas fa-clipboard-list"></i> <span>Orders</span>
 			</a></li>
 			<hr class="sidebar-divider d-none d-md-block">
 
@@ -197,7 +200,7 @@
 									<div class="font-weight-bold">
 										<div class="text-truncate">Hi there! I am wondering if
 											you can help me with a problem I've been having.</div>
-										<div class="small text-gray-500">Emily Fowler · 58m</div>
+										<div class="small text-gray-500">Emily Fowler Â· 58m</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -208,7 +211,7 @@
 									<div>
 										<div class="text-truncate">I have the photos that you
 											ordered last month, how would you like them sent to you?</div>
-										<div class="small text-gray-500">Jae Chun · 1d</div>
+										<div class="small text-gray-500">Jae Chun Â· 1d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -220,7 +223,7 @@
 										<div class="text-truncate">Last month's report looks
 											great, I am very happy with the progress so far, keep up the
 											good work!</div>
-										<div class="small text-gray-500">Morgan Alvarez · 2d</div>
+										<div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -232,7 +235,7 @@
 										<div class="text-truncate">Am I a good boy? The reason I
 											ask is because someone told me that people say this to all
 											dogs, even if they aren't good...</div>
-										<div class="small text-gray-500">Chicken the Dog · 2w</div>
+										<div class="small text-gray-500">Chicken the Dog Â· 2w</div>
 									</div>
 								</a> <a class="dropdown-item text-center small text-gray-500"
 									href="#">Read More Messages</a>
@@ -276,21 +279,21 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 order-detail">
+							<div class="order-title">
+								<h2>Order #${order.id }</h2>
+							</div>
+							<div class="order-date">
+								${order.date }
+							</div>
 
-					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Category Table</h1>
-					<!-- <p class="mb-4">
-						DataTables is a third party plugin that is used to generate the
-						demo table below. For more information about DataTables, please
-						visit the <a target="_blank" href="https://datatables.net">official
-							DataTables documentation</a>.
-					</p> -->
-
+						</div>
+					</div>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Category
-								Information</h6>
+							<h6 class="m-0 font-weight-bold text-primary">User: ${order.user.username }</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -298,31 +301,41 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>#</th>
-											<th>Name</th>
-											<th>Image</th>
+											<th>Product Name</th>
+											<th>Price</th>
+											<th>Quantity</th>
+											<th>Subtotal</th>
 										</tr>
 									</thead>
-									<tfoot>
-										
+									<tfoot class="order-foot">
+										<tr>
+											<td colspan="3" class="order-foot-left">SubTotal:</td>
+											<td class="order-foot-right">${order.subTotal }</td>
+										</tr>
+										<tr>
+											<td colspan="3" class="order-foot-left">Discount:</td>
+											<td class="order-foot-right">${order.discount }</td>
+										</tr>
+										<tr>
+											<td colspan="3" class="order-foot-left">Additional fees:</td>
+											<td class="order-foot-right">${order.additionalFees }</td>
+										</tr>
+										<tr>
+											<td colspan="3" class="order-foot-left">Shipping & Handling:</td>
+											<td class="order-foot-right">${order.shipping }</td>
+										</tr>
+										<tr class="grand-total">
+											<td colspan="3" class="order-foot-left">GrandTotal:</td>
+											<td class="order-foot-right">${order.grandTotal }</td>
+										</tr>
 									</tfoot>
 									<tbody>
-										<c:forEach var="cat" items="${cats}">
+										<c:forEach var="item" items="${order.order_details}">
 											<tr>
-												<td>${cat.id}</td>
-												<td>${cat.name}</td>
-												<td><img src="${cat.image }" width="100px" height="100px"/></td>
-												<td>
-													<a href="/editCat?catId=${cat.id }">
-														<button class="btn btn-primary" type="button">Edit</button>
-													</a>
-												</td>
-												<td>
-													<form action="/deleteCat" method="POST">
-														<input name="catId" value="${cat.id }" type="hidden"/>
-														<button class="btn btn-danger" type="submit">Delete</button>
-													</form>
-												</td>
+												<td>${item.product.name }</td>
+												<td>${item.product.price }</td>
+												<td>${item.quantity }</td>
+												<td>${item.subTotal }</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -330,7 +343,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 				<!-- /.container-fluid -->
 
@@ -367,7 +379,7 @@
 					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">Ã—</span>
 					</button>
 				</div>
 				<div class="modal-body">Select "Logout" below if you are ready

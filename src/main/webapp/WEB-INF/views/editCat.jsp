@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,14 +48,14 @@
 			<div class="sidebar-heading">Management</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item active"><a class="nav-link" href="/category"> <i
-					class="fas fa-dice-d6"></i> <span>Category</span>
+			<li class="nav-item active"><a class="nav-link" href="/category">
+					<i class="fas fa-dice-d6"></i> <span>Category</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/product"> <i
 					class="fas fa-boxes"></i> <span>Products</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/user">
-					<i class="fas fa-address-card"></i> <span>Users</span>
+			<li class="nav-item"><a class="nav-link" href="/user"> <i
+					class="fas fa-address-card"></i> <span>Users</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/order"> <i
 					class="fas fa-clipboard-list"></i> <span>Orders</span>
@@ -197,7 +196,7 @@
 									<div class="font-weight-bold">
 										<div class="text-truncate">Hi there! I am wondering if
 											you can help me with a problem I've been having.</div>
-										<div class="small text-gray-500">Emily Fowler · 58m</div>
+										<div class="small text-gray-500">Emily Fowler Â· 58m</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -208,7 +207,7 @@
 									<div>
 										<div class="text-truncate">I have the photos that you
 											ordered last month, how would you like them sent to you?</div>
-										<div class="small text-gray-500">Jae Chun · 1d</div>
+										<div class="small text-gray-500">Jae Chun Â· 1d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -220,7 +219,7 @@
 										<div class="text-truncate">Last month's report looks
 											great, I am very happy with the progress so far, keep up the
 											good work!</div>
-										<div class="small text-gray-500">Morgan Alvarez · 2d</div>
+										<div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -232,7 +231,7 @@
 										<div class="text-truncate">Am I a good boy? The reason I
 											ask is because someone told me that people say this to all
 											dogs, even if they aren't good...</div>
-										<div class="small text-gray-500">Chicken the Dog · 2w</div>
+										<div class="small text-gray-500">Chicken the Dog Â· 2w</div>
 									</div>
 								</a> <a class="dropdown-item text-center small text-gray-500"
 									href="#">Read More Messages</a>
@@ -276,61 +275,22 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
-					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Category Table</h1>
-					<!-- <p class="mb-4">
-						DataTables is a third party plugin that is used to generate the
-						demo table below. For more information about DataTables, please
-						visit the <a target="_blank" href="https://datatables.net">official
-							DataTables documentation</a>.
-					</p> -->
-
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Category
-								Information</h6>
+					<form action="editCat" method="POST" enctype="multipart/form-data">
+						<input name="catId" type="hidden" value="${cat.id }">
+						<div class="form-group">
+							<label>Name</label> 
+							<input name="catName" type="text" class="form-control" id="exampleInputEmail1" value="${cat.name }">
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Name</th>
-											<th>Image</th>
-										</tr>
-									</thead>
-									<tfoot>
-										
-									</tfoot>
-									<tbody>
-										<c:forEach var="cat" items="${cats}">
-											<tr>
-												<td>${cat.id}</td>
-												<td>${cat.name}</td>
-												<td><img src="${cat.image }" width="100px" height="100px"/></td>
-												<td>
-													<a href="/editCat?catId=${cat.id }">
-														<button class="btn btn-primary" type="button">Edit</button>
-													</a>
-												</td>
-												<td>
-													<form action="/deleteCat" method="POST">
-														<input name="catId" value="${cat.id }" type="hidden"/>
-														<button class="btn btn-danger" type="submit">Delete</button>
-													</form>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+						<div class="form-group">
+							<label>Image</label> 
+							<input name="file" type="file" class="form-control" id="exampleInputPassword1">
 						</div>
-					</div>
-
+						<div class="form-group">
+							<img src="${cat.image }" width="200px" height="200px"/>
+						</div>
+						<button type="submit" class="btn btn-primary">Edit</button>
+						<a href="/category"><button type="button" class="btn btn-danger">Cancel</button></a>
+					</form>
 				</div>
 				<!-- /.container-fluid -->
 
@@ -367,7 +327,7 @@
 					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">Ã—</span>
 					</button>
 				</div>
 				<div class="modal-body">Select "Logout" below if you are ready

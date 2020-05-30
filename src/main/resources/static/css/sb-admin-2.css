@@ -10996,3 +10996,23 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+.pagination .pagination-item{
+	padding: 5px 10px;
+	border: 1px solid black;
+	margin: 0px 2px;
+	display: inline-block;
+}
+.order-foot-right{
+	text-align: left;
+}
+.order-foot-left{
+	text-align: right;
+}
+.order-foot{
+	background: #E6E6E6;
+	color: black;
+}
+.order-foot .grand-total{
+	font-weight: bold;
+}
+

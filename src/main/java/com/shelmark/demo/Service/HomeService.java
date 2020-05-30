@@ -36,6 +36,15 @@ public class HomeService {
 	public List<Category> getCatsByPage(Integer start, Integer limit){
 		return catRepository.getCatsByPage(start, limit);
 	}
+	public Category getCatById(Long id){
+		return catRepository.findById(id).get();
+	}
+	public void update(Category cat){
+		catRepository.save(cat);
+	}
+	public void delete(Category cat){
+		catRepository.delete(cat);
+	}
 	
 	@Autowired
 	private ProductRepository proRepository;
@@ -53,7 +62,10 @@ public class HomeService {
 	public List<Order> getAllOrder(){
 		return orderRepository.findAll();
 	}
-	public List<Order> getOrderssByPage(Integer start, Integer limit){
+	public Order getOrderById(Long id){
+		return orderRepository.findById(id).get();
+	}
+	public List<Order> getOrdersByPage(Integer start, Integer limit){
 		return orderRepository.getOrdersByPage(start, limit);
 	}
 }

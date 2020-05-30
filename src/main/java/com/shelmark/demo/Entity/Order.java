@@ -39,6 +39,24 @@ public class Order {
 	@Column(name="ORDER_ISACCEPTED")
 	private boolean is_Accepted;
 	
+	@Column(name="ORDER_SUBTOTAL")
+	private Long subTotal;
+	
+	@Column(name="ORDER_DISCOUNT")
+	private Long discount;
+	
+	@Column(name="ORDER_ADDITIONALFEES")
+	private Long additionalFees;
+	
+	@Column(name="ORDER_SHIPPING")
+	private Long shipping;
+	
+	@Column(name="ORDER_GRANDTOTAL")
+	private Long grandTotal;
+	
+	@Column(name="ORDER_DATE")
+	private Long date;
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,5 +89,56 @@ public class Order {
 		this.is_Accepted = is_Accepted;
 	}
 
-	
+	public Long getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal() {
+		Long sum=(long) 0;
+		for (Order_Detail o: this.order_details) {
+			sum+=o.getSubTotal();
+		}
+		this.subTotal=sum;
+	}
+
+	public Long getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Long discount) {
+		this.discount = discount;
+	}
+
+	public Long getAdditionalFees() {
+		return additionalFees;
+	}
+
+	public void setAdditionalFees(Long additionalFees) {
+		this.additionalFees = additionalFees;
+	}
+
+	public Long getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(Long shipping) {
+		this.shipping = shipping;
+	}
+
+	public Long getGrandTotal() {
+		return grandTotal;
+	}
+
+	public void setGrandTotal() {
+		Long sum = this.additionalFees - this.discount +this.grandTotal + this.shipping;
+		this.grandTotal=sum;
+	}
+
+	public Long getDate() {
+		return date;
+	}
+
+	public void setDate(Long date) {
+		this.date = date;
+	}
 }
