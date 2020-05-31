@@ -90,6 +90,29 @@ public class HomeController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/addCat", method = RequestMethod.GET)
+	public ModelAndView addCategory() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("addCat");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/addCat", method = RequestMethod.POST)
+	public String addCat(@RequestParam String catName, @RequestParam(required=false) MultipartFile file) {
+		Category cat = new Category();
+		String img;
+		if (!file.isEmpty()) {
+			img = imgService.uploadFile(uploadRootPath+"/category", file);
+		}
+		else {
+			img="";
+		}
+		cat.setName(catName);
+		cat.setImage("/img/category/"+img);
+		homeService.addCat(cat);
+		return "redirect:/category";
+	}
+	
 	@RequestMapping(value = "/deleteCat", method = RequestMethod.POST)
 	public String deleteCategory(@RequestParam(required = false) Long catId) {
 		Category cat = homeService.getCatById(catId);

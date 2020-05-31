@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,14 +48,14 @@
 			<div class="sidebar-heading">Management</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item active"><a class="nav-link" href="/category"> <i
-					class="fas fa-dice-d6"></i> <span>Category</span>
+			<li class="nav-item active"><a class="nav-link" href="/category">
+					<i class="fas fa-dice-d6"></i> <span>Category</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/product"> <i
 					class="fas fa-boxes"></i> <span>Products</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="/user">
-					<i class="fas fa-address-card"></i> <span>Users</span>
+			<li class="nav-item"><a class="nav-link" href="/user"> <i
+					class="fas fa-address-card"></i> <span>Users</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="/order"> <i
 					class="fas fa-clipboard-list"></i> <span>Orders</span>
@@ -197,7 +196,7 @@
 									<div class="font-weight-bold">
 										<div class="text-truncate">Hi there! I am wondering if
 											you can help me with a problem I've been having.</div>
-										<div class="small text-gray-500">Emily Fowler · 58m</div>
+										<div class="small text-gray-500">Emily Fowler Â· 58m</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -208,7 +207,7 @@
 									<div>
 										<div class="text-truncate">I have the photos that you
 											ordered last month, how would you like them sent to you?</div>
-										<div class="small text-gray-500">Jae Chun · 1d</div>
+										<div class="small text-gray-500">Jae Chun Â· 1d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -220,7 +219,7 @@
 										<div class="text-truncate">Last month's report looks
 											great, I am very happy with the progress so far, keep up the
 											good work!</div>
-										<div class="small text-gray-500">Morgan Alvarez · 2d</div>
+										<div class="small text-gray-500">Morgan Alvarez Â· 2d</div>
 									</div>
 								</a> <a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
@@ -232,7 +231,7 @@
 										<div class="text-truncate">Am I a good boy? The reason I
 											ask is because someone told me that people say this to all
 											dogs, even if they aren't good...</div>
-										<div class="small text-gray-500">Chicken the Dog · 2w</div>
+										<div class="small text-gray-500">Chicken the Dog Â· 2w</div>
 									</div>
 								</a> <a class="dropdown-item text-center small text-gray-500"
 									href="#">Read More Messages</a>
@@ -276,66 +275,21 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-
-					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Category Table</h1>
-					<!-- <p class="mb-4">
-						DataTables is a third party plugin that is used to generate the
-						demo table below. For more information about DataTables, please
-						visit the <a target="_blank" href="https://datatables.net">official
-							DataTables documentation</a>.
-					</p> -->
-
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Category
-								Information</h6>
+					<form action="addCat" method="POST" enctype="multipart/form-data">
+						<div class="form-group">
+							<label>Name</label> 
+							<input name="catName" type="text" class="form-control" id="exampleInputEmail1" required>
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Name</th>
-											<th>Image</th>
-											<th colspan="2">
-												<a href="/addCat">
-													<button class="btn btn-outline-success btn-block">Add new</button>
-												</a>
-											</th>
-										</tr>
-									</thead>
-									<tfoot>
-										
-									</tfoot>
-									<tbody>
-										<c:forEach var="cat" items="${cats}">
-											<tr>
-												<td>${cat.id}</td>
-												<td>${cat.name}</td>
-												<td><img src="${cat.image }" width="100px" height="100px"/></td>
-												<td>
-													<a href="/editCat?catId=${cat.id }">
-														<button class="btn btn-dark btn-block" type="button"><i class="fas fa-edit"></i></button>
-													</a>
-												</td>
-												<td>
-													<form action="/deleteCat" method="POST">
-														<input name="catId" value="${cat.id }" type="hidden"/>
-														<button class="btn btn-danger btn-block" type="submit"><i class="far fa-trash-alt"></i></button>
-													</form>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
+						<div class="form-group">
+							<label>Image</label> 
+							<input name="file" id="myfile" type="file" class="form-control" alt="Category image">
 						</div>
-					</div>
-
+						<div class="form-group">
+							<img id="catImg" height="200px"/>
+						</div>
+						<button type="submit" class="btn btn-primary">Add</button>
+						<a href="/category"><button type="button" class="btn btn-danger">Cancel</button></a>
+					</form>
 				</div>
 				<!-- /.container-fluid -->
 
@@ -372,7 +326,7 @@
 					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">×</span>
+						<span aria-hidden="true">Ã—</span>
 					</button>
 				</div>
 				<div class="modal-body">Select "Logout" below if you are ready
@@ -402,5 +356,19 @@
 	<!-- Page level custom scripts -->
 	<script src="js/demo/chart-area-demo.js"></script>
 	<script src="js/demo/chart-pie-demo.js"></script>
+	<script>
+		$('input[type=file]').change(function (evt) {
+			var tgt = evt.target || window.event.srcElement;
+	        var files = tgt.files;
+			
+			if (files && files.length) {
+			     var fr = new FileReader();
+			     fr.onload = function () {
+			         document.getElementById('catImg').src = fr.result;
+			     }
+			     fr.readAsDataURL(files[0]);
+			}
+		});
+	</script>
 </body>
 </html>

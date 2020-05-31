@@ -283,10 +283,10 @@
 						</div>
 						<div class="form-group">
 							<label>Image</label> 
-							<input name="file" type="file" class="form-control" id="exampleInputPassword1">
+							<input name="file" id="myfile" type="file" class="form-control">
 						</div>
 						<div class="form-group">
-							<img src="${cat.image }" width="200px" height="200px"/>
+							<img id="catImg" src="${cat.image }" height="200px"/>
 						</div>
 						<button type="submit" class="btn btn-primary">Edit</button>
 						<a href="/category"><button type="button" class="btn btn-danger">Cancel</button></a>
@@ -357,5 +357,19 @@
 	<!-- Page level custom scripts -->
 	<script src="js/demo/chart-area-demo.js"></script>
 	<script src="js/demo/chart-pie-demo.js"></script>
+	<script>
+		$('input[type=file]').change(function (evt) {
+			var tgt = evt.target || window.event.srcElement;
+	        var files = tgt.files;
+			
+			if (files && files.length) {
+			     var fr = new FileReader();
+			     fr.onload = function () {
+			         document.getElementById('catImg').src = fr.result;
+			     }
+			     fr.readAsDataURL(files[0]);
+			 }
+		});
+	</script>
 </body>
 </html>

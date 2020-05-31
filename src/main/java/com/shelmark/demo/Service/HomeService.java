@@ -45,6 +45,9 @@ public class HomeService {
 	public void delete(Category cat){
 		catRepository.delete(cat);
 	}
+	public void addCat(Category cat){
+		catRepository.save(cat);
+	}
 	
 	@Autowired
 	private ProductRepository proRepository;
