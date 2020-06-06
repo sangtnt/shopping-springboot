@@ -2,6 +2,7 @@ package com.shelmark.demo.Service;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +18,12 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.shelmark.demo.Entity.Permission;
 import com.shelmark.demo.Entity.User;
 import com.shelmark.demo.Repository.UserRepository;
 
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
-
-    @Autowired HttpSession session; //autowiring session
 
     @Autowired UserRepository repository; //autowire the user repo
 
@@ -34,17 +34,18 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             Authentication authentication) throws IOException, ServletException {
         // TODO Auto-generated method stub
         String userName = "";
-        if(authentication.getPrincipal() instanceof Principal) {
-             userName = ((Principal)authentication.getPrincipal()).getName();
-
-        }else {
-            userName = ((org.springframework.security.core.userdetails.User)authentication.getPrincipal()).getUsername();
-        }
+        userName = ((org.springframework.security.core.userdetails.User)authentication.getPrincipal()).getUsername();
         User user = repository.findByUsername(userName);
         logger.info("userName: " + userName);
-        //HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         session.setAttribute("user", user);
-   	 	redirectStrategy.sendRedirect(request, response, "/");
+        List<Permission> permission=user.getPermissions();
+        String path="/";
+        for (Permission p : permission) {
+        	if (p.getPermissionName().equals("ADMIN")) {
+        		path="/admin";
+        	}
+        }
+        redirectStrategy.sendRedirect(request, response, path);
     }
-
 }

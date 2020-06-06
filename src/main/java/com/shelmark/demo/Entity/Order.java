@@ -141,4 +141,13 @@ public class Order {
 	public void setDate(Long date) {
 		this.date = date;
 	}
+
+	public void setSubTotal(Long subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	public void setGrandTotal(Long grandTotal) {
+		this.grandTotal = grandTotal;
+	}
+	
 }

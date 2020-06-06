@@ -94,7 +94,6 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-
 	public String getDate() {
 		return date;
 	}
@@ -118,8 +117,6 @@ public class Product {
 	public void setOrder_details(List<Order_Detail> order_details) {
 		this.order_details = order_details;
 	}
-
-
 
 	
 }
