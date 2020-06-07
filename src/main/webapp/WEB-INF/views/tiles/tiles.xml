@@ -37,5 +37,8 @@ template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
 <definition name="productList" extends="base-definition">
 	<put-attribute name="body" value="/WEB-INF/views/productList.jsp" />
 </definition>
+<definition name="editPro" extends="base-definition">
+	<put-attribute name="body" value="/WEB-INF/views/editPro.jsp" />
+</definition>
 <!-- forgotPassword Page -->
 </tiles-definitions>

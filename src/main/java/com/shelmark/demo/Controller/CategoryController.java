@@ -20,6 +20,8 @@ public class CategoryController {
 	@Autowired 
 	private CategoryService catService;
 	
+	public static String uploadRootPath = System.getProperty("user.dir") + "/src/main/webapp/resources/static/img";
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ModelAndView getCategory(@RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer limit) {
@@ -77,8 +79,6 @@ public class CategoryController {
 
 	@Autowired
 	private ImageService imgService;
-
-	public static String uploadRootPath = System.getProperty("user.dir") + "/src/main/webapp/resources/static/img";
 
 	@RequestMapping(value = "/editCat", method = RequestMethod.POST)
 	public String editCat(@RequestParam Long catId, @RequestParam String catName,

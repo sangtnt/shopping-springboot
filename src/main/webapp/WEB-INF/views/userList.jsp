@@ -29,18 +29,13 @@
 							<th>Gender</th>
 							<th>Phone Number</th>
 							<th>Status</th>
+							<th>
+								<button class="btn btn-outline-success btn-block">Add new</button>
+							</th>
 						</tr>
 					</thead>
 					<tfoot>
-						<tr>
-							<th>Username</th>
-							<th>Full Name</th>
-							<th>Balance</th>
-							<th>Email</th>
-							<th>Gender</th>
-							<th>Phone Number</th>
-							<th>Status</th>
-						</tr>
+						
 					</tfoot>
 					<tbody>
 						<c:forEach var="user" items="${users}">
@@ -55,7 +50,16 @@
 										<span style="color: green"> active </span>
 									</c:if> <c:if test="${user.status==false}">
 										<span style="color: red"> inactive </span>
-									</c:if></td>
+									</c:if>
+								</td>
+								<td>
+									<form action="/admin/user/deleteUser" method="POST">
+										<input name="username" value="${user.username }" type="hidden" />
+										<button class="btn btn-danger btn-block" type="submit">
+											<i class="far fa-trash-alt"></i>
+										</button>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

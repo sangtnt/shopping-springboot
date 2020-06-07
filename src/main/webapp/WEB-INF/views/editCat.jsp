@@ -1,4 +1,3 @@
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 	<form action="/admin/category/editCat" method="POST" enctype="multipart/form-data">
@@ -15,7 +14,7 @@
 			<img id="catImg" src="${cat.image }" height="200px" />
 		</div>
 		<button type="submit" class="btn btn-primary">Edit</button>
-		<a href="/category"><button type="button" class="btn btn-danger">Cancel</button></a>
+		<a href="/admin/category"><button type="button" class="btn btn-danger">Cancel</button></a>
 	</form>
 </div>
 <!-- /.container-fluid -->

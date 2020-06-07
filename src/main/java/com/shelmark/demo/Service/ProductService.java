@@ -20,4 +20,20 @@ public class ProductService {
 	public List<Product> getProductsByPage(Integer start, Integer limit) {
 		return proRepository.getProductsByPage(start, limit);
 	}
+	
+	public List<Product> getProductsByCat(Long catId) {
+		return proRepository.findByCatId(catId);
+	}
+	
+	public Product findById(Long id) {
+		return proRepository.findById(id).get();
+	}
+	
+	public void delete(Product pro) {
+		proRepository.delete(pro);
+	}
+	
+	public void save(Product pro) {
+		proRepository.save(pro);
+	}
 }

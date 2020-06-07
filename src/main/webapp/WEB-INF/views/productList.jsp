@@ -30,18 +30,13 @@
 							<th>Description</th>
 							<th>Date</th>
 							<th>Category</th>
+							<th colspan="2">
+								<button class="btn btn-outline-success btn-block">Add new</button>
+							</th>
 						</tr>
 					</thead>
 					<tfoot>
-						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Price</th>
-							<th>Quantity</th>
-							<th>Description</th>
-							<th>Date</th>
-							<th>Category</th>
-						</tr>
+						
 					</tfoot>
 					<tbody>
 						<c:forEach var="pro" items="${pros}">
@@ -53,6 +48,19 @@
 								<td>${pro.description}</td>
 								<td>${pro.date}</td>
 								<td>${pro.cat.name}</td>
+								<td><a href="/admin/product/editPro?proId=${pro.id }">
+										<button class="btn btn-dark btn-block" type="button">
+											<i class="fas fa-edit"></i>
+										</button>
+								</a></td>
+								<td>
+									<form action="/admin/product/deletePro" method="POST">
+										<input name="proId" value="${pro.id }" type="hidden" />
+										<button class="btn btn-danger btn-block" type="submit">
+											<i class="far fa-trash-alt"></i>
+										</button>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

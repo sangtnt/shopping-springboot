@@ -1,0 +1,50 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+	<form action="/admin/product/editPro" method="POST"
+		enctype="multipart/form-data">
+		<input name="proId" type="hidden" value="${pro.id }">
+		<div class="form-group">
+			<label>Name</label> <input name="proName" type="text"
+				class="form-control" id="exampleInputEmail1" value="${pro.name }" required>
+		</div>
+		<div class="form-group">
+			<label>Description</label> <input name="proDescription" type="text"
+				class="form-control" id="exampleInputEmail1"
+				value="${pro.description }" required>
+		</div>
+		<div class="form-group">
+			<label>Price</label> <input name="proPrice" type="text"
+				class="form-control" id="exampleInputEmail1" value="${pro.price }" required>
+		</div>
+		<div class="form-group">
+			<label>Quantity</label> <input name="proQuantity" type="text"
+				class="form-control" id="exampleInputEmail1"
+				value="${pro.quantity }" required>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Category</label> 
+			<select name="catId" class="form-control" id="exampleFormControlSelect1" required>
+				<c:forEach var="item" items="${cats}">
+					<c:if test="${item.id == pro.cat.id}">
+						<option value="${item.id }" selected>${item.name }</option>
+					</c:if>
+					<c:if test="${item.id != pro.cat.id}">
+						<option value="${item.id }">${item.name }</option>
+					</c:if>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Image</label> <input name="file" id="myfile" type="file"
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<img id="catImg" src="${pro.image }" height="200px" />
+		</div>
+		<button type="submit" class="btn btn-primary">Edit</button>
+		<a href="/admin/product"><button type="button"
+				class="btn btn-danger">Cancel</button></a>
+	</form>
+</div>
+<!-- /.container-fluid -->

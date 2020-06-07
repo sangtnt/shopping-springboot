@@ -37,7 +37,7 @@ public class Product {
 	private Long quantity;
 	
 	@Column(name="PRO_DATE")
-	private String date;
+	private Long date;
 	
 	@ManyToOne
 	@JoinColumn(name="CAT_ID", nullable=false)
@@ -94,11 +94,11 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public String getDate() {
+	public Long getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 
