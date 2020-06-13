@@ -1,12 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Hero Section Begin -->
-<section class="hero">
+<section class="hero hero-normal">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="hero__categories">
 					<div class="hero__categories__all">
-						<i class="fa fa-bars"></i> <span>All categories</span>
+						<i class="fa fa-bars"></i> <span>All departments</span>
 					</div>
 					<ul>
 						<li><a href="#">Fresh Meat</a></li>
@@ -42,16 +42,6 @@
 							<h5>+65 11.188.888</h5>
 							<span>support 24/7 time</span>
 						</div>
-					</div>
-				</div>
-				<div class="hero__item set-bg" data-setbg="/resources/static/img/hero/banner.jpg">
-					<div class="hero__text">
-						<span>FRUIT FRESH</span>
-						<h2>
-							Vegetable <br />100% Organic
-						</h2>
-						<p>Free Pickup and Delivery Available</p>
-						<a href="#" class="primary-btn">SHOP NOW</a>
 					</div>
 				</div>
 			</div>

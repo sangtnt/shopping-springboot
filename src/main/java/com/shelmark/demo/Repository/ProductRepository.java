@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.shelmark.demo.Entity.Product;
 
@@ -13,4 +14,17 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	
 	@Query(value="SELECT * FROM product WHERE cat_id=:catId", nativeQuery=true)
 	List<Product> findByCatId (Long catId);
+	
+	@Query(value="SELECT * FROM product WHERE cat_id=:catId ORDER BY pro_date DESC LIMIT 9", nativeQuery=true)
+	List<Product> getProByCatAndDate (Long catId);
+	
+	@Query(value="SELECT * FROM product WHERE cat_id=:catId ORDER BY pro_rating DESC LIMIT 9", nativeQuery=true)
+	List<Product> getProByCatAndRating (Long catId);
+	
+	@Query(value="SELECT * FROM product WHERE cat_id=:catId ORDER BY pro_sold DESC LIMIT 9", nativeQuery=true)
+	List<Product> getProByCatAndSold (Long catId);
+	
+	@Query(value="SELECT * FROM product WHERE cat_id=:catId", nativeQuery=true)
+	List<Product> findAllByCat (Long catId);
+	
 }

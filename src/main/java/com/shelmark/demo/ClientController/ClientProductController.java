@@ -18,9 +18,26 @@ public class ClientProductController {
 	private ProductService proService;
 	@RequestMapping(value="")
 	public ModelAndView showProsByCatId(@RequestParam Long catId) {
-		List<Product> pros = proService.getAllProduct();
+		List<Product> latestPros = proService.getProByOrderAndDate(catId);
+		List<Product> ratedPros = proService.getProByCatAndRating(catId);
+		List<Product> bestSeller = proService.getProByCatAndSold(catId);
+		List<Product> allPros = proService.findByCat(catId);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("latestPros", latestPros);
+		mv.addObject("ratedPros", ratedPros);
+		mv.addObject("bestSeller", bestSeller);
+		mv.addObject("allPros", allPros);
 		mv.setViewName("proByCat");
+		return mv;
+	}
+	@RequestMapping(value="/proDetail")
+	public ModelAndView proDetail(@RequestParam() Long proId) {
+		ModelAndView mv = new ModelAndView();
+		Product pro = proService.findById(proId);
+		List<Product> relatedPros = proService.getProByCatAndRating(pro.getCat().getId());
+		mv.addObject("pro", pro);
+		mv.addObject("relatedPros", relatedPros);
+		mv.setViewName("clientProDetail");
 		return mv;
 	}
 }

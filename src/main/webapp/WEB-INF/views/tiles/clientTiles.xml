@@ -16,4 +16,7 @@
 	<definition name="proByCat" extends="client-base-definition">
 		<put-attribute name="body" value="/WEB-INF/views/proByCat.jsp" />
 	</definition>
+	<definition name="clientProDetail" extends="client-base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/clientProDetail.jsp" />
+	</definition>
 </tiles-definitions>

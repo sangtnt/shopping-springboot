@@ -40,25 +40,25 @@
     });
 
     //Humberger Menu
-    $(".humberger__open").on('click', function () {
-        $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
-        $(".humberger__menu__overlay").addClass("active");
-        $("body").addClass("over_hid");
-    });
-
-    $(".humberger__menu__overlay").on('click', function () {
-        $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
-        $(".humberger__menu__overlay").removeClass("active");
-        $("body").removeClass("over_hid");
-    });
+//    $(".humberger__open").on('click', function () {
+//        $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
+//        $(".humberger__menu__overlay").addClass("active");
+//        $("body").addClass("over_hid");
+//    });
+//
+//    $(".humberger__menu__overlay").on('click', function () {
+//        $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
+//        $(".humberger__menu__overlay").removeClass("active");
+//        $("body").removeClass("over_hid");
+//    });
 
     /*------------------
 		Navigation
-	--------------------*/
-    $(".mobile-menu").slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true
-    });
+//	--------------------*/
+//    $(".mobile-menu").slicknav({
+//        prependTo: '#mobile-menu-wrap',
+//        allowParentLinks: true
+//    });
 
     /*-----------------------
         Categories Slider
@@ -208,17 +208,36 @@
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        var quantity = parseFloat($("#pro_quantity").text());
         if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
+            if(oldValue<quantity){
+            	var newVal = parseFloat(oldValue) + 1;
+            }
+            else{
+            	var newVal = quantity;
+            }
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
         $button.parent().find('input').val(newVal);
+    });
+    
+    proQty.find('input').on('change', function () {
+        var oldValue = $(this).val();
+        var quantity = parseFloat($("#pro_quantity").text());
+        var newValue=oldValue;
+        if (oldValue>quantity){
+        	newValue=quantity;
+        }
+        if (oldValue<1){
+        	newValue=1;
+        }
+        $(this).val(newValue);
     });
 
 })(jQuery);

@@ -38,14 +38,16 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         User user = repository.findByUsername(userName);
         logger.info("userName: " + userName);
         HttpSession session = request.getSession();
+        String referer = (String) session.getAttribute("referer");
         session.setAttribute("user", user);
         List<Permission> permission=user.getPermissions();
-        String path="/";
-        for (Permission p : permission) {
-        	if (p.getPermissionName().equals("ADMIN")) {
-        		path="/admin";
-        	}
+        if (referer.equals("/admin")) {
+        	for (Permission p : permission) {
+            	if (p.getPermissionName().equals("ADMIN")) {
+            		referer="/admin";
+            	}
+            }
         }
-        redirectStrategy.sendRedirect(request, response, path);
+        redirectStrategy.sendRedirect(request, response, referer);
     }
 }

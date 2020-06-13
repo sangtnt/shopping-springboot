@@ -27,6 +27,10 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 	
+	public void save(User user){
+		userRepository.save(user);
+	}
+	
 	public List<User> getUserByPage(Integer start, Integer limit){
 		return userRepository.getUsersByPage(start, limit);
 	}

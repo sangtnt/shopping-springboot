@@ -1,4 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<section class="hero">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="hero__item set-bg"
+					data-setbg="/resources/static/img/hero/banner.jpg">
+					<div class="hero__text">
+						<span>FRUIT FRESH</span>
+						<h2>
+							Vegetable <br />100% Organic
+						</h2>
+						<p>Free Pickup and Delivery Available</p>
+						<a href="#" class="primary-btn">SHOP NOW</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <!-- Categories Section Begin -->
 <section class="categories">
 	<div class="container">
@@ -6,8 +25,7 @@
 			<div class="categories__slider owl-carousel">
 				<c:forEach var="cat" items="${cats }">
 					<div class="col-lg-3">
-						<div class="categories__item set-bg"
-							data-setbg="${cat.image }">
+						<div class="categories__item set-bg" data-setbg="${cat.image }">
 							<h5>
 								<a href="/product?catId=${cat.id }">${cat.name }</a>
 							</h5>

@@ -12,8 +12,8 @@ import com.shelmark.demo.Repository.ProductRepository;
 public class ProductService {
 	@Autowired
 	private ProductRepository proRepository;
-
-	public List<Product> getAllProduct() {
+	
+	public List<Product> getProByCat() {
 		return proRepository.findAll();
 	}
 
@@ -21,7 +21,18 @@ public class ProductService {
 		return proRepository.getProductsByPage(start, limit);
 	}
 	
-	public List<Product> getProductsByCat(Long catId) {
+	public List<Product> getProByOrderAndDate(Long catId) {
+		return proRepository.getProByCatAndDate(catId);
+	}
+	
+	public List<Product> getProByCatAndRating(Long catId) {
+		return proRepository.getProByCatAndRating(catId);
+	}
+	public List<Product> getProByCatAndSold(Long catId) {
+		return proRepository.getProByCatAndSold(catId);
+	}
+	
+	public List<Product> findByCat(Long catId) {
 		return proRepository.findByCatId(catId);
 	}
 	
