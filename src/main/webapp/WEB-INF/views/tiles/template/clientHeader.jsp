@@ -3,7 +3,8 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
 	<div class="humberger__menu__logo">
-		<a href="/"><img src="/resources/static/img/logo2.png" alt="" height="50px"></a>
+		<a href="/"><img src="/resources/static/img/logo2.png" alt=""
+			height="50px"></a>
 	</div>
 	<div class="humberger__menu__cart">
 		<ul>
@@ -25,7 +26,13 @@
 			</ul>
 		</div>
 		<div class="header__top__right__auth">
-			<a href="/login"><i class="fa fa-user"></i> Login</a>
+			<c:if test="${sessionScope.user==null }">
+				<a href="/login"><i class="fa fa-user"></i> Login</a>
+			</c:if>
+			<c:if test="${sessionScope.user!=null }">
+				<a href="/login"><i class="fa fa-user"></i>
+					${sessionScope.user.username }</a>
+			</c:if>
 		</div>
 	</div>
 	<nav class="humberger__menu__nav mobile-menu">
@@ -42,7 +49,7 @@
 	</div>
 	<div class="humberger__menu__contact">
 		<ul>
-			<li><i class="fa fa-envelope"></i> sang</li>
+			<li><i class="fa fa-envelope"></i>${sessionScope.user.username }</li>
 			<li><i class="fa fa-user"></i><a class="seller-link" href="#">Seller</a></li>
 		</ul>
 	</div>
@@ -58,18 +65,15 @@
 					<div class="header__top__left">
 						<ul>
 							<c:if test="${sessionScope.user!=null }">
-								<li>
-									<i class="fa fa-envelope"></i> Hello ${sessionScope.user.username }
-								</li>
+								<li><i class="fa fa-envelope"></i> Hello
+									${sessionScope.user.username }</li>
 							</c:if>
 							<c:if test="${sessionScope.user==null }">
-								<li>
-									<i class="fa fa-envelope"></i> Please <a href="/login">Login</a>!
+								<li><i class="fa fa-envelope"></i> Please <a href="/login">Login</a>!
 								</li>
 							</c:if>
-							<li>
-								<i class="fa fa-user"></i><a class="seller-link" href="#">Seller</a>
-							</li>
+							<li><i class="fa fa-user"></i><a class="seller-link"
+								href="#">Seller</a></li>
 						</ul>
 					</div>
 				</div>
@@ -91,7 +95,13 @@
 							</ul>
 						</div>
 						<div class="header__top__right__auth">
-							<a href="/login"><i class="fa fa-user"></i> Login</a>
+							<c:if test="${sessionScope.user==null }">
+								<a href="/login"><i class="fa fa-user"></i> Login</a>
+							</c:if>
+							<c:if test="${sessionScope.user!=null }">
+								<a href="/login"><i class="fa fa-user"></i>
+									${sessionScope.user.username }</a>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -117,11 +127,11 @@
 				<div class="header__cart">
 					<ul>
 						<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-						<li><a href="/auth/viewCart"><i class="fa fa-shopping-bag"></i> 
-							<c:if test="${sessionScope.user!=null }">
-								<span></span>
-							</c:if>
-						</a></li>
+						<li><a href="/auth/viewCart"><i
+								class="fa fa-shopping-bag"></i> <c:if
+									test="${sessionScope.user!=null }">
+									<span></span>
+								</c:if> </a></li>
 					</ul>
 					<div class="header__cart__price">
 						item: <span>$150.00</span>

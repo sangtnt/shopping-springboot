@@ -14,4 +14,12 @@ public class ShoppingCartService {
 	public void save(ShoppingCart cart) {
 		cartRepo.save(cart);
 	}
+	
+	public ShoppingCart findById(Long id) {
+		return cartRepo.findById(id).get();
+	}
+	
+	public void delete(ShoppingCart cart) {
+		cartRepo.delete(cart);
+	}
 }

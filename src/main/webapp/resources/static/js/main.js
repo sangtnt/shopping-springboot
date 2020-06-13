@@ -190,7 +190,18 @@
             });
         }
     });
-
+    /*-------------------
+     	Submit cart
+     --------------------*/
+    function changeFunction(){
+		setTimeout(function(){
+			$("#autoSaveCart").submit()
+		}, 3000)
+	}
+	$('.cart-quantity').on('change',changeFunction)
+	$(".updateCart").on('click', function(){
+		$("#autoSaveCart").submit()
+	})
     /*-------------------
 		Quantity change
 	--------------------- */
@@ -213,6 +224,7 @@
                 newVal = 1;
             }
         }
+        changeFunction();
         $button.parent().find('input').val(newVal);
     });
     proQty = $('.pro-qty-myself');
