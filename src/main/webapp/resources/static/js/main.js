@@ -1,11 +1,3 @@
-/*  ---------------------------------------------------
-    Template Name: Ogani
-    Description:  Ogani eCommerce  HTML Template
-    Author: Colorlib
-    Author URI: https://colorlib.com
-    Version: 1.0
-    Created: Colorlib
----------------------------------------------------------  */
 
 'use strict';
 
@@ -40,25 +32,25 @@
     });
 
     //Humberger Menu
-//    $(".humberger__open").on('click', function () {
-//        $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
-//        $(".humberger__menu__overlay").addClass("active");
-//        $("body").addClass("over_hid");
-//    });
-//
-//    $(".humberger__menu__overlay").on('click', function () {
-//        $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
-//        $(".humberger__menu__overlay").removeClass("active");
-//        $("body").removeClass("over_hid");
-//    });
+    $(".humberger__open").on('click', function () {
+        $(".humberger__menu__wrapper").addClass("show__humberger__menu__wrapper");
+        $(".humberger__menu__overlay").addClass("active");
+        $("body").addClass("over_hid");
+    });
+
+    $(".humberger__menu__overlay").on('click', function () {
+        $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
+        $(".humberger__menu__overlay").removeClass("active");
+        $("body").removeClass("over_hid");
+    });
 
     /*------------------
 		Navigation
-//	--------------------*/
-//    $(".mobile-menu").slicknav({
-//        prependTo: '#mobile-menu-wrap',
-//        allowParentLinks: true
-//    });
+	--------------------*/
+    $(".mobile-menu").slicknav({
+        prependTo: '#mobile-menu-wrap',
+        allowParentLinks: true
+    });
 
     /*-----------------------
         Categories Slider
@@ -203,6 +195,27 @@
 		Quantity change
 	--------------------- */
     var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+
+            	var newVal = parseFloat(oldValue) + 1;
+ 
+
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+    proQty = $('.pro-qty-myself');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
     proQty.on('click', '.qtybtn', function () {

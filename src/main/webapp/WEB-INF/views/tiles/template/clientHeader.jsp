@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Humberger Begin -->
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
@@ -24,13 +25,12 @@
 			</ul>
 		</div>
 		<div class="header__top__right__auth">
-			<a href="/"><i class="fa fa-user"></i> Login</a>
+			<a href="/login"><i class="fa fa-user"></i> Login</a>
 		</div>
 	</div>
 	<nav class="humberger__menu__nav mobile-menu">
 		<ul>
 			<li class="active"><a href="/">Home</a></li>
-			<li><a href="#">Seller</a></li>
 			<li><a href="#">Contact</a></li>
 		</ul>
 	</nav>
@@ -43,7 +43,7 @@
 	<div class="humberger__menu__contact">
 		<ul>
 			<li><i class="fa fa-envelope"></i> sang</li>
-			<li>Free Shipping for all Order of $99</li>
+			<li><i class="fa fa-user"></i><a class="seller-link" href="#">Seller</a></li>
 		</ul>
 	</div>
 </div>
@@ -57,8 +57,19 @@
 				<div class="col-lg-6 col-md-6">
 					<div class="header__top__left">
 						<ul>
-							<li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-							<li>Free Shipping for all Order of $99</li>
+							<c:if test="${sessionScope.user!=null }">
+								<li>
+									<i class="fa fa-envelope"></i> Hello ${sessionScope.user.username }
+								</li>
+							</c:if>
+							<c:if test="${sessionScope.user==null }">
+								<li>
+									<i class="fa fa-envelope"></i> Please <a href="/login">Login</a>!
+								</li>
+							</c:if>
+							<li>
+								<i class="fa fa-user"></i><a class="seller-link" href="#">Seller</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -80,7 +91,7 @@
 							</ul>
 						</div>
 						<div class="header__top__right__auth">
-							<a href="#"><i class="fa fa-user"></i> Login</a>
+							<a href="/login"><i class="fa fa-user"></i> Login</a>
 						</div>
 					</div>
 				</div>
@@ -91,23 +102,14 @@
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="header__logo">
-					<a href="./index.html"><img src="/resources/static/img/logo2.png" alt=""></a>
+					<a href="/"><img src="/resources/static/img/logo2.png" alt=""></a>
 				</div>
 			</div>
 			<div class="col-lg-6">
 				<nav class="header__menu">
 					<ul>
-						<li class="active"><a href="./index.html">Home</a></li>
-						<li><a href="./shop-grid.html">Shop</a></li>
-						<li><a href="#">Pages</a>
-							<ul class="header__menu__dropdown">
-								<li><a href="./shop-details.html">Shop Details</a></li>
-								<li><a href="./shoping-cart.html">Shoping Cart</a></li>
-								<li><a href="./checkout.html">Check Out</a></li>
-								<li><a href="./blog-details.html">Blog Details</a></li>
-							</ul></li>
-						<li><a href="./blog.html">Blog</a></li>
-						<li><a href="./contact.html">Contact</a></li>
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="#">Contact</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -115,7 +117,11 @@
 				<div class="header__cart">
 					<ul>
 						<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-						<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+						<li><a href="/auth/viewCart"><i class="fa fa-shopping-bag"></i> 
+							<c:if test="${sessionScope.user!=null }">
+								<span></span>
+							</c:if>
+						</a></li>
 					</ul>
 					<div class="header__cart__price">
 						item: <span>$150.00</span>

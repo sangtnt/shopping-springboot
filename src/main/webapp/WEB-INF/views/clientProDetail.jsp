@@ -52,14 +52,13 @@
 						<input name="proId" type="hidden" value="${pro.id }">
 						<div class="product__details__quantity">
 							<div class="quantity">
-								<div class="pro-qty">
+								<div class="pro-qty-myself">
 									<input name="quantity" type="text" value="1">
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="primary-btn">ADD
-							TO CART</button> <a href="#" class="heart-icon"><span
-							class="icon_heart_alt"></span></a>
+						<button type="submit" class="primary-btn">ADD TO CART</button>
+						<a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
 					</form>
 					<ul>
 						<li><b>Availability</b> <c:if test="${pro.quantity>1 }">
@@ -101,7 +100,31 @@
 						</div>
 						<div class="tab-pane" id="tabs-2" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<p></p>
+								<div class="container-fluid">
+									<div class="row">
+										<img class="col-xs-1 col-sm-2" src="${pro.user.image }">
+										<div class="col-xs-11 col-sm-3">
+											<div class="row">
+												<div class="col-sm-12">
+													<h2>${pro.user.username }</h2>
+												</div>
+												<div class="col-sm-12">
+													<button class="btn btn-primary">View Shop</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-11 col-sm-7">
+											<div class="row">
+												<div class="col-sm-6">
+													Products: <span style="color:red">${pro.user.products.size() }</span>
+												</div>
+												<div class="col-sm-6">
+													Attended: <span style="color:red">${pro.user.date}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">

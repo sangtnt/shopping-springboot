@@ -194,6 +194,14 @@ ol {
 	background: #000;
 }
 
+.seller-link{
+	color: red;
+}
+
+.seller-link:hover{
+	color: blue;
+}
+
 .loader {
 	width: 40px;
 	height: 40px;
@@ -1768,7 +1776,7 @@ ol {
 	margin-right: 6px;
 }
 
-.pro-qty {
+.pro-qty , .pro-qty-myself{
 	width: 140px;
 	height: 50px;
 	display: inline-block;
@@ -1778,7 +1786,7 @@ ol {
 	margin-bottom: 5px;
 }
 
-.pro-qty input {
+.pro-qty input , .pro-qty-myself input{
 	height: 100%;
 	width: 100%;
 	font-size: 16px;
@@ -1789,7 +1797,7 @@ ol {
 	text-align: center;
 }
 
-.pro-qty .qtybtn {
+.pro-qty .qtybtn, .pro-qty-myself .qtybtn {
 	width: 35px;
 	font-size: 16px;
 	color: #6f6f6f;
@@ -1954,20 +1962,20 @@ ol {
 	width: 225px;
 }
 
-.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty {
+.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty, .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty-myself  {
 	width: 120px;
 	height: 40px;
 }
 
-.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty input {
+.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty input, .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty-myself input {
 	color: #1c1c1c;
 }
 
-.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty input::placeholder {
+.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty input::placeholder, .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty-myself input::placeholder {
 	color: #1c1c1c;
 }
 
-.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty .qtybtn {
+.shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty .qtybtn, .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty-myself qtybtn{
 	width: 15px;
 }
 

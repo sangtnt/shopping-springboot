@@ -1,5 +1,8 @@
 package com.shelmark.demo.Entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -64,8 +67,8 @@ public class Product {
 	@JoinColumn(name="CAT_ID", nullable=false)
 	private Category cat;
 	
-	@OneToMany(mappedBy="product")
-	private List<ShoppingCart> cartItems;
+	@OneToMany(mappedBy = "product")
+	private List<ShoppingCart> cartItems = new ArrayList<ShoppingCart>();
 	
 	@ManyToOne
 	@JoinColumn(name="USER_USERNAME", nullable=false)
