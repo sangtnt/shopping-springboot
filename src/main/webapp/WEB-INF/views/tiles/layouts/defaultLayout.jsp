@@ -72,7 +72,10 @@
 				$('#product').addClass("active");
 			} else if (pathname.includes('order')) {
 				$('#order').addClass("active");
-			} else {
+			} else if (pathname.includes('permission')){
+				$('#permission').addClass("active");
+			}
+			else{
 				$('#dashboard').addClass("active");
 			}
 		})

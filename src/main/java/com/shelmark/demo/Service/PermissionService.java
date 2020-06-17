@@ -1,5 +1,7 @@
 package com.shelmark.demo.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,17 @@ public class PermissionService {
 	
 	public Permission findById(Long id) {
 		return permissionRepo.findById(id).get();
+	}
+	
+	public List<Permission> findAll() {
+		return permissionRepo.findAll();
+	}
+	
+	public void save(Permission per) {
+		permissionRepo.save(per);
+	}
+	
+	public void delete(Permission per) {
+		permissionRepo.delete(per);
 	}
 }

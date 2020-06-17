@@ -34,5 +34,9 @@ public class UserService {
 	public List<User> getUserByPage(Integer start, Integer limit){
 		return userRepository.getUsersByPage(start, limit);
 	}
+	
+	public void delete(User user) {
+		userRepository.delete(user);
+	}
 
 }

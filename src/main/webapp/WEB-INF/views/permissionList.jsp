@@ -3,7 +3,7 @@
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">Product Table</h1>
+	<h1 class="h3 mb-2 text-gray-800">Permission Table</h1>
 	<!-- <p class="mb-4">
 						DataTables is a third party plugin that is used to generate the
 						demo table below. For more information about DataTables, please
@@ -14,8 +14,7 @@
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Product
-				Information</h6>
+			<h6 class="m-0 font-weight-bold text-primary">Permissions</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -23,16 +22,9 @@
 					cellspacing="0">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Price</th>
-							<th>Quantity</th>
-							<th>Shipping</th>
-							<th>Brand</th>
-							<th>Origin</th>
-							<th>Date</th>
-							<th>Category</th>
-							<th colspan="2">
-								<a href="/admin/product/addPro">
+							<th>Role</th>
+							<th>
+								<a href="/admin/permission/add">
 									<button class="btn btn-outline-success btn-block">Add new</button>
 								</a>
 							</th>
@@ -42,24 +34,12 @@
 						
 					</tfoot>
 					<tbody>
-						<c:forEach var="pro" items="${pros}">
+						<c:forEach var="item" items="${pers}">
 							<tr>
-								<td>${pro.name}</td>
-								<td>${pro.price }</td>
-								<td>${pro.quantity}</td>
-								<td>${pro.shipping}</td>
-								<td>${pro.brand}</td>
-								<td>${pro.origin}</td>
-								<td>${pro.date}</td>
-								<td>${pro.cat.name}</td>
-								<td><a href="/admin/product/editPro?proId=${pro.id }">
-										<button class="btn btn-dark btn-block" type="button">
-											<i class="fas fa-edit"></i>
-										</button>
-								</a></td>
+								<td>${item.permissionName }</td>
 								<td>
-									<form action="/admin/product/deletePro" method="POST">
-										<input name="proId" value="${pro.id }" type="hidden" />
+									<form action="/admin/permission/delete" method="POST">
+										<input name="id" value="${item.id }" type="hidden" />
 										<button class="btn btn-danger btn-block" type="submit">
 											<i class="far fa-trash-alt"></i>
 										</button>

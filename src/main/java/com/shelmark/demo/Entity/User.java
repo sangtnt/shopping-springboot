@@ -12,8 +12,10 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,9 +44,6 @@ public class User {
 	@Column(name="USER_BALANCE", nullable=true)
 	private Long balance;
 	
-	@Column(name= "USER_STATUS", nullable=true)
-	private boolean status;
-	
 	@Column(name= "USER_IMAGE", nullable=true)
 	private String image;
 	
@@ -63,7 +62,7 @@ public class User {
 			inverseJoinColumns = {
 					@JoinColumn(name = "PERMISSION_ID") 
 			})
-	private List<Permission> permissions;
+	private Set<Permission> permissions;
 	
 	@OneToMany(mappedBy="user")
 	private List<Order> orders;
@@ -74,19 +73,19 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Product> products;
 	
-	@OneToMany(mappedBy = "user")
-	private List<ShoppingCart> cartItems;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	private Set<ShoppingCart> cartItems;
 
 	@OneToMany(mappedBy = "user")
 	private List<User_Rate_Pro> ratings;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "USER_USERNAME") }, inverseJoinColumns = {
 			@JoinColumn(name = "PRO_ID") })
-	private List<Product> proLiked;
+	private Set<Product> proLiked;
 	
 	public User() {
-		this.permissions = new ArrayList<Permission>();
+		this.permissions = new HashSet<Permission>();
 	}
 	
 	public String getUsername() {
@@ -137,14 +136,6 @@ public class User {
 		return balance;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public String getFullname() {
 		return fullname;
 	}
@@ -153,11 +144,11 @@ public class User {
 		this.fullname = fullname;
 	}
 
-	public List<Permission> getPermissions() {
+	public Set<Permission> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(List<Permission> permissions) {
+	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}
 
@@ -185,11 +176,11 @@ public class User {
 		this.reviews = reviews;
 	}
 
-	public List<Product> getProLiked() {
+	public Set<Product> getProLiked() {
 		return proLiked;
 	}
 
-	public void setProLiked(List<Product> proLiked) {
+	public void setProLiked(Set<Product> proLiked) {
 		this.proLiked = proLiked;
 	}
 
@@ -225,11 +216,11 @@ public class User {
 		this.ratings = ratings;
 	}
 
-	public List<ShoppingCart> getCartItems() {
+	public Set<ShoppingCart> getCartItems() {
 		return cartItems;
 	}
 
-	public void setCartItems(List<ShoppingCart> cartItems) {
+	public void setCartItems(Set<ShoppingCart> cartItems) {
 		this.cartItems = cartItems;
 	}
 	

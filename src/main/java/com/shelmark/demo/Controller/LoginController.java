@@ -3,6 +3,7 @@ package com.shelmark.demo.Controller;
 import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,7 +53,7 @@ public class LoginController {
 		user.setPassword(password);
 		user.setUsername(phone);
 		user.setPhone(phone);
-		List<Permission> pers = user.getPermissions();
+		Set<Permission> pers = user.getPermissions();
 		pers.add(perService.findById((long) 2));
 		user.setPermissions(pers);
 		userService.save(user);

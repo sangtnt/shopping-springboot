@@ -3,6 +3,7 @@ package com.shelmark.demo.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,7 +43,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
 					user.getPermissions().size() > 0) {
 
-				List<Permission> permissions = user.getPermissions();
+				Set<Permission> permissions = user.getPermissions();
 				for (Permission permission : permissions) {
 					GrantedAuthority auth = new SimpleGrantedAuthority(ROLE_PREFIX + permission.getPermissionName());
 

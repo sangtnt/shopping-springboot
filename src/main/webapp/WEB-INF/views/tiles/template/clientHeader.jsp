@@ -8,12 +8,9 @@
 	</div>
 	<div class="humberger__menu__cart">
 		<ul>
-			<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-			<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+			<li><a href="#"><i class="fa fa-heart"></i> <span>${sessionScope.likes }</span></a></li>
+			<li><a href="/auth/viewCart"><i class="fa fa-shopping-bag"></i> <span>${sessionScope.cartItems }</span></a></li>
 		</ul>
-		<div class="header__cart__price">
-			item: <span>$150.00</span>
-		</div>
 	</div>
 	<div class="humberger__menu__widget">
 		<div class="header__top__right__language">
@@ -126,16 +123,11 @@
 			<div class="col-lg-3">
 				<div class="header__cart">
 					<ul>
-						<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+						<li><a href="#"><i class="fa fa-heart"></i> <span>${sessionScope.likes }</span></a></li>
 						<li><a href="/auth/viewCart"><i
-								class="fa fa-shopping-bag"></i> <c:if
-									test="${sessionScope.user!=null }">
-									<span></span>
-								</c:if> </a></li>
+								class="fa fa-shopping-bag"></i>
+									<span>${sessionScope.cartItems }</span></a></li>
 					</ul>
-					<div class="header__cart__price">
-						item: <span>$150.00</span>
-					</div>
 				</div>
 			</div>
 		</div>

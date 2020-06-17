@@ -2,8 +2,10 @@ package com.shelmark.demo.Entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -68,7 +70,7 @@ public class Product {
 	private Category cat;
 	
 	@OneToMany(mappedBy = "product")
-	private List<ShoppingCart> cartItems = new ArrayList<ShoppingCart>();
+	private Set<ShoppingCart> cartItems = new HashSet<ShoppingCart>();
 	
 	@ManyToOne
 	@JoinColumn(name="USER_USERNAME", nullable=false)
@@ -83,7 +85,7 @@ public class Product {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "PRO_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_USERNAME") })
-	private List<User> userLiked;
+	private Set<Product> proLiked;
 	
 	public Long getId() {
 		return id;
@@ -181,12 +183,13 @@ public class Product {
 		this.reviews = reviews;
 	}
 
-	public List<User> getUserLiked() {
-		return userLiked;
+	
+	public Set<Product> getProLiked() {
+		return proLiked;
 	}
 
-	public void setUserLiked(List<User> userLiked) {
-		this.userLiked = userLiked;
+	public void setProLiked(Set<Product> proLiked) {
+		this.proLiked = proLiked;
 	}
 
 	public String getOrigin() {
@@ -239,11 +242,11 @@ public class Product {
 		}
 	}
 
-	public List<ShoppingCart> getCartItems() {
+	public Set<ShoppingCart> getCartItems() {
 		return cartItems;
 	}
 
-	public void setCartItems(List<ShoppingCart> cartItems) {
+	public void setCartItems(Set<ShoppingCart> cartItems) {
 		this.cartItems = cartItems;
 	}
 }

@@ -1,6 +1,7 @@
 package com.shelmark.demo.Entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ public class Permission {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_PERMISSION", joinColumns = { @JoinColumn(name = "PERMISSION_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_USERNAME") })
-	private List<User> users;
+	private Set<User> users;
 
 	public Long getId() {
 		return id;
@@ -46,7 +47,7 @@ public class Permission {
 		this.permissionName = permissionName;
 	}
 
-	public List<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 }

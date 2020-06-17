@@ -24,14 +24,13 @@
 						<tr>
 							<th>Username</th>
 							<th>Full Name</th>
-							<th>Balance</th>
+							<th>Image</th>
 							<th>Email</th>
 							<th>Gender</th>
 							<th>Phone Number</th>
-							<th>Status</th>
-							<th>
+							<!-- <th colspan="2">
 								<button class="btn btn-outline-success btn-block">Add new</button>
-							</th>
+							</th> -->
 						</tr>
 					</thead>
 					<tfoot>
@@ -42,15 +41,14 @@
 							<tr>
 								<td>${user.username}</td>
 								<td>${user.fullname}</td>
-								<td>${user.balance}</td>
+								<td><img height="50px" width="50px" src="${user.image }"></td>
 								<td>${user.email }</td>
 								<td>${user.gender }</td>
 								<td>${user.phone }</td>
-								<td><c:if test="${user.status}">
-										<span style="color: green"> active </span>
-									</c:if> <c:if test="${user.status==false}">
-										<span style="color: red"> inactive </span>
-									</c:if>
+								<td>
+									<a href="/admin/user/addPermission?username=${user.username }">
+										<button class="btn btn-dark"><i class="fas fa-users"></i></button>
+									</a>
 								</td>
 								<td>
 									<form action="/admin/user/deleteUser" method="POST">

@@ -3,6 +3,7 @@ package com.shelmark.demo.Service;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.shelmark.demo.SetupSession;
 import com.shelmark.demo.Entity.Permission;
 import com.shelmark.demo.Entity.User;
 import com.shelmark.demo.Repository.UserRepository;
@@ -25,7 +27,7 @@ import com.shelmark.demo.Repository.UserRepository;
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
-    @Autowired UserRepository repository; //autowire the user repo
+    @Autowired UserService userService; //autowire the user repo
 
 	private static final Logger logger = LoggerFactory.getLogger(AuthenticationSuccessHandlerImpl.class);
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -35,12 +37,13 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         // TODO Auto-generated method stub
         String userName = "";
         userName = ((org.springframework.security.core.userdetails.User)authentication.getPrincipal()).getUsername();
-        User user = repository.findByUsername(userName);
+        User user = userService.findByUsername(userName);
         logger.info("userName: " + userName);
         HttpSession session = request.getSession();
         String referer = (String) session.getAttribute("referer");
         session.setAttribute("user", user);
-        List<Permission> permission=user.getPermissions();
+        SetupSession.setHeader(user.getCartItems().size() ,user.getProLiked().size(), request);
+        Set<Permission> permission=user.getPermissions();
         if (referer.equals("/admin")) {
         	for (Permission p : permission) {
             	if (p.getPermissionName().equals("ADMIN")) {

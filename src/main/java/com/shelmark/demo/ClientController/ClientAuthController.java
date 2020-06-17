@@ -7,21 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.shelmark.demo.SetupSession;
 import com.shelmark.demo.Entity.Product;
 import com.shelmark.demo.Entity.ShoppingCart;
 import com.shelmark.demo.Entity.User;
-import com.shelmark.demo.Repository.ShoppingCartRepository;
-import com.shelmark.demo.Repository.UserRepository;
 import com.shelmark.demo.Service.ProductService;
 import com.shelmark.demo.Service.ShoppingCartService;
 import com.shelmark.demo.Service.UserService;
-import com.shelmark.demo.Wrapper.ShoppingCartWrapper;
 
 @Controller
 @RequestMapping("/auth")
@@ -30,7 +27,7 @@ public class ClientAuthController {
 	private ProductService proService;
 	
 	@Autowired
-	private ShoppingCartRepository cartRepo;
+	private ShoppingCartService cartService;
 	
 	@Autowired
 	private UserService userService;
@@ -46,7 +43,7 @@ public class ClientAuthController {
 			if (c.getProduct().equals(pro)) {
 				c.setQuantity(c.getQuantity()+quantity);
 				cart.setDate();
-				cartRepo.save(c);
+				cartService.save(c);
 				return "redirect:"+ referer;
 			}
 		}
@@ -55,7 +52,8 @@ public class ClientAuthController {
 		cart.setQuantity(quantity);
 		cart.setProduct(pro);
 		
-		cartRepo.save(cart);
+		cartService.save(cart);
+		SetupSession.setHeader(user.getCartItems().size()+1, user.getProLiked().size(), request);
 		return "redirect:"+ referer;
 	}
 
@@ -69,12 +67,15 @@ public class ClientAuthController {
 		mv.setViewName("cart");
 		return mv;
 	}
-	@Autowired
-	private ShoppingCartService cartService;
+	
 	@RequestMapping(value="/deleteCartItem", method = RequestMethod.GET)
-	public String deleteCartItem(@RequestParam Long itemId) {
+	public String deleteCartItem(@RequestParam Long itemId, HttpServletRequest request) {
 		ShoppingCart cart = cartService.findById(itemId);
 		cartService.delete(cart);
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
+		User user = userService.findByUsername(u.getUsername());
+		SetupSession.setHeader(user.getCartItems().size()-1, user.getProLiked().size(), request);
 		return "redirect:/auth/viewCart";
 	}
 	
@@ -86,7 +87,7 @@ public class ClientAuthController {
 		int i = 0;
 		for (ShoppingCart item : user.getCartItems()) {
 			item.setQuantity(cart.get(i));
-			cartRepo.save(item);
+			cartService.save(item);
 			i++;
 		}
 		return "redirect:/auth/viewCart";

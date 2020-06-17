@@ -1,38 +1,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-	<form action="/admin/product/editPro" method="POST"
+	<form action="/admin/product/addPro" method="POST"
 		enctype="multipart/form-data">
-		<input name="proId" type="hidden" value="${pro.id }">
+		<input name="proId" type="hidden">
 		<div class="form-group">
 			<label>Name</label> <input name="proName" type="text"
-				class="form-control" id="exampleInputEmail1" value="${pro.name }" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label>Description</label> <input name="proDescription" type="text"
-				class="form-control" id="exampleInputEmail1"
-				value="${pro.description }" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label>Price</label> <input name="proPrice" type="text"
-				class="form-control" id="exampleInputEmail1" value="${pro.price }" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label>Quantity</label> <input name="proQuantity" type="text"
-				class="form-control" id="exampleInputEmail1"
-				value="${pro.quantity }" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label>Shipping</label> <input name="proShipping" type="text"
-				class="form-control" value="${pro.shipping }" id="exampleInputEmail1" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label>Brand</label> <input name="proBrand" type="text"
-				class="form-control" value="${pro.brand }" id="exampleInputEmail1" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label>Origin</label> <input name="proOrigin" type="text"
-				class="form-control" value="${pro.origin }" id="exampleInputEmail1" required>
+				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
 			<label for="exampleFormControlSelect1">Category</label> 
@@ -52,7 +50,7 @@
 				class="form-control">
 		</div>
 		<div class="form-group">
-			<img id="catImg" src="${pro.image }" height="200px" />
+			<img id="catImg" height="200px" />
 		</div>
 		<button type="submit" class="btn btn-primary">Edit</button>
 		<a href="/admin/product"><button type="button"
