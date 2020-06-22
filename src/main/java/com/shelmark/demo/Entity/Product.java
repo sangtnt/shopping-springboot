@@ -1,7 +1,10 @@
 package com.shelmark.demo.Entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -135,8 +138,10 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public Long getDate() {
-		return date;
+	public String getDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
+		Date currentDate = new Date(this.date);
+		return df.format(currentDate);
 	}
 
 	public void setDate(Long date) {

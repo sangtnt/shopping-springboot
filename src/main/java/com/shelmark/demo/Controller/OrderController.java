@@ -44,4 +44,12 @@ public class OrderController {
 		mv.addObject("order", order);
 		return mv;
 	}
+	
+	@RequestMapping(value = "/changeOrder", method = RequestMethod.POST)
+	public String change(@RequestParam Long orderId, @RequestParam Integer orderStatus) {
+		Order order = orderService.getOrderById(orderId);
+		order.setStatus(orderStatus);
+		orderService.save(order);
+		return "redirect:/admin/order";
+	}
 }

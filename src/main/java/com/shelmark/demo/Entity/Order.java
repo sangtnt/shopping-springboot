@@ -3,6 +3,9 @@
  */
 package com.shelmark.demo.Entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,8 +39,25 @@ public class Order {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade=CascadeType.ALL)
 	private List<Order_Detail> order_details;
 	
-	@Column(name="ORDER_ISACCEPTED")
-	private boolean is_Accepted;
+	@Column(name="ORDER_ADDRESS")
+	private String address;
+	
+	@Column(name="ORDER_CUS_FULLNAME")
+	private String fullname;
+	
+	@Column(name="ORDER_CUS_PHONE")
+	private String phone;
+	
+	/*
+	 * status 
+	 * 0: wait to be accepted 
+	 * 1: wrap 
+	 * 2: delivery 
+	 * 3: received 
+	 * 4: canceled
+	 */
+	@Column(name="ORDER_STATUS")
+	private Integer status;
 	
 	@Column(name="ORDER_SUBTOTAL")
 	private Long subTotal;
@@ -80,13 +100,13 @@ public class Order {
 	public void setOrder_details(List<Order_Detail> order_details) {
 		this.order_details = order_details;
 	}
-
-	public boolean isIs_Accepted() {
-		return is_Accepted;
+	
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setIs_Accepted(boolean is_Accepted) {
-		this.is_Accepted = is_Accepted;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public Long getSubTotal() {
@@ -101,6 +121,10 @@ public class Order {
 		this.subTotal=sum;
 	}
 
+	public void setSubTotal(Long subTotal) {
+		this.subTotal=subTotal;
+	}
+	
 	public Long getDiscount() {
 		return discount;
 	}
@@ -130,24 +154,48 @@ public class Order {
 	}
 
 	public void setGrandTotal() {
-		Long sum = this.additionalFees - this.discount +this.grandTotal + this.shipping;
+		Long sum = this.additionalFees - this.discount +this.subTotal + this.shipping;
 		this.grandTotal=sum;
 	}
 
-	public Long getDate() {
-		return date;
+	public String getDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
+		Date currentDate = new Date(this.date);
+		return df.format(currentDate);
 	}
 
-	public void setDate(Long date) {
-		this.date = date;
+	public void setDate() {
+		Date date = new Date();
+		this.date= date.getTime();
+	}
+	
+	public void cancelOrder() {
+		this.status=4;
 	}
 
-	public void setSubTotal(Long subTotal) {
-		this.subTotal = subTotal;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setGrandTotal(Long grandTotal) {
-		this.grandTotal = grandTotal;
+	public void setAddress(String address) {
+		this.address = address;
 	}
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
 	
 }

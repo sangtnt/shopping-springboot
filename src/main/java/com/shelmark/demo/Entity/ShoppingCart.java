@@ -1,6 +1,8 @@
 package com.shelmark.demo.Entity;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -34,6 +36,9 @@ public class ShoppingCart {
 	@Column(name="CART_QUANTITY")
 	private Long quantity;
 	
+	@Column(name="CART_TOTAL")
+	private Long total;
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,8 +55,10 @@ public class ShoppingCart {
 		this.user = user;
 	}
 
-	public Long getDate() {
-		return date;
+	public String getDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
+		Date currentDate = new Date(this.date);
+		return df.format(currentDate);
 	}
 
 	public void setDate() {
@@ -73,6 +80,14 @@ public class ShoppingCart {
 
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
+	}
+
+	public Long getTotal() {
+		return total;
+	}
+
+	public void setTotal() {
+		this.total = this.quantity*this.product.getPrice();
 	}
 	
 }

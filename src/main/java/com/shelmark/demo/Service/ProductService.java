@@ -1,5 +1,6 @@
 package com.shelmark.demo.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,13 @@ public class ProductService {
 	
 	public void save(Product pro) {
 		proRepository.save(pro);
+	}
+	
+	public List<Product> getListByListId(List<Long> id){
+		List<Product> products = new ArrayList<>();
+		for (Long i: id) {
+			products.add(proRepository.findById(i).get());
+		}
+		return products;
 	}
 }

@@ -9,6 +9,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -200,8 +202,10 @@ public class User {
 		this.products = products;
 	}
 
-	public Long getDate() {
-		return date;
+	public String getDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date currentDate = new Date(this.date);
+		return df.format(currentDate);
 	}
 
 	public void setDate(Long date) {

@@ -24,4 +24,7 @@ public class OrderService {
 	public List<Order> getOrdersByPage(Integer start, Integer limit) {
 		return orderRepository.getOrdersByPage(start, limit);
 	}
+	public void save(Order order) {
+		orderRepository.save(order);
+	}
 }

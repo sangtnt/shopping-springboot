@@ -67,7 +67,7 @@ public class Order_Detail {
 		return subTotal;
 	}
 
-	public void setSubTotal(Long subTotal) {
+	public void setSubTotal() {
 		this.subTotal = this.quantity*this.product.getPrice();
 	}
 	

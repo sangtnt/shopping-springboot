@@ -32,7 +32,6 @@
 							<th>Order ID</th>
 							<th>Username</th>
 							<th>Fullname</th>
-							<th>Email</th>
 							<th>Phone</th>
 							<th>Status</th>
 						</tr>
@@ -45,14 +44,51 @@
 								<td><a href="/admin/order/orderDetail?orderId=${order.id }">
 										${order.id} </a></td>
 								<td>${order.user.username}</td>
-								<td>${order.user.fullname }</td>
-								<td>${order.user.email }</td>
-								<td>${order.user.phone }</td>
-								<td><c:if test="${order.is_Accepted==false }">
-										<button class="btn btn-primary">Accept</button>
-									</c:if> <c:if test="${order.is_Accepted }">
-										<span style="color: green">Accepted</span>
+								<td>${order.fullname }</td>
+								<td>${order.phone }</td>
+								<td><c:if test="${order.status ==0}">
+										<form method="POST">
+											<input name="orderId" value="${order.id }" type="hidden">
+											<input name="orderStatus" value="1" type="hidden">
+											<button formaction="/admin/order/changeOrder" type="submit"
+												class="btn btn-primary">Accept</button>
+										</form>
+									</c:if> <c:if test="${order.status ==1}">
+										<form method="POST">
+											<input name="orderId" value="${order.id }" type="hidden">
+											<input name="orderStatus" value="2" type="hidden">
+											<button formaction="/admin/order/changeOrder" type="submit"
+												class="btn btn-dark">Wrap</button>
+										</form>
+									</c:if> <c:if test="${order.status ==2}">
+										<form method="POST">
+											<input name="orderId" value="${order.id }" type="hidden">
+											<input name="orderStatus" value="3" type="hidden">
+											<button formaction="/admin/order/changeOrder" type="submit"
+												class="btn btn-info">Delivery</button>
+										</form>
+									</c:if> <c:if test="${order.status ==3}">
+										<form method="POST">
+											<input name="orderId" value="${order.id }" type="hidden">
+											<input name="orderStatus" value="4" type="hidden">
+											<button formaction="/admin/order/changeOrder" type="submit"
+												class="btn btn-success">Complete</button>
+										</form>
+									</c:if> <c:if test="${order.status ==4}">
+										<span style="color: green; font-weight: bold">Completed</span>
+									</c:if> <c:if test="${order.status ==5}">
+										<span style="color: red; font-weight: bold">Canceled</span>
 									</c:if></td>
+								<c:if test="${order.status !=5 &&order.status !=4}">
+									<td>
+										<form method="POST">
+											<input name="orderId" value="${order.id }" type="hidden">
+											<input name="orderStatus" value="5" type="hidden">
+											<button formaction="/admin/order/changeOrder" type="submit"
+												class="btn btn-danger">Cancel</button>
+										</form>
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
