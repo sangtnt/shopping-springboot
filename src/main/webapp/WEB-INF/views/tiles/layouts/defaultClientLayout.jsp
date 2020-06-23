@@ -38,5 +38,19 @@
     <script src="<c:url value='/resources/static/js/jquery.slicknav.js'/>"></script>
     <script src="<c:url value='/resources/static/js/owl.carousel.min.js'/>"></script>
     <script src="<c:url value='/resources/static/js/main.js'/>"></script>
+    <script>
+    	$(document).ready(function() {
+    		$('.addToCart').click(function(){
+        		$(this).closest("form").submit();
+        	})
+			let pathname = window.location.pathname;
+			if (pathname.includes('order')) {
+				$('.header-order').addClass("active");
+			}
+			else{
+				$('.header-home').addClass("active");
+			}
+		})
+    </script>
 </body>
 </html>

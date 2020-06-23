@@ -51,10 +51,11 @@ public class Order {
 	/*
 	 * status 
 	 * 0: wait to be accepted 
-	 * 1: wrap 
-	 * 2: delivery 
-	 * 3: received 
-	 * 4: canceled
+	 * 1: accepted 
+	 * 2: wrap 
+	 * 3: delivery 
+	 * 4: received 
+	 * 5: canceled
 	 */
 	@Column(name="ORDER_STATUS")
 	private Integer status;

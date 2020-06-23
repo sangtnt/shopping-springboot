@@ -297,7 +297,12 @@ ol {
 	color: #252525;
 	margin-right: 5px;
 }
-
+.header__top__left ul li a{
+	color: #252525;
+}
+.header__top__left ul li a:hover{
+	color: #252525;
+}
 .header__top__right {
 	text-align: right;
 	padding: 10px 0 13px;
@@ -3040,6 +3045,12 @@ ol {
 		color: #252525;
 		margin-right: 5px;
 	}
+	.humberger__menu__contact ul li a{
+		color: black !important;
+	}
+	.humberger__menu__contact ul li a:hover{
+		color: black !important;
+	}
 	.humberger__menu__cart ul {
 		display: inline-block;
 		margin-right: 25px;
@@ -3473,4 +3484,38 @@ ol {
 	.blog__details__hero__text h2 {
 		font-size: 24px;
 	}
+}
+.single-order{
+	margin: 20px 0px;
+	background: #F3F6FA;
+}
+.order-seller{
+	display: flex;
+	padding: 20px;
+	border-bottom: 1px solid white;
+	width: 100%;
+}
+.order-seller img, .order-seller div{
+	margin-right: 20px;
+	
+}
+.order-seller div{
+	font-weight: bold;
+}
+.order-seller img{
+	height: 30px;
+	width:30px;
+	border: 1px solid; black;
+	border-radius: 100%;
+}
+.order-seller .order-status{
+	flex-grow: 1;
+	color: red;
+	text-align: right;
+}
+.total-order{
+	color: red;
+	font-size: 20px;
+	text-align: right;
+	font-weight: bold;
 }

@@ -9,14 +9,16 @@
 			<div class="order-title">
 				<h2>Order #${order.id }</h2>
 			</div>
-			<div class="order-date">${order.date}</div>
-
+			<div class="order-date">Customer: ${order.fullname}</div>
+			<div class="order-date">Date: ${order.date}</div>
+			<div class="order-date">Address: ${order.address}</div>
+			<div class="order-date">Phone Number: ${order.phone}</div>
 		</div>
 	</div>
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">User:
+			<h6 class="m-0 font-weight-bold text-primary">User Submitted Order:
 				${order.user.username }</h6>
 		</div>
 		<div class="card-body">

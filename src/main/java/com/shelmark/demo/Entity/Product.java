@@ -68,6 +68,9 @@ public class Product {
 	@Column(name="PRO_ORIGIN")
 	private String origin;
 	
+	@Column(name="PRO_RESEARCH")
+	private Long research;
+	
 	@ManyToOne
 	@JoinColumn(name="CAT_ID", nullable=false)
 	private Category cat;
@@ -254,4 +257,14 @@ public class Product {
 	public void setCartItems(Set<ShoppingCart> cartItems) {
 		this.cartItems = cartItems;
 	}
+
+	public Long getResearch() {
+		return research;
+	}
+
+	public void setResearch(Long research) {
+		this.research = research;
+	}
+	
+	
 }

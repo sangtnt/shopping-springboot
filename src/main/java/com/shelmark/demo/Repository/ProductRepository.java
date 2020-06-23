@@ -24,7 +24,19 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Query(value="SELECT * FROM product WHERE cat_id=:catId ORDER BY pro_sold DESC LIMIT 9", nativeQuery=true)
 	List<Product> getProByCatAndSold (Long catId);
 	
+	@Query(value="SELECT * FROM product ORDER BY pro_date DESC LIMIT 9", nativeQuery=true)
+	List<Product> getAllProDate ();
+	
+	@Query(value="SELECT * FROM product ORDER BY pro_rating DESC LIMIT 9", nativeQuery=true)
+	List<Product> getAllProRating ();
+	
+	@Query(value="SELECT * FROM product ORDER BY pro_sold DESC LIMIT 9", nativeQuery=true)
+	List<Product> getAllProSold ();
+	
 	@Query(value="SELECT * FROM product WHERE cat_id=:catId", nativeQuery=true)
 	List<Product> findAllByCat (Long catId);
+	
+	@Query(value="SELECT * FROM product ORDER BY pro_research DESC LIMIT 12", nativeQuery=true)
+	List<Product> getAllMostResearch ();
 	
 }

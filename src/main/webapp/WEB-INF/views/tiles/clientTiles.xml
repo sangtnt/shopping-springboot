@@ -25,4 +25,7 @@
 	<definition name="checkout" extends="client-base-definition">
 		<put-attribute name="body" value="/WEB-INF/views/checkout.jsp" />
 	</definition>
+	<definition name="clientOrder" extends="client-base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/clientOrder.jsp" />
+	</definition>
 </tiles-definitions>

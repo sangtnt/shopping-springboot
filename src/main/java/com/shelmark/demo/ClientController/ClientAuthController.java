@@ -40,34 +40,46 @@ public class ClientAuthController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private OrderDetailRepository orderDetailRepo;
-	
+
 	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-	public String addToCart(@RequestParam Long quantity, @RequestParam Long proId, HttpServletRequest request) {
-		Product pro = proService.findById(proId);
-		ShoppingCart cart = new ShoppingCart();
+	public String addToCart(@RequestParam List<Long> quantity, @RequestParam List<Long> proId,
+			HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
 		User user = userService.findByUsername(u.getUsername());
-		String referer = request.getHeader("Referer");
-		for (ShoppingCart c : user.getCartItems()) {
-			if (c.getProduct().equals(pro)) {
-				c.setQuantity(c.getQuantity() + quantity);
+		for (int i =0; i<quantity.size(); i++) {
+			boolean check=false;
+			Product pro = proService.findById(proId.get(i));
+			ShoppingCart cart = new ShoppingCart();
+			for (ShoppingCart c : user.getCartItems()) {
+				if (c.getProduct().equals(pro)) {
+					c.setQuantity(c.getQuantity() + quantity.get(i));
+					cart.setDate();
+					cartService.save(c);
+					check=true;
+					break;
+				}
+			}
+			if (!check) {
+				cart.setUser(user);
 				cart.setDate();
-				cartService.save(c);
-				return "redirect:" + referer;
+				cart.setQuantity(quantity.get(i));
+				cart.setProduct(pro);
+				cart.setTotal();
+				cartService.save(cart);
+				SetupSession.setHeader(user.getCartItems().size() + quantity.size(), user.getProLiked().size(), request);
 			}
 		}
-		cart.setUser(user);
-		cart.setDate();
-		cart.setQuantity(quantity);
-		cart.setProduct(pro);
-		cart.setTotal();
-		cartService.save(cart);
-		SetupSession.setHeader(user.getCartItems().size() + 1, user.getProLiked().size(), request);
-		return "redirect:" + referer;
+		if (quantity.size() == 1) {
+			return "redirect:" + referer;
+		}
+		else {
+			return "redirect:/auth/viewCart";
+		}
 	}
 
 	@RequestMapping(value = "/viewCart", method = RequestMethod.GET)
@@ -119,20 +131,14 @@ public class ClientAuthController {
 	}
 
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String submitOrder(@RequestParam String fullname, 
-			@RequestParam String city, 
-			@RequestParam String district,
-			@RequestParam String address, 
-			@RequestParam String phone, 
-			@RequestParam List<Long> proId,
-			@RequestParam List<Long> quantity,
-			@RequestParam String payment,
-			HttpServletRequest request) {
+	public String submitOrder(@RequestParam String fullname, @RequestParam String city, @RequestParam String district,
+			@RequestParam String address, @RequestParam String phone, @RequestParam List<Long> proId,
+			@RequestParam List<Long> quantity, @RequestParam String payment, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
 		User user = userService.findByUsername(u.getUsername());
 		System.out.print(payment);
-		//set Order
+		// set Order
 		Order order = new Order();
 		order.setStatus(0);
 		order.setFullname(fullname);
@@ -144,24 +150,24 @@ public class ClientAuthController {
 		order.setDiscount((long) 0);
 		order.setAdditionalFees((long) 0);
 		orderService.save(order);
-		List <Product> pros = proService.getListByListId(proId);
-		Long subTotal=(long) 0;
-		//set Order_Detail
-		for (int index = 0; index<pros.size(); index++) {
+		List<Product> pros = proService.getListByListId(proId);
+		Long subTotal = (long) 0;
+		// set Order_Detail
+		for (int index = 0; index < pros.size(); index++) {
 			Order_Detail orderDetail = new Order_Detail();
 			orderDetail.setOrder(order);
 			orderDetail.setProduct(pros.get(index));
 			orderDetail.setQuantity(quantity.get(index));
 			orderDetail.setSubTotal();
-			subTotal+=orderDetail.getQuantity()*orderDetail.getProduct().getPrice();
+			subTotal += orderDetail.getQuantity() * orderDetail.getProduct().getPrice();
 			orderDetailRepo.save(orderDetail);
 		}
 		order.setSubTotal(subTotal);
 		order.setGrandTotal();
 		orderService.save(order);
 		Set<ShoppingCart> cartItems = user.getCartItems();
-		for(Product p : pros) {
-			for (ShoppingCart cartItem: cartItems) {
+		for (Product p : pros) {
+			for (ShoppingCart cartItem : cartItems) {
 				if (cartItem.getProduct().equals(p)) {
 					cartService.delete(cartItem);
 					cartItems.remove(cartItem);

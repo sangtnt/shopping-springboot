@@ -33,6 +33,17 @@ public class ProductService {
 		return proRepository.getProByCatAndSold(catId);
 	}
 	
+	public List<Product> getAllProDate() {
+		return proRepository.getAllProDate();
+	}
+	
+	public List<Product> getAllProRating() {
+		return proRepository.getAllProRating();
+	}
+	public List<Product> getAllProSold() {
+		return proRepository.getAllProSold();
+	}
+	
 	public List<Product> findByCat(Long catId) {
 		return proRepository.findByCatId(catId);
 	}
@@ -55,5 +66,9 @@ public class ProductService {
 			products.add(proRepository.findById(i).get());
 		}
 		return products;
+	}
+	
+	public List<Product> getAllMostResearch(){
+		return proRepository.getAllMostResearch();
 	}
 }

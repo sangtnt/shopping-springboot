@@ -27,15 +27,14 @@
 				<a href="/login"><i class="fa fa-user"></i> Login</a>
 			</c:if>
 			<c:if test="${sessionScope.user!=null }">
-				<a href="/login"><i class="fa fa-user"></i>
-					${sessionScope.user.username }</a>
+				<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</c:if>
 		</div>
 	</div>
 	<nav class="humberger__menu__nav mobile-menu">
 		<ul>
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="#">Contact</a></li>
+			<li class="header-home"><a href="/">Home</a></li>
+			<li class="header-order"><a href="/order">Your Orders</a></li>
 		</ul>
 	</nav>
 	<div id="mobile-menu-wrap"></div>
@@ -46,8 +45,13 @@
 	</div>
 	<div class="humberger__menu__contact">
 		<ul>
-			<li><i class="fa fa-envelope"></i>${sessionScope.user.username }</li>
-			<li><i class="fa fa-user"></i><a class="seller-link" href="#">Seller</a></li>
+			<li>
+				<c:if test="${sessionScope.user!=null }">
+					<a href="/user/information"><i class="fa fa-user"></i>
+						${sessionScope.user.username }</a>
+				</c:if>
+			</li>
+			<li><i class="fa fa-user"></i><a href="#">Seller</a></li>
 		</ul>
 	</div>
 </div>
@@ -62,11 +66,10 @@
 					<div class="header__top__left">
 						<ul>
 							<c:if test="${sessionScope.user!=null }">
-								<li><i class="fa fa-envelope"></i> Hello
-									${sessionScope.user.username }</li>
-							</c:if>
-							<c:if test="${sessionScope.user==null }">
-								<li><i class="fa fa-envelope"></i> Please <a href="/login">Login</a>!
+								<li>
+									<a href="/user/information">
+										<i class="fa fa-user"></i>${sessionScope.user.username }
+									</a>
 								</li>
 							</c:if>
 							<li><i class="fa fa-user"></i><a class="seller-link"
@@ -96,8 +99,7 @@
 								<a href="/login"><i class="fa fa-user"></i> Login</a>
 							</c:if>
 							<c:if test="${sessionScope.user!=null }">
-								<a href="/login"><i class="fa fa-user"></i>
-									${sessionScope.user.username }</a>
+								<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 							</c:if>
 						</div>
 					</div>
@@ -115,8 +117,8 @@
 			<div class="col-lg-6">
 				<nav class="header__menu">
 					<ul>
-						<li class="active"><a href="/">Home</a></li>
-						<li><a href="#">Contact</a></li>
+						<li class="header-home"><a href="/">Home</a></li>
+						<li class="header-order"><a href="/order">Your Orders</a></li>
 					</ul>
 				</nav>
 			</div>
