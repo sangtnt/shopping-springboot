@@ -46,14 +46,16 @@
 											<i class="fas fa-edit"></i>
 										</button>
 								</a></td>
-								<td>
-									<form action="/admin/category/deleteCat" method="POST">
-										<input name="catId" value="${cat.id }" type="hidden" />
-										<button class="btn btn-danger btn-block" type="submit">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
+								<c:if test="${cat.products.size()==0 }">
+									<td>
+										<form action="/admin/category/deleteCat" method="POST">
+											<input name="catId" value="${cat.id }" type="hidden" />
+											<button class="btn btn-danger btn-block" type="submit">
+												<i class="far fa-trash-alt"></i>
+											</button>
+										</form>
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>

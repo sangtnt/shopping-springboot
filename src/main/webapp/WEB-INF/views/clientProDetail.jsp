@@ -48,18 +48,22 @@
 							items)</span>
 					</div>
 					<div class="product__details__price">$${pro.price }</div>
-					<form action="/auth/addToCart" method="POST">
-						<input name="proId" type="hidden" value="${pro.id }">
-						<div class="product__details__quantity">
-							<div class="quantity">
-								<div class="pro-qty-myself">
-									<input name="quantity" type="text" value="1">
+					<c:if test="${pro.quantity>0 }">
+						<form action="/auth/addToCart" method="POST">
+							<input name="proId" type="hidden" value="${pro.id }">
+							<div class="product__details__quantity">
+								<div class="quantity">
+									<div class="pro-qty-myself">
+										<input name="quantity" type="text" value="1">
+									</div>
 								</div>
 							</div>
-						</div>
-						<button type="submit" class="primary-btn">ADD TO CART</button>
-						<a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
-					</form>
+
+							<button type="submit" class="primary-btn">ADD TO CART</button>
+
+							<a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+						</form>
+					</c:if>
 					<ul>
 						<li><b>Availability</b> <c:if test="${pro.quantity>1 }">
 								<span id="pro_quantity">${pro.quantity }</span> items
@@ -109,17 +113,18 @@
 													<h2>${pro.user.username }</h2>
 												</div>
 												<div class="col-sm-12">
-													<button class="btn btn-primary">View Shop</button>
+													<a href="/user/viewShop?username=${pro.user.username }"><button
+															class="btn btn-primary">View Shop</button></a>
 												</div>
 											</div>
 										</div>
 										<div class="col-xs-11 col-sm-7">
 											<div class="row">
 												<div class="col-sm-6">
-													Products: <span style="color:red">${pro.user.products.size() }</span>
+													Products: <span style="color: red">${pro.user.products.size() }</span>
 												</div>
 												<div class="col-sm-6">
-													Attended: <span style="color:red">${pro.user.date}</span>
+													Attended: <span style="color: red">${pro.user.date}</span>
 												</div>
 											</div>
 										</div>

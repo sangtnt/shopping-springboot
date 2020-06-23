@@ -28,4 +28,7 @@
 	<definition name="clientOrder" extends="client-base-definition">
 		<put-attribute name="body" value="/WEB-INF/views/clientOrder.jsp" />
 	</definition>
+	<definition name="shopDetail" extends="client-base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/shopDetail.jsp" />
+	</definition>
 </tiles-definitions>

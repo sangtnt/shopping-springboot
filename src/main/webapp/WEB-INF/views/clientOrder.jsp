@@ -27,11 +27,7 @@
 						<div class="col-lg-12 single-order">
 							<div class="row">
 								<div class="order-seller">
-									<img height="10px" width="10px" src="${order.user.image }">
-									<div>${order.user.username }</div>
-									<button class="btn-dark">
-										<i class="fas fa-store"></i>View Shop
-									</button>
+									<div>${order.date }</div>
 									<div class="order-status">
 										<c:if test="${order.status==0 }">Waiting...</c:if>
 										<c:if test="${order.status==1 }">Accepted</c:if>

@@ -34,7 +34,7 @@
 						</tr>
 					</thead>
 					<tfoot>
-						
+
 					</tfoot>
 					<tbody>
 						<c:forEach var="user" items="${users}">
@@ -45,19 +45,23 @@
 								<td>${user.email }</td>
 								<td>${user.gender }</td>
 								<td>${user.phone }</td>
-								<td>
-									<a href="/admin/user/addPermission?username=${user.username }">
-										<button class="btn btn-dark"><i class="fas fa-users"></i></button>
-									</a>
-								</td>
-								<td>
-									<form action="/admin/user/deleteUser" method="POST">
-										<input name="username" value="${user.username }" type="hidden" />
-										<button class="btn btn-danger btn-block" type="submit">
-											<i class="far fa-trash-alt"></i>
+								<td><a
+									href="/admin/user/addPermission?username=${user.username }">
+										<button class="btn btn-dark">
+											<i class="fas fa-users"></i>
 										</button>
-									</form>
-								</td>
+								</a></td>
+								<c:if test="${user.products.size()==0 }">
+									<td>
+										<form action="/admin/user/deleteUser" method="POST">
+											<input name="username" value="${user.username }"
+												type="hidden" />
+											<button class="btn btn-danger btn-block" type="submit">
+												<i class="far fa-trash-alt"></i>
+											</button>
+										</form>
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -57,7 +57,12 @@ public class ClientAuthController {
 			ShoppingCart cart = new ShoppingCart();
 			for (ShoppingCart c : user.getCartItems()) {
 				if (c.getProduct().equals(pro)) {
-					c.setQuantity(c.getQuantity() + quantity.get(i));
+					if (pro.getQuantity()<c.getQuantity() + quantity.get(i)) {
+						c.setQuantity(pro.getQuantity());
+					}
+					else {
+						c.setQuantity(c.getQuantity() + quantity.get(i));
+					}
 					cart.setDate();
 					cartService.save(c);
 					check=true;
@@ -161,6 +166,10 @@ public class ClientAuthController {
 			orderDetail.setSubTotal();
 			subTotal += orderDetail.getQuantity() * orderDetail.getProduct().getPrice();
 			orderDetailRepo.save(orderDetail);
+			Product pro = pros.get(index);
+			pro.setQuantity(pro.getQuantity()-quantity.get(index));
+			pro.setSold(pro.getSold()+quantity.get(index));
+			proService.save(pro);
 		}
 		order.setSubTotal(subTotal);
 		order.setGrandTotal();

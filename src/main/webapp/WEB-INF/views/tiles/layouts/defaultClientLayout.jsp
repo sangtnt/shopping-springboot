@@ -13,6 +13,7 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="<c:url value='/resources/static/css/bootstrap.min.css'/>" type="text/css">
+    <link rel="stylesheet" href="/resources/static/css/adminlte.min.css">
 	<link rel="stylesheet" href="<c:url value='/resources/static/css/font-awesome.min.css'/>" type="text/css">
 	<link rel="stylesheet" href="<c:url value='/resources/static/css/elegant-icons.css'/>" type="text/css">
     <link rel="stylesheet" href="<c:url value='/resources/static/css/nice-select.css'/>" type="text/css">
@@ -52,5 +53,11 @@
 			}
 		})
     </script>
+	<!-- Bootstrap 4 -->
+	<script src="/resources/static/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/resources/static/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="/resources/static/js/demo.js"></script>
 </body>
 </html>

@@ -50,7 +50,7 @@
 		</div>
 		<div class="row featured__filter">
 			<c:forEach var="pro" items="${pros }">
-				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg" data-setbg="${pro.image }">
 							<ul class="featured__item__pic__hover">

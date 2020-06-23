@@ -23,28 +23,29 @@
 					<thead>
 						<tr>
 							<th>Role</th>
-							<th>
-								<a href="/admin/permission/add">
-									<button class="btn btn-outline-success btn-block">Add new</button>
-								</a>
-							</th>
+							<th><a href="/admin/permission/add">
+									<button class="btn btn-outline-success btn-block">Add
+										new</button>
+							</a></th>
 						</tr>
 					</thead>
 					<tfoot>
-						
+
 					</tfoot>
 					<tbody>
 						<c:forEach var="item" items="${pers}">
 							<tr>
 								<td>${item.permissionName }</td>
-								<td>
-									<form action="/admin/permission/delete" method="POST">
-										<input name="id" value="${item.id }" type="hidden" />
-										<button class="btn btn-danger btn-block" type="submit">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
+								<c:if test="${item.users.size()==0 }">
+									<td>
+										<form action="/admin/permission/delete" method="POST">
+											<input name="id" value="${item.id }" type="hidden" />
+											<button class="btn btn-danger btn-block" type="submit">
+												<i class="far fa-trash-alt"></i>
+											</button>
+										</form>
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
