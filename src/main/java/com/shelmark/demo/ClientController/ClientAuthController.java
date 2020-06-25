@@ -187,4 +187,34 @@ public class ClientAuthController {
 		SetupSession.setHeader(cartItems.size(), user.getProLiked().size(), request);
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/like", method = RequestMethod.GET)
+	public String like(@RequestParam Long proId, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
+		User user = userService.findByUsername(u.getUsername());
+		Product pro = proService.findById(proId);
+		Set<Product> pros = user.getProLiked();
+		if (pros.contains(pro)) {
+			pros.remove(pro);
+		}
+		else{
+			pros.add(pro);
+		}
+		user.setProLiked(pros);
+		userService.save(user);
+		SetupSession.setHeader(user.getCartItems().size(), user.getProLiked().size(), request);
+		String referer = (String) session.getAttribute("referer");
+		return "redirect:"+referer;
+	}
+	@RequestMapping(value = "/viewProLike", method = RequestMethod.GET)
+	public ModelAndView viewProLike(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
+		User user = userService.findByUsername(u.getUsername());
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("proLike");
+		mv.addObject("pros", user.getProLiked());
+		return mv;
+	}
 }

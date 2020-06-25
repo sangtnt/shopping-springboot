@@ -8,7 +8,7 @@
 	</div>
 	<div class="humberger__menu__cart">
 		<ul>
-			<li><a href="#"><i class="fa fa-heart"></i> <span>${sessionScope.likes }</span></a></li>
+			<li><a href="/auth/viewProLike"><i class="fa fa-heart"></i> <span>${sessionScope.likes }</span></a></li>
 			<li><a href="/auth/viewCart"><i class="fa fa-shopping-bag"></i> <span>${sessionScope.cartItems }</span></a></li>
 		</ul>
 	</div>
@@ -125,7 +125,7 @@
 			<div class="col-lg-3">
 				<div class="header__cart">
 					<ul>
-						<li><a href="#"><i class="fa fa-heart"></i> <span>${sessionScope.likes }</span></a></li>
+						<li><a href="/auth/viewProLike"><i class="fa fa-heart"></i> <span>${sessionScope.likes }</span></a></li>
 						<li><a href="/auth/viewCart"><i
 								class="fa fa-shopping-bag"></i>
 									<span>${sessionScope.cartItems }</span></a></li>

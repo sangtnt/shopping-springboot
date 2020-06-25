@@ -54,7 +54,7 @@
 					<div class="featured__item">
 						<div class="featured__item__pic set-bg" data-setbg="${pro.image }">
 							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
+								<li><a href="/auth/like?proId=${pro.id }"><i class="fa fa-heart"></i></a></li>
 								<li>
 									<form action="/auth/addToCart" method="post">
 										<input name="quantity" value="1" type="hidden"> <input

@@ -228,4 +228,12 @@ public class User {
 		this.cartItems = cartItems;
 	}
 	
+	public boolean checkProLiked(Product pro) {
+		for (Product p : this.proLiked) {
+			if (p.equals(pro)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

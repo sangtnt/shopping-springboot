@@ -910,6 +910,11 @@ ol {
 	transform: rotate(360deg);
 }
 
+.featured__item__pic__hover li a .liked {
+	color: #ffffff;
+	transform: rotate(360deg);
+}
+
 .featured__item__pic__hover li a {
 	font-size: 16px;
 	color: #1c1c1c;

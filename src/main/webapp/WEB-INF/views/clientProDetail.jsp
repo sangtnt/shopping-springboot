@@ -61,7 +61,20 @@
 
 							<button type="submit" class="primary-btn">ADD TO CART</button>
 
-							<a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+							<c:if test="${user!=null }">
+								<c:if test="${ user.checkProLiked(pro)}">
+									<a href="/auth/like?proId=${pro.id }" class="heart-icon"><span
+										class="icon_heart"></span></a>
+								</c:if>
+								<c:if test="${ user.checkProLiked(pro)==false}">
+									<a href="/auth/like?proId=${pro.id }" class="heart-icon"><span
+										class="icon_heart_alt"></span></a>
+								</c:if>
+							</c:if>
+							<c:if test="${user==null }">
+								<a href="/auth/like?proId=${pro.id }" class="heart-icon"><span
+										class="icon_heart_alt"></span></a>
+							</c:if>
 						</form>
 					</c:if>
 					<ul>

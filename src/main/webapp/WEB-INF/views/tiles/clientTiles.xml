@@ -31,4 +31,7 @@
 	<definition name="shopDetail" extends="client-base-definition">
 		<put-attribute name="body" value="/WEB-INF/views/shopDetail.jsp" />
 	</definition>
+	<definition name="proLike" extends="client-base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/proLike.jsp" />
+	</definition>
 </tiles-definitions>

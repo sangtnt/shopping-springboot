@@ -101,9 +101,14 @@
 						<div class="featured__item__pic set-bg"
 							data-setbg="${item.image }">
 							<ul class="featured__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+								<li><a href="/auth/like?proId=${item.id }"><i class="fa fa-heart"></i></a></li>
+								<li>
+									<form action="/auth/addToCart" method="post">
+										<input name="quantity" value="1" type="hidden"> <input
+											name="proId" value="${pro.id }" type="hidden"> <a><i
+											class="addToCart fa fa-shopping-cart"></i></a>
+									</form>
+								</li>
 							</ul>
 						</div>
 						<div class="featured__item__text">
