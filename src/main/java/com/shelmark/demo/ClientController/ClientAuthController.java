@@ -20,7 +20,6 @@ import com.shelmark.demo.Entity.Product;
 import com.shelmark.demo.Entity.ShoppingCart;
 import com.shelmark.demo.Entity.User;
 import com.shelmark.demo.Repository.OrderDetailRepository;
-import com.shelmark.demo.Repository.ShoppingCartRepository;
 import com.shelmark.demo.Service.OrderService;
 import com.shelmark.demo.Service.ProductService;
 import com.shelmark.demo.Service.ShoppingCartService;
@@ -204,7 +203,7 @@ public class ClientAuthController {
 		user.setProLiked(pros);
 		userService.save(user);
 		SetupSession.setHeader(user.getCartItems().size(), user.getProLiked().size(), request);
-		String referer = (String) session.getAttribute("referer");
+		String referer = request.getHeader("referer");
 		return "redirect:"+referer;
 	}
 	@RequestMapping(value = "/viewProLike", method = RequestMethod.GET)

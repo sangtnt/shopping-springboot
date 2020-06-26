@@ -34,4 +34,7 @@
 	<definition name="proLike" extends="client-base-definition">
 		<put-attribute name="body" value="/WEB-INF/views/proLike.jsp" />
 	</definition>
+	<definition name="clientSearch" extends="client-base-definition">
+		<put-attribute name="body" value="/WEB-INF/views/clientSearch.jsp" />
+	</definition>
 </tiles-definitions>

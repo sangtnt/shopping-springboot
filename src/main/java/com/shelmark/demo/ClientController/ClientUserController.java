@@ -19,7 +19,7 @@ public class ClientUserController {
 	public ModelAndView showProfile(@RequestParam String username) {
 		User user = userService.findByUsername(username);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user", user);
+		mv.addObject("user", user);s
 		mv.setViewName("shopDetail");
 		return mv;
 	}

@@ -68,6 +68,27 @@
 							<h6>
 								<a href="/product/proDetail?proId=${pro.id }">${pro.name }</a>
 							</h6>
+							<h6 style="color: red">
+								<c:if test="${pro.research >1}">
+									(${pro.research } researches)
+								</c:if>
+								<c:if test="${pro.research ==1}">
+									(${pro.research } research)
+								</c:if>
+								<c:if test="${pro.research ==0|| pro.research==null}">
+									(No research)
+								</c:if>
+								
+								<%-- <c:if test="${pro.usersLiked.size() >1}">
+									(${pro.usersLiked.size() } Likes)
+								</c:if>
+								<c:if test="${pro.usersLiked.size() ==1}">
+									(${pro.usersLiked.size() } Like)
+								</c:if>
+								<c:if test="${pro.usersLiked.size() ==0}">
+									(${pro.usersLiked.size() } Like)
+								</c:if> --%>
+							</h6>
 							<h5>$${pro.price }</h5>
 						</div>
 					</div>

@@ -9,28 +9,20 @@
 						<i class="fa fa-bars"></i> <span>All departments</span>
 					</div>
 					<ul>
-						<li><a href="#">Fresh Meat</a></li>
-						<li><a href="#">Vegetables</a></li>
-						<li><a href="#">Fruit & Nut Gifts</a></li>
-						<li><a href="#">Fresh Berries</a></li>
-						<li><a href="#">Ocean Foods</a></li>
-						<li><a href="#">Butter & Eggs</a></li>
-						<li><a href="#">Fastfood</a></li>
-						<li><a href="#">Fresh Onion</a></li>
-						<li><a href="#">Papayaya & Crisps</a></li>
-						<li><a href="#">Oatmeal</a></li>
-						<li><a href="#">Fresh Bananas</a></li>
+						<c:forEach var="cat" items="${cats }">
+							<li><a href="/product?catId=${cat.id }">${cat.name }</a></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-9">
 				<div class="hero__search">
 					<div class="hero__search__form">
-						<form action="#">
+						<form action="/product/search" method="GET">
 							<div class="hero__search__categories">
-								All Categories <span class="arrow_carrot-down"></span>
+								All Categories<!--  <span class="arrow_carrot-down"></span> -->
 							</div>
-							<input type="text" placeholder="What do yo u need?">
+							<input name="name" type="text" placeholder="What do you need?" required>
 							<button type="submit" class="site-btn">SEARCH</button>
 						</form>
 					</div>

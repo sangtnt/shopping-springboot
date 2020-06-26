@@ -2,11 +2,8 @@ package com.shelmark.demo.Entity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -91,7 +88,7 @@ public class Product {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "PRO_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_USERNAME") })
-	private Set<Product> proLiked;
+	private Set<Product> usersLiked;
 	
 	public Long getId() {
 		return id;
@@ -191,13 +188,12 @@ public class Product {
 		this.reviews = reviews;
 	}
 
-	
-	public Set<Product> getProLiked() {
-		return proLiked;
+	public Set<Product> getUsersLiked() {
+		return usersLiked;
 	}
 
-	public void setProLiked(Set<Product> proLiked) {
-		this.proLiked = proLiked;
+	public void setUsersLiked(Set<Product> usersLiked) {
+		this.usersLiked = usersLiked;
 	}
 
 	public String getOrigin() {

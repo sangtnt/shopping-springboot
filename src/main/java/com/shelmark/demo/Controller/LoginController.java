@@ -1,8 +1,5 @@
 package com.shelmark.demo.Controller;
 
-import java.net.http.HttpRequest;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +28,9 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(HttpSession session, HttpServletRequest request) {
 		String referer = request.getHeader("Referer");
-		session.setAttribute("referer", referer);
+		if (!referer.contains("login")) {
+			session.setAttribute("referer", referer);
+		}
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("login");
 		return mv;

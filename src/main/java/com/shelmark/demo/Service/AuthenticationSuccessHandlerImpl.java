@@ -1,8 +1,6 @@
 package com.shelmark.demo.Service;
 
 import java.io.IOException;
-import java.security.Principal;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -22,7 +20,6 @@ import org.springframework.stereotype.Component;
 import com.shelmark.demo.SetupSession;
 import com.shelmark.demo.Entity.Permission;
 import com.shelmark.demo.Entity.User;
-import com.shelmark.demo.Repository.UserRepository;
 
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
@@ -41,6 +38,9 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         logger.info("userName: " + userName);
         HttpSession session = request.getSession();
         String referer = (String) session.getAttribute("referer");
+        if (referer.equals("")) {
+        	referer="/";
+        }
         session.setAttribute("user", user);
         SetupSession.setHeader(user.getCartItems().size() ,user.getProLiked().size(), request);
         Set<Permission> permission=user.getPermissions();

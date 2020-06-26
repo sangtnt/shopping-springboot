@@ -46,6 +46,7 @@
 						</c:forEach>
 						<span>(${pro.reviews.size() } reviews) (Sold ${pro.sold }
 							items)</span>
+						
 					</div>
 					<div class="product__details__price">$${pro.price }</div>
 					<c:if test="${pro.quantity>0 }">

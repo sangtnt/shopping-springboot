@@ -1,6 +1,7 @@
 package com.shelmark.demo.ClientController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,11 +49,37 @@ public class ClientProductController {
 		if(u!=null) {
 			user = userService.findByUsername(u.getUsername());
 		}
+		String referer = request.getHeader("referer");
+		if (referer.contains("search")) {
+			Long s=(long) 0;
+			if (pro.getResearch()==null) {
+				s += 1;
+			}
+			else {
+				s=pro.getResearch()+1;
+			}
+			pro.setResearch(s);
+			proService.save(pro);
+		}
 		List<Product> relatedPros = proService.getProByCatAndRating(pro.getCat().getId());
 		mv.addObject("pro", pro);
 		mv.addObject("user", user);
 		mv.addObject("relatedPros", relatedPros);
 		mv.setViewName("clientProDetail");
+		return mv;
+	}
+	
+	@RequestMapping(value="/search")
+	public ModelAndView search(@RequestParam String name) {
+		List<Product> products = proService.findAll();
+		List<Product> pros = products.stream().filter(pro->{
+			return pro.getName().toLowerCase().contains(name.toLowerCase());
+		})
+		.collect(Collectors.toList());
+ 		ModelAndView mv = new ModelAndView();
+		mv.addObject("pros", pros);
+		mv.addObject("name", name);
+		mv.setViewName("clientSearch");
 		return mv;
 	}
 }
