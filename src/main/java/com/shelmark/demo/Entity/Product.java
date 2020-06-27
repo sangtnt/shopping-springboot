@@ -85,10 +85,10 @@ public class Product {
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<User_Review_Pro> reviews;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "PRO_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_USERNAME") })
-	private Set<Product> usersLiked;
+	private Set<User> userLiked;
 	
 	public Long getId() {
 		return id;
@@ -188,12 +188,12 @@ public class Product {
 		this.reviews = reviews;
 	}
 
-	public Set<Product> getUsersLiked() {
-		return usersLiked;
+	public Set<User> getUserLiked() {
+		return userLiked;
 	}
 
-	public void setUsersLiked(Set<Product> usersLiked) {
-		this.usersLiked = usersLiked;
+	public void setUserLiked(Set<User> userLiked) {
+		this.userLiked = userLiked;
 	}
 
 	public String getOrigin() {

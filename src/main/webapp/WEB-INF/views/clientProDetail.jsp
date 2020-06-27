@@ -45,7 +45,9 @@
 							<i class="fa fa-star-o"></i>
 						</c:forEach>
 						<span>(${pro.reviews.size() } reviews) (Sold ${pro.sold }
-							items)</span>
+							items) (${pro.userLiked.size() }
+							likes) (${pro.research }
+							researches)</span>
 						
 					</div>
 					<div class="product__details__price">$${pro.price }</div>
@@ -175,9 +177,14 @@
 					<div class="product__item">
 						<div class="product__item__pic set-bg" data-setbg="${item.image }">
 							<ul class="product__item__pic__hover">
-								<li><a href="#"><i class="fa fa-heart"></i></a></li>
-								<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								<li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+								<li><a href="/auth/like?proId=${pro.id }"><i class="fa fa-heart"></i></a></li>
+								<li>
+									<form action="/auth/addToCart" method="post">
+										<input name="quantity" value="1" type="hidden"> <input
+											name="proId" value="${pro.id }" type="hidden"> <a><i
+											class="addToCart fa fa-shopping-cart"></i></a>
+									</form>
+								</li>
 							</ul>
 						</div>
 						<div class="product__item__text">

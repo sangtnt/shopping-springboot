@@ -49,17 +49,19 @@ public class ClientProductController {
 		if(u!=null) {
 			user = userService.findByUsername(u.getUsername());
 		}
-		String referer = request.getHeader("referer");
-		if (referer.contains("search")) {
-			Long s=(long) 0;
-			if (pro.getResearch()==null) {
-				s += 1;
+		if (request.getHeader("referer")!=null) {
+			String referer = request.getHeader("referer");
+			if (referer.contains("search")) {
+				Long s=(long) 0;
+				if (pro.getResearch()==null) {
+					s += 1;
+				}
+				else {
+					s=pro.getResearch()+1;
+				}
+				pro.setResearch(s);
+				proService.save(pro);
 			}
-			else {
-				s=pro.getResearch()+1;
-			}
-			pro.setResearch(s);
-			proService.save(pro);
 		}
 		List<Product> relatedPros = proService.getProByCatAndRating(pro.getCat().getId());
 		mv.addObject("pro", pro);

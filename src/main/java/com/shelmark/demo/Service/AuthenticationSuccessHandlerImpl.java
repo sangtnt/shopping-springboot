@@ -38,9 +38,6 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         logger.info("userName: " + userName);
         HttpSession session = request.getSession();
         String referer = (String) session.getAttribute("referer");
-        if (referer.equals("")) {
-        	referer="/";
-        }
         session.setAttribute("user", user);
         SetupSession.setHeader(user.getCartItems().size() ,user.getProLiked().size(), request);
         Set<Permission> permission=user.getPermissions();
