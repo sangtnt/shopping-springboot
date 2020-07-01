@@ -80,8 +80,9 @@ public class ProductController {
 							@RequestParam String proBrand,
 							@RequestParam String proOrigin,
 							@RequestParam String proShipping,
-							@RequestParam Long proPrice,
+							@RequestParam Double proPrice,
 							@RequestParam Long proQuantity,
+							@RequestParam Long discount,
 							@RequestParam Long catId,
 							@RequestParam MultipartFile file
 	){
@@ -92,6 +93,7 @@ public class ProductController {
 		pro.setQuantity(proQuantity);
 		pro.setCat(catService.getCatById(catId));
 		pro.setBrand(proBrand);
+		pro.setDiscount(discount);
 		pro.setOrigin(proOrigin);
 		pro.setShipping(proShipping);
 		Date date = new Date();
@@ -120,7 +122,7 @@ public class ProductController {
 									@RequestParam String proBrand,
 									@RequestParam String proOrigin,
 									@RequestParam String proShipping,
-									@RequestParam Long proPrice,
+									@RequestParam Double proPrice,
 									@RequestParam Long proQuantity,
 									@RequestParam Long catId,
 									@RequestParam MultipartFile file,

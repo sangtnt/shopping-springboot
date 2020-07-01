@@ -29,7 +29,15 @@
 							<h6>
 								<a href="/product/proDetail?proId=${pro.id }">${pro.name }</a>
 							</h6>
-							<h5>$${pro.price }</h5>
+							<c:if test="${pro.discount>0 }">
+								<h5 class="outer">
+									<span class="inner">$${pro.price }</span>
+								</h5>
+								<h5>$${pro.getDiscountPrice() }</h5>
+							</c:if>
+							<c:if test="${pro.discount==0 || pro.discount==null}">
+								<h5>$${pro.price }</h5>
+							</c:if>
 						</div>
 					</div>
 				</div>

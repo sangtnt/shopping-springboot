@@ -67,7 +67,7 @@ public class User {
 	private List<Order> orders;
 	
 	@OneToMany(mappedBy="user")
-	private List<User_Review_Pro> reviews;
+	private List<UserReviewPro> reviews;
 	
 	@OneToMany(mappedBy="user")
 	private List<Product> products;
@@ -76,7 +76,7 @@ public class User {
 	private Set<ShoppingCart> cartItems;
 
 	@OneToMany(mappedBy = "user")
-	private List<User_Rate_Pro> ratings;
+	private List<UserRatePro> ratings;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "USER_USERNAME") }, inverseJoinColumns = {
@@ -167,11 +167,11 @@ public class User {
 		this.orders = orders;
 	}
 
-	public List<User_Review_Pro> getReviews() {
+	public List<UserReviewPro> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<User_Review_Pro> reviews) {
+	public void setReviews(List<UserReviewPro> reviews) {
 		this.reviews = reviews;
 	}
 
@@ -209,11 +209,11 @@ public class User {
 		this.date = date;
 	}
 
-	public List<User_Rate_Pro> getRatings() {
+	public List<UserRatePro> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(List<User_Rate_Pro> ratings) {
+	public void setRatings(List<UserRatePro> ratings) {
 		this.ratings = ratings;
 	}
 

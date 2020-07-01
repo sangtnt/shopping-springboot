@@ -2,6 +2,8 @@ package com.shelmark.demo.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +48,14 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/changeOrder", method = RequestMethod.POST)
-	public String change(@RequestParam Long orderId, @RequestParam Integer orderStatus) {
+	public String change(@RequestParam Long orderId, @RequestParam Integer orderStatus, HttpServletRequest request) {
 		Order order = orderService.getOrderById(orderId);
 		order.setStatus(orderStatus);
 		orderService.save(order);
-		return "redirect:/admin/order";
+		String referer="/admin/order";
+		if (request.getHeader("referer")!=null) {
+			referer=request.getHeader("referer");
+		}
+		return "redirect:"+referer;
 	}
 }

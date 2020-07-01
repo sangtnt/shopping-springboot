@@ -41,7 +41,7 @@
 											<td class="shoping__cart__item"><img
 												src="${item.product.image }" alt="">
 												<h5>${item.product.name }</h5></td>
-											<td class="shoping__cart__price">$${item.product.price }</td>
+											<td class="shoping__cart__price">$${item.product.getDiscountPrice() }</td>
 											<td class="shoping__cart__quantity">
 												<div class="quantity">
 													<div class="pro-qty">
@@ -50,8 +50,7 @@
 													</div>
 												</div>
 											</td>
-											<td class="shoping__cart__total">$${item.product.price*item.quantity
-												}</td>
+											<td class="shoping__cart__total">$${item.total}</td>
 											<td class="shoping__cart__item__close"><a
 												href="/auth/deleteCartItem?itemId=${item.id }"><span
 													class="icon_close"></span></a></td>

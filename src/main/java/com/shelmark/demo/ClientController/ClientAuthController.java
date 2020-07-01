@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shelmark.demo.SetupSession;
@@ -19,7 +20,10 @@ import com.shelmark.demo.Entity.Order_Detail;
 import com.shelmark.demo.Entity.Product;
 import com.shelmark.demo.Entity.ShoppingCart;
 import com.shelmark.demo.Entity.User;
+import com.shelmark.demo.Entity.UserReviewPro;
 import com.shelmark.demo.Repository.OrderDetailRepository;
+import com.shelmark.demo.Repository.UserReviewProRepository;
+import com.shelmark.demo.Service.ImageService;
 import com.shelmark.demo.Service.OrderService;
 import com.shelmark.demo.Service.ProductService;
 import com.shelmark.demo.Service.ShoppingCartService;
@@ -42,7 +46,11 @@ public class ClientAuthController {
 
 	@Autowired
 	private OrderDetailRepository orderDetailRepo;
-
+	
+	@Autowired
+	private UserReviewProRepository userReviewPro;
+	
+	public static String uploadRootPath = System.getProperty("user.dir") + "/src/main/webapp/resources/static/img";
 	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
 	public String addToCart(@RequestParam List<Long> quantity, @RequestParam List<Long> proId,
 			HttpServletRequest request) {
@@ -50,21 +58,20 @@ public class ClientAuthController {
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
 		User user = userService.findByUsername(u.getUsername());
-		for (int i =0; i<quantity.size(); i++) {
-			boolean check=false;
+		for (int i = 0; i < quantity.size(); i++) {
+			boolean check = false;
 			Product pro = proService.findById(proId.get(i));
 			ShoppingCart cart = new ShoppingCart();
 			for (ShoppingCart c : user.getCartItems()) {
 				if (c.getProduct().equals(pro)) {
-					if (pro.getQuantity()<c.getQuantity() + quantity.get(i)) {
+					if (pro.getQuantity() < c.getQuantity() + quantity.get(i)) {
 						c.setQuantity(pro.getQuantity());
-					}
-					else {
+					} else {
 						c.setQuantity(c.getQuantity() + quantity.get(i));
 					}
 					cart.setDate();
 					cartService.save(c);
-					check=true;
+					check = true;
 					break;
 				}
 			}
@@ -75,13 +82,13 @@ public class ClientAuthController {
 				cart.setProduct(pro);
 				cart.setTotal();
 				cartService.save(cart);
-				SetupSession.setHeader(user.getCartItems().size() + quantity.size(), user.getProLiked().size(), request);
+				SetupSession.setHeader(user.getCartItems().size() + quantity.size(), user.getProLiked().size(),
+						request);
 			}
 		}
 		if (quantity.size() == 1) {
 			return "redirect:" + referer;
-		}
-		else {
+		} else {
 			return "redirect:/auth/viewCart";
 		}
 	}
@@ -152,10 +159,10 @@ public class ClientAuthController {
 		order.setDate();
 		order.setShipping((long) 30);
 		order.setDiscount((long) 0);
-		order.setAdditionalFees((long) 0);
+		order.setAdditionalFees( 0.0);
 		orderService.save(order);
 		List<Product> pros = proService.getListByListId(proId);
-		Long subTotal = (long) 0;
+		Double subTotal = 0.0;
 		// set Order_Detail
 		for (int index = 0; index < pros.size(); index++) {
 			Order_Detail orderDetail = new Order_Detail();
@@ -166,8 +173,8 @@ public class ClientAuthController {
 			subTotal += orderDetail.getQuantity() * orderDetail.getProduct().getPrice();
 			orderDetailRepo.save(orderDetail);
 			Product pro = pros.get(index);
-			pro.setQuantity(pro.getQuantity()-quantity.get(index));
-			pro.setSold(pro.getSold()+quantity.get(index));
+			pro.setQuantity(pro.getQuantity() - quantity.get(index));
+			pro.setSold(pro.getSold() + quantity.get(index));
 			proService.save(pro);
 		}
 		order.setSubTotal(subTotal);
@@ -186,7 +193,7 @@ public class ClientAuthController {
 		SetupSession.setHeader(cartItems.size(), user.getProLiked().size(), request);
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping(value = "/like", method = RequestMethod.GET)
 	public String like(@RequestParam Long proId, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -196,16 +203,16 @@ public class ClientAuthController {
 		Set<Product> pros = user.getProLiked();
 		if (pros.contains(pro)) {
 			pros.remove(pro);
-		}
-		else{
+		} else {
 			pros.add(pro);
 		}
 		user.setProLiked(pros);
 		userService.save(user);
 		SetupSession.setHeader(user.getCartItems().size(), user.getProLiked().size(), request);
 		String referer = request.getHeader("referer");
-		return "redirect:"+referer;
+		return "redirect:" + referer;
 	}
+
 	@RequestMapping(value = "/viewProLike", method = RequestMethod.GET)
 	public ModelAndView viewProLike(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -215,5 +222,31 @@ public class ClientAuthController {
 		mv.setViewName("proLike");
 		mv.addObject("pros", user.getProLiked());
 		return mv;
+	}
+
+	@Autowired
+	private ImageService imgService;
+	
+	@RequestMapping(value = "/review", method=RequestMethod.POST)
+	public String addReview(@RequestParam String username, @RequestParam Long proId, @RequestParam String review,
+			HttpServletRequest request,
+			MultipartFile file) {
+		User user = userService.findByUsername(username);
+		Product pro = proService.findById(proId);
+		UserReviewPro reviewPro = new UserReviewPro();
+		reviewPro.setUser(user);
+		reviewPro.setDate();
+		String img;
+		if (!file.isEmpty()) {
+			img = imgService.uploadFile(uploadRootPath + "/review", file);
+			reviewPro.setImage("/resources/static/img/review/" + img);
+		} else {
+			reviewPro.setImage("");
+		}
+		reviewPro.setProduct(pro);
+		reviewPro.setReview(review);
+		userReviewPro.save(reviewPro);
+		String referer = request.getHeader("referer");
+		return "redirect:" + referer;
 	}
 }

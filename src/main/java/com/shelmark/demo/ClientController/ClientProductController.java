@@ -22,10 +22,11 @@ import com.shelmark.demo.Service.UserService;
 public class ClientProductController {
 	@Autowired
 	private ProductService proService;
-	
+
 	@Autowired
 	private UserService userService;
-	@RequestMapping(value="")
+
+	@RequestMapping(value = "")
 	public ModelAndView showProsByCatId(@RequestParam Long catId) {
 		List<Product> latestPros = proService.getProByOrderAndDate(catId);
 		List<Product> ratedPros = proService.getProByCatAndRating(catId);
@@ -39,25 +40,25 @@ public class ClientProductController {
 		mv.setViewName("proByCat");
 		return mv;
 	}
-	@RequestMapping(value="/proDetail")
+
+	@RequestMapping(value = "/proDetail")
 	public ModelAndView proDetail(@RequestParam() Long proId, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		Product pro = proService.findById(proId);
 		HttpSession session = request.getSession();
 		User u = (User) session.getAttribute("user");
-		User user= null;
-		if(u!=null) {
+		User user = null;
+		if (u != null) {
 			user = userService.findByUsername(u.getUsername());
 		}
-		if (request.getHeader("referer")!=null) {
+		if (request.getHeader("referer") != null) {
 			String referer = request.getHeader("referer");
 			if (referer.contains("search")) {
-				Long s=(long) 0;
-				if (pro.getResearch()==null) {
+				Long s = (long) 0;
+				if (pro.getResearch() == null) {
 					s += 1;
-				}
-				else {
-					s=pro.getResearch()+1;
+				} else {
+					s = pro.getResearch() + 1;
 				}
 				pro.setResearch(s);
 				proService.save(pro);
@@ -70,15 +71,14 @@ public class ClientProductController {
 		mv.setViewName("clientProDetail");
 		return mv;
 	}
-	
-	@RequestMapping(value="/search")
+
+	@RequestMapping(value = "/search")
 	public ModelAndView search(@RequestParam String name) {
 		List<Product> products = proService.findAll();
-		List<Product> pros = products.stream().filter(pro->{
+		List<Product> pros = products.stream().filter(pro -> {
 			return pro.getName().toLowerCase().contains(name.toLowerCase());
-		})
-		.collect(Collectors.toList());
- 		ModelAndView mv = new ModelAndView();
+		}).collect(Collectors.toList());
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("pros", pros);
 		mv.addObject("name", name);
 		mv.setViewName("clientSearch");

@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.shelmark.demo.Entity.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long>{
-	@Query(value="SELECT * FROM cus_order LIMIT :start, :limit", nativeQuery=true)
+	@Query(value="SELECT * FROM cus_order ORDER BY ORDER_DATE DESC LIMIT :start, :limit", nativeQuery=true)
 	List<Order> getOrdersByPage(Integer start, Integer limit);
 }

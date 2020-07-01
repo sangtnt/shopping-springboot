@@ -35,6 +35,19 @@
 				class="form-control" value="${pro.origin }" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
+			<label for="exampleFormControlSelect1">Discount</label> 
+			<select name="discount" class="form-control" id="exampleFormControlSelect1" required>
+				<c:forEach var="count" begin="0" end="100">
+					<c:if test="${count==pro.discount}">
+						<option value="${count}" selected>${count}%</option>
+					</c:if>
+					<c:if test="${count!=pro.discount }">
+						<option value="${count}">${count}%</option>
+					</c:if>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="form-group">
 			<label for="exampleFormControlSelect1">Category</label> 
 			<select name="catId" class="form-control" id="exampleFormControlSelect1" required>
 				<c:forEach var="item" items="${cats}">

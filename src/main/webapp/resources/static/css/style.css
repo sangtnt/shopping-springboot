@@ -3524,3 +3524,37 @@ ol {
 	text-align: right;
 	font-weight: bold;
 }
+.review-container{
+	display: flex;
+}
+.review-container .img-user{
+	margin-right: 30px;
+	border: 1px solid gray;
+	border-radius: 100%;
+}
+.review-container .review-username{
+	font-weight: bold;
+}
+.review-container{
+	margin: 5px 0px;
+}
+.review-container .review-right textarea{
+	resize: none;
+	font-size: 14px;
+}
+.review-area{
+	padding: 10px;
+	border-bottom: 1px solid gray;
+}
+.review-container .comment{
+	width: 200px;
+	word-break: break-all;
+}
+span.inner, h5.inner {
+	color: gray;
+}
+span.outer, h5.outer {
+    color: red;
+    text-decoration: line-through;
+    font-weight:bold;
+}

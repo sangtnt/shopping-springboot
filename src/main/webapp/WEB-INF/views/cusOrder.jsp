@@ -30,7 +30,7 @@
 					<thead>
 						<tr>
 							<th>Order ID</th>
-							<th>Username</th>
+							<th>Date</th>
 							<th>Fullname</th>
 							<th>Phone</th>
 							<th>Status</th>
@@ -43,7 +43,7 @@
 							<tr>
 								<td><a href="/admin/order/orderDetail?orderId=${order.id }">
 										${order.id} </a></td>
-								<td>${order.user.username}</td>
+								<td>${order.date}</td>
 								<td>${order.fullname }</td>
 								<td>${order.phone }</td>
 								<td><c:if test="${order.status ==0}">

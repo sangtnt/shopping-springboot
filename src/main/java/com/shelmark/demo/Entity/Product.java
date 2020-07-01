@@ -36,7 +36,7 @@ public class Product {
 	private String image;
 	
 	@Column(name="PRO_PRICE")
-	private Long price;
+	private Double price;
 	
 	@Column(name="PRO_DESCRIPTION")
 	private String description;
@@ -48,7 +48,7 @@ public class Product {
 	private Long date;
 	
 	@OneToMany(mappedBy = "product")
-	private List<User_Rate_Pro> ratings;
+	private List<UserRatePro> ratings;
 	
 	@Column(name="PRO_SOLD")
 	private Long sold;
@@ -68,6 +68,9 @@ public class Product {
 	@Column(name="PRO_RESEARCH")
 	private Long research;
 	
+	@Column(name="PRO_DISCOUNT", columnDefinition="Decimal(10) default 0")
+	private Long discount;
+	
 	@ManyToOne
 	@JoinColumn(name="CAT_ID", nullable=false)
 	private Category cat;
@@ -83,7 +86,7 @@ public class Product {
 	private List<Order_Detail> order_details;
 	
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-	private List<User_Review_Pro> reviews;
+	private List<UserReviewPro> reviews;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "PRO_ID") }, inverseJoinColumns = {
@@ -114,11 +117,11 @@ public class Product {
 		this.image = image;
 	}
 
-	public Long getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -180,11 +183,11 @@ public class Product {
 		this.shipping = shipping;
 	}
 
-	public List<User_Review_Pro> getReviews() {
+	public List<UserReviewPro> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(List<User_Review_Pro> reviews) {
+	public void setReviews(List<UserReviewPro> reviews) {
 		this.reviews = reviews;
 	}
 
@@ -212,11 +215,11 @@ public class Product {
 		this.user = user;
 	}
 
-	public List<User_Rate_Pro> getRatings() {
+	public List<UserRatePro> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(List<User_Rate_Pro> ratings) {
+	public void setRatings(List<UserRatePro> ratings) {
 		this.ratings = ratings;
 	}
 
@@ -235,7 +238,7 @@ public class Product {
 	public void setRating() {
 		long result=0;
 		if (this.ratings.size()!=0) {
-			for (User_Rate_Pro r: this.ratings) {
+			for (UserRatePro r: this.ratings) {
 				result+=r.getRating();
 			}
 			result=Math.round(result/this.ratings.size());
@@ -261,6 +264,16 @@ public class Product {
 	public void setResearch(Long research) {
 		this.research = research;
 	}
+
+	public Long getDiscount() {
+		return discount;
+	}
 	
-	
+	public Double getDiscountPrice() {
+		return (double) Math.round((this.price*((double) (100-this.discount)/100)*100))/100;
+	}
+
+	public void setDiscount(Long discount) {
+		this.discount = discount;
+	}
 }

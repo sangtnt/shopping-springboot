@@ -29,7 +29,7 @@ public class Order_Detail {
 	private Long quantity;
 
 	@Column(name="ORDER_DETAIL_SUBTOTAL")
-	private Long subTotal;
+	private Double subTotal;
 	
 	public Order getOrder() {
 		return order;
@@ -63,12 +63,12 @@ public class Order_Detail {
 		this.id = id;
 	}
 
-	public Long getSubTotal() {
+	public Double getSubTotal() {
 		return subTotal;
 	}
 
 	public void setSubTotal() {
-		this.subTotal = this.quantity*this.product.getPrice();
+		this.subTotal = (double) (Math.round(this.quantity*this.product.getDiscountPrice()*100)/100);
 	}
 	
 }

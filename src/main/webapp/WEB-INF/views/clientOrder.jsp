@@ -59,10 +59,9 @@
 															<input name="quantity" value="${item.quantity }"
 															type="hidden">
 															<h5>${item.product.name }</h5></td>
-														<td class="shoping__cart__price">$${item.product.price
-															}</td>
+														<td class="shoping__cart__price">$${item.product.getDiscountPrice()}</td>
 														<td class="shoping__cart__price">${item.quantity }</td>
-														<td class="shoping__cart__total">$${item.product.price*item.quantity
+														<td class="shoping__cart__total">$${item.product.getDiscountPrice()*item.quantity
 															}</td>
 													</tr>
 												</c:forEach>

@@ -17,7 +17,15 @@
 								</div>
 								<div class="latest-product__item__text">
 									<h6>${item.name }</h6>
-									<span>$${item.price }</span>
+									<c:if test="${item.discount>0 }">
+										<span class="outer">
+											<span class="inner">$${item.price }</span>
+										</span>
+										<span>$${item.getDiscountPrice() }</span>
+									</c:if>
+									<c:if test="${item.discount==0 || item.discount==null}">
+										<span>$${item.price }</span>
+									</c:if>
 								</div>
 							</a>
 							<c:if test="${(loop.index+1)%3==0 ||loop.index+1==latestPros.size()}">
@@ -41,7 +49,15 @@
 								</div>
 								<div class="latest-product__item__text">
 									<h6>${item.name }</h6>
-									<span>$${item.price }</span>
+									<c:if test="${item.discount>0 }">
+										<span class="outer">
+											<span class="inner">$${item.price }</span>
+										</span>
+										<span>$${item.getDiscountPrice() }</span>
+									</c:if>
+									<c:if test="${item.discount==0 || item.discount==null}">
+										<span>$${item.price }</span>
+									</c:if>
 								</div>
 							</a>
 							<c:if test="${(loop.index+1)%3==0 ||loop.index+1==ratedPros.size()}">
@@ -65,7 +81,15 @@
 								</div>
 								<div class="latest-product__item__text">
 									<h6>${item.name }</h6>
-									<span>$${item.price }</span>
+									<c:if test="${item.discount>0 }">
+										<span class="outer">
+											<span class="inner">$${item.price }</span>
+										</span>
+										<span>$${item.getDiscountPrice() }</span>
+									</c:if>
+									<c:if test="${item.discount==0 || item.discount==null}">
+										<span>$${item.price }</span>
+									</c:if>
 								</div>
 							</a>
 							<c:if test="${(loop.index+1)%3==0||loop.index+1==bestSeller.size() }">
@@ -115,7 +139,15 @@
 							<h6>
 								<a href="/product/proDetail?proId=${item.id }">${item.name }</a>
 							</h6>
-							<h5>$${item.price }</h5>
+							<c:if test="${item.discount>0 }">
+								<h5 class="outer">
+									<span class="inner">$${item.price }</span>
+								</h5>
+								<h5>$${item.getDiscountPrice() }</h5>
+							</c:if>
+							<c:if test="${item.discount==0 || item.discount==null}">
+								<h5>$${item.price }</h5>
+							</c:if>
 						</div>
 					</div>
 				</div>

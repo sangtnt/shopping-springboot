@@ -1,5 +1,9 @@
 package com.shelmark.demo.Entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="user_review_pro")
-public class User_Review_Pro {
+public class UserReviewPro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="USER_REVIEW_PRO_ID")
@@ -74,12 +78,15 @@ public class User_Review_Pro {
 		this.image = image;
 	}
 
-	public Long getDate() {
-		return date;
+	public String getDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
+		Date currentDate = new Date(this.date);
+		return df.format(currentDate);
 	}
 
-	public void setDate(Long date) {
-		this.date = date;
+	public void setDate() {
+		Date date = new Date();
+		this.date = date.getTime();
 	}
 	
 }

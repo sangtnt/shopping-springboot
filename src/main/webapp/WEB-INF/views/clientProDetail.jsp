@@ -45,12 +45,21 @@
 							<i class="fa fa-star-o"></i>
 						</c:forEach>
 						<span>(${pro.reviews.size() } reviews) (Sold ${pro.sold }
-							items) (${pro.userLiked.size() }
-							likes) (${pro.research }
+							items) (${pro.userLiked.size() } likes) (${pro.research }
 							researches)</span>
-						
+
 					</div>
-					<div class="product__details__price">$${pro.price }</div>
+					<div class="product__details__price">
+						<c:if test="${pro.discount>0 }">
+							<span class="outer"> <span class="inner">$${pro.price
+									}</span>
+							</span>
+							<span>$${pro.getDiscountPrice() }</span>
+						</c:if>
+						<c:if test="${pro.discount==0 || pro.discount==null}">
+							<span>$${pro.price }</span>
+						</c:if>
+					</div>
 					<c:if test="${pro.quantity>0 }">
 						<form action="/auth/addToCart" method="POST">
 							<input name="proId" type="hidden" value="${pro.id }">
@@ -76,7 +85,7 @@
 							</c:if>
 							<c:if test="${user==null }">
 								<a href="/auth/like?proId=${pro.id }" class="heart-icon"><span
-										class="icon_heart_alt"></span></a>
+									class="icon_heart_alt"></span></a>
 							</c:if>
 						</form>
 					</c:if>
@@ -150,7 +159,63 @@
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<p></p>
+								<div class="review-area">
+									<c:forEach var="review" items="${pro.reviews }">
+										<div class="review-container">
+											<img src="${review.user.image }" width="50px" height="50px">
+											<div class="review-right product__details__text">
+												<div class="review-username">${review.user.username }</div>
+												<div class="product__details__rating">
+													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+														class="fa fa-star"></i>
+												</div>
+												<c:if test="${!review.image.equals('') }">
+													<img height="50px" alt="" src="${review.image }">
+												</c:if>
+												<div class="comment">${review.review }</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+
+								<c:if test="${user!=null }">
+									<div class="review-container">
+										<img class="img-user" src="${user.image }" width="50px"
+											height="50px">
+										<div class="review-right">
+											<div class="review-username">${user.username }</div>
+											<div class="review-star">
+												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+													class="fa fa-star"></i>
+											</div>
+											<form action="/auth/review" method="post"
+												enctype="multipart/form-data">
+												<input name="proId" value="${pro.id }" type="hidden">
+												<input name="username" value="${user.username }"
+													type="hidden">
+												<textarea name="review" placeholder="Give reviews here"
+													rows="4" cols="50"></textarea>
+												<div class="form-group">
+													<label>Image</label> <input name="file" id="myfile"
+														type="file" class="form-control">
+												</div>
+												<div class="form-group">
+													<img id="catImg" src="${pro.image }" height="200px" />
+												</div>
+												<div class="review-submit">
+													<button class="btn btn-primary">Submit</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</c:if>
+								<c:if test="${user==null }">
+									<p>Login Or Create Account To Review!</p>
+									<a href="/login"><button class="btn btn-primary">Login</button></a>
+									<a href="/register"><button class="btn btn-danger">Register</button></a>
+								</c:if>
 							</div>
 						</div>
 					</div>
@@ -177,7 +242,8 @@
 					<div class="product__item">
 						<div class="product__item__pic set-bg" data-setbg="${item.image }">
 							<ul class="product__item__pic__hover">
-								<li><a href="/auth/like?proId=${pro.id }"><i class="fa fa-heart"></i></a></li>
+								<li><a href="/auth/like?proId=${pro.id }"><i
+										class="fa fa-heart"></i></a></li>
 								<li>
 									<form action="/auth/addToCart" method="post">
 										<input name="quantity" value="1" type="hidden"> <input

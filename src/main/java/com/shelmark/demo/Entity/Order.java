@@ -61,19 +61,19 @@ public class Order {
 	private Integer status;
 	
 	@Column(name="ORDER_SUBTOTAL")
-	private Long subTotal;
+	private Double subTotal;
 	
 	@Column(name="ORDER_DISCOUNT")
 	private Long discount;
 	
 	@Column(name="ORDER_ADDITIONALFEES")
-	private Long additionalFees;
+	private Double additionalFees;
 	
 	@Column(name="ORDER_SHIPPING")
 	private Long shipping;
 	
 	@Column(name="ORDER_GRANDTOTAL")
-	private Long grandTotal;
+	private Double grandTotal;
 	
 	@Column(name="ORDER_DATE")
 	private Long date;
@@ -110,19 +110,19 @@ public class Order {
 		this.status = status;
 	}
 
-	public Long getSubTotal() {
+	public Double getSubTotal() {
 		return subTotal;
 	}
 
 	public void setSubTotal() {
-		Long sum=(long) 0;
+		Double sum= 0.0;
 		for (Order_Detail o: this.order_details) {
 			sum+=o.getSubTotal();
 		}
 		this.subTotal=sum;
 	}
 
-	public void setSubTotal(Long subTotal) {
+	public void setSubTotal(Double subTotal) {
 		this.subTotal=subTotal;
 	}
 	
@@ -134,11 +134,11 @@ public class Order {
 		this.discount = discount;
 	}
 
-	public Long getAdditionalFees() {
+	public Double getAdditionalFees() {
 		return additionalFees;
 	}
 
-	public void setAdditionalFees(Long additionalFees) {
+	public void setAdditionalFees(Double additionalFees) {
 		this.additionalFees = additionalFees;
 	}
 
@@ -150,12 +150,12 @@ public class Order {
 		this.shipping = shipping;
 	}
 
-	public Long getGrandTotal() {
+	public Double getGrandTotal() {
 		return grandTotal;
 	}
 
 	public void setGrandTotal() {
-		Long sum = this.additionalFees - this.discount +this.subTotal + this.shipping;
+		Double sum = this.additionalFees - this.discount +this.subTotal + this.shipping;
 		this.grandTotal=sum;
 	}
 
