@@ -86,7 +86,7 @@ public class ClientAuthController {
 						request);
 			}
 		}
-		if (quantity.size() == 1) {
+		if (!referer.contains("order")) {
 			return "redirect:" + referer;
 		} else {
 			return "redirect:/auth/viewCart";
@@ -157,8 +157,8 @@ public class ClientAuthController {
 		order.setPhone(phone);
 		order.setUser(user);
 		order.setDate();
-		order.setShipping((long) 30);
-		order.setDiscount((long) 0);
+		order.setShipping( 30.0);
+		order.setDiscount( 0.0);
 		order.setAdditionalFees( 0.0);
 		orderService.save(order);
 		List<Product> pros = proService.getListByListId(proId);
@@ -170,7 +170,7 @@ public class ClientAuthController {
 			orderDetail.setProduct(pros.get(index));
 			orderDetail.setQuantity(quantity.get(index));
 			orderDetail.setSubTotal();
-			subTotal += orderDetail.getQuantity() * orderDetail.getProduct().getPrice();
+			subTotal += orderDetail.getQuantity() * orderDetail.getProduct().getDiscountPrice();
 			orderDetailRepo.save(orderDetail);
 			Product pro = pros.get(index);
 			pro.setQuantity(pro.getQuantity() - quantity.get(index));

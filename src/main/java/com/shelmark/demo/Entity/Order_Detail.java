@@ -68,7 +68,7 @@ public class Order_Detail {
 	}
 
 	public void setSubTotal() {
-		this.subTotal = (double) (Math.round(this.quantity*this.product.getDiscountPrice()*100)/100);
+		this.subTotal =(double)  Math.round((this.quantity*this.product.getDiscountPrice())*100)/100;
 	}
 	
 }

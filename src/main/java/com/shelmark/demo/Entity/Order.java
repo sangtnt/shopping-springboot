@@ -64,13 +64,13 @@ public class Order {
 	private Double subTotal;
 	
 	@Column(name="ORDER_DISCOUNT")
-	private Long discount;
+	private Double discount;
 	
 	@Column(name="ORDER_ADDITIONALFEES")
 	private Double additionalFees;
 	
 	@Column(name="ORDER_SHIPPING")
-	private Long shipping;
+	private Double shipping;
 	
 	@Column(name="ORDER_GRANDTOTAL")
 	private Double grandTotal;
@@ -126,11 +126,11 @@ public class Order {
 		this.subTotal=subTotal;
 	}
 	
-	public Long getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(Long discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -142,11 +142,11 @@ public class Order {
 		this.additionalFees = additionalFees;
 	}
 
-	public Long getShipping() {
+	public Double getShipping() {
 		return shipping;
 	}
 
-	public void setShipping(Long shipping) {
+	public void setShipping(Double shipping) {
 		this.shipping = shipping;
 	}
 
@@ -156,7 +156,7 @@ public class Order {
 
 	public void setGrandTotal() {
 		Double sum = this.additionalFees - this.discount +this.subTotal + this.shipping;
-		this.grandTotal=sum;
+		this.grandTotal=(double) Math.round(sum*100)/100;
 	}
 
 	public String getDate() {

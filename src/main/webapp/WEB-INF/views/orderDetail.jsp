@@ -59,7 +59,7 @@
 						<c:forEach var="item" items="${order.order_details}">
 							<tr>
 								<td>${item.product.name }</td>
-								<td>${item.product.price }</td>
+								<td>${item.product.getDiscountPrice() }</td>
 								<td>${item.quantity }</td>
 								<td>${item.subTotal }</td>
 							</tr>
