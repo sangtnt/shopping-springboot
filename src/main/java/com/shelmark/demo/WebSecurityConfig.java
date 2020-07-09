@@ -39,7 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/lib/bootstrap/**",
                 "/resources/**")
 			.permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
+			.antMatchers("/admin/user/**").hasRole("ADMIN")
+			.antMatchers("/admin/permission/**").hasRole("ADMIN")
+			.antMatchers("/admin/product/**").hasRole("PRODUCT MANAGER")
+			.antMatchers("/admin/category/**").hasRole("PRODUCT MANAGER")
+			.antMatchers("/admin/order/**").hasRole("ORDER MANAGER")
 			.antMatchers("/auth/**").hasRole("USER")
 			.antMatchers("/order/**").hasRole("USER")
 			.antMatchers("/**").permitAll()

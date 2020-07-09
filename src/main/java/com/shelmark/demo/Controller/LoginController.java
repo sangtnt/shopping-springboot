@@ -50,13 +50,15 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView createAcc(@RequestParam String phone, @RequestParam String password) {
+	public ModelAndView createAcc(@RequestParam String phone, @RequestParam String password,  @RequestParam String gender) {
 		ModelAndView mv = new ModelAndView();
 		User user = new User();
 		password = passwordEncoder.encode(password);
 		user.setPassword(password);
 		user.setUsername(phone);
 		user.setPhone(phone);
+		user.setGender(gender);
+		user.setImage("/resources/static/img/avatar/"+gender+".png");
 		Set<Permission> pers = user.getPermissions();
 		pers.add(perService.findById((long) 2));
 		user.setPermissions(pers);

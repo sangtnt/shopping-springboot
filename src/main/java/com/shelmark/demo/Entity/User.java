@@ -52,7 +52,7 @@ public class User {
 	@Column(name= "USER_DATE", nullable=true)
 	private Long date;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "USER_PERMISSION", 
 			joinColumns = { 
