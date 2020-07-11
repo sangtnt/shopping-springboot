@@ -28,9 +28,12 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(HttpSession session, HttpServletRequest request) {
 		if(request.getHeader("referer")!=null) {
-			String referer = request.getHeader("Referer");
-			if (!referer.contains("login")) {
+			String referer = request.getHeader("referer");
+			if (!referer.contains("login")&&!referer.contains("register")) {
 				session.setAttribute("referer", referer);
+			}
+			else {
+				session.setAttribute("referer", "/");
 			}
 		}
 		else {

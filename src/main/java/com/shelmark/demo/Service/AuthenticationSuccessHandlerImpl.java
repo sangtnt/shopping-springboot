@@ -26,6 +26,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 
     @Autowired UserService userService; //autowire the user repo
 
+    @Autowired PermissionService perService;
 	private static final Logger logger = LoggerFactory.getLogger(AuthenticationSuccessHandlerImpl.class);
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	@Override
@@ -40,8 +41,12 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         String referer = (String) session.getAttribute("referer");
         session.setAttribute("user", user);
         SetupSession.setHeader(user.getCartItems().size() ,user.getProLiked().size(), request);
-        if (referer.contains("/admin")) {
-            referer="/admin";
+        Set<Permission> pers = user.getPermissions();
+        for (Permission p : pers) {
+        	if (p.getPermissionName().equals("ADMIN")||p.getPermissionName().equals("PRODUCT MANAGER")||p.getPermissionName().equals("ORDER MANAGER")) {
+        		referer="/admin";
+        		break;
+        	}
         }
         redirectStrategy.sendRedirect(request, response, referer);
     }

@@ -65,7 +65,7 @@ public class Product {
 	@Column(name="PRO_ORIGIN")
 	private String origin;
 	
-	@Column(name="PRO_RESEARCH")
+	@Column(name="PRO_RESEARCH", columnDefinition="Decimal(10) default 0")
 	private Long research;
 	
 	@Column(name="PRO_DISCOUNT", columnDefinition="Decimal(10) default 0")

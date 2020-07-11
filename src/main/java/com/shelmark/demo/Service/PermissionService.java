@@ -28,4 +28,24 @@ public class PermissionService {
 	public void delete(Permission per) {
 		permissionRepo.delete(per);
 	}
+	
+	public void createDefaultPermission() {
+		Permission admin = new Permission();
+		admin.setId((long) 1);
+		admin.setPermissionName("ADMIN");
+//		Permission user = new Permission();
+//		user.setId((long) 2);
+//		user.setPermissionName("USER");
+		Permission proManager = new Permission();
+		proManager.setId((long) 3);
+		proManager.setPermissionName("PRODUCT MANAGER");
+		Permission orderManager = new Permission();
+		orderManager.setId((long) 4);
+		orderManager.setPermissionName("ORDER MANAGER");
+		
+		permissionRepo.save(admin);
+//		permissionRepo.save(user);
+		permissionRepo.save(proManager);
+		permissionRepo.save(orderManager);
+	}
 }
