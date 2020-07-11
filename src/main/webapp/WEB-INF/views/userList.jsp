@@ -51,6 +51,11 @@
 											<i class="fas fa-users"></i>
 										</button>
 								</a></td>
+								
+								<td><a href="/admin/user/editUser?username=${user.username}"><i
+						class="far fa-edit"></i></a></td>
+								
+								
 								<c:if test="${user.products.size()==0 }">
 									<td>
 										<form action="/admin/user/deleteUser" method="POST">
@@ -69,6 +74,6 @@
 			</div>
 		</div>
 	</div>
-
+<a href="/admin/user/createUser">Create</a>
 </div>
 <!-- /.container-fluid -->

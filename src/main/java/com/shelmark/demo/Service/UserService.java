@@ -34,8 +34,30 @@ public class UserService {
 		return userRepository.getUsersByPage(start, limit);
 	}
 	
-	public void delete(User user) {
+	public String delete(User user) {
 		userRepository.delete(user);
+		return null;
+		
 	}
+	
+	public String  deleteId(String username) {
+		userRepository.deleteById(username);
+		return null;
+	}
+	
 
+	public String saveUser(User cat) {
+		if(cat.getUsername() == null || cat.getUsername().isEmpty()) {
+			return "User name must be filled";
+		}
+		userRepository.save(cat);
+		return null;
+	}
+	
+	public User getUsername(String username) {
+		User user = userRepository.getOne(username);
+
+		return user;
+		
+	}
 }

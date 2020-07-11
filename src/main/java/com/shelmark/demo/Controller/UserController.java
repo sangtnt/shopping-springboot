@@ -3,8 +3,12 @@ package com.shelmark.demo.Controller;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,6 +76,65 @@ public class UserController {
 		}
 		user.setPermissions(newPers);
 		userService.save(user);
+		return "redirect:/admin/user";
+	}
+	
+	@RequestMapping(value = "/createUser", method = RequestMethod.GET)
+	public ModelAndView getNewUserView() {
+		User user = new User();
+		ModelAndView model = new ModelAndView();
+		model.setViewName("createUser");
+		model.addObject("user", user);
+		return model;
+	}
+
+	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
+	public String saveUser(@ModelAttribute("user") User userModel, HttpServletRequest request,
+			Model model) {
+		if (userModel.getUsername() == null) {
+			String errorMessage = userService.saveUser(userModel);
+			model.addAttribute("errorMessage", errorMessage);
+			if (errorMessage != null) {
+				return "createUser";
+			}
+		} else {
+			userService.saveUser(userModel);
+		}
+		return "redirect:/admin/user";
+	}
+	
+	@RequestMapping(value = "/admin/deleteUser", method = RequestMethod.GET)
+	public String deleteUser(@RequestParam("username") String username) {
+		User user = userService.findByUsername(username);
+		String errorMessage = userService.delete(user);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("deleteCategory");
+
+		return "redirect:/admin/user";
+
+	}
+	
+	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
+	public ModelAndView getEditView(@RequestParam("username") String username) {
+		User user = userService.getUsername(username);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("editUser");
+		model.addObject("user", user);
+		return model;
+	}
+
+	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
+	public String editUser(@ModelAttribute("user") User userModel, HttpServletRequest request,
+			Model model) {
+		if (userModel.getUsername() == null) {
+			String errorMessage = userService.saveUser(userModel);
+			model.addAttribute("errorMessage", errorMessage);
+			if (errorMessage != null) {
+				return "createUser";
+			}
+		} else {
+			userService.saveUser(userModel);
+		}
 		return "redirect:/admin/user";
 	}
 }
