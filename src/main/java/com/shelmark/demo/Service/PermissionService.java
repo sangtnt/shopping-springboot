@@ -33,9 +33,9 @@ public class PermissionService {
 		Permission admin = new Permission();
 		admin.setId((long) 1);
 		admin.setPermissionName("ADMIN");
-		Permission user = new Permission();
-		user.setId((long) 2);
-		user.setPermissionName("USER");
+//		Permission user = new Permission();
+//		user.setId((long) 2);
+//		user.setPermissionName("USER");
 		Permission proManager = new Permission();
 		proManager.setId((long) 3);
 		proManager.setPermissionName("PRODUCT MANAGER");
@@ -44,7 +44,7 @@ public class PermissionService {
 		orderManager.setPermissionName("ORDER MANAGER");
 		
 		permissionRepo.save(admin);
-		permissionRepo.save(user);
+//		permissionRepo.save(user);
 		permissionRepo.save(proManager);
 		permissionRepo.save(orderManager);
 	}

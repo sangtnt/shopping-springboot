@@ -1,6 +1,7 @@
 package com.shelmark.demo.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,16 +48,46 @@ public class UserService {
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	public void createDefaultUser() {
+	
+	public void createDefaultAdmin() {
 		String password = passwordEncoder.encode("123456");
-		User user = new User();
-		user.setUsername("admin");
-		user.setImage("/resources/static/img/avatar/admin.jpg");
-		user.setPassword(password);
+		User admin = new User();
+		admin.setUsername("admin");
+		admin.setImage("/resources/static/img/avatar/admin.jpg");
+		admin.setPassword(password);
+		Date date = new Date();
+		admin.setDate(date.getTime());
 		Set<Permission> pers = new HashSet<Permission>();
 		pers.add(perService.findById((long) 1));
-		pers.add(perService.findById((long) 2));
-		user.setPermissions(pers);
-		userRepository.save(user);
+		admin.setPermissions(pers);
+		userRepository.save(admin);
+	}
+	
+	public void createDefaultProManager() {
+		String password = passwordEncoder.encode("123456");
+		Date date = new Date();
+		User proManager = new User();
+		proManager.setUsername("proManager");
+		proManager.setImage("/resources/static/img/avatar/admin.jpg");
+		proManager.setPassword(password);
+		proManager.setDate(date.getTime());
+		Set<Permission> proPers = new HashSet<Permission>();
+		proPers.add(perService.findById((long) 3));
+		proManager.setPermissions(proPers);
+		userRepository.save(proManager);
+	}
+	
+	public void createDefaultOrderManager() {
+		String password = passwordEncoder.encode("123456");
+		Date date = new Date();
+		User orderManager = new User();
+		orderManager.setUsername("orderManager");
+		orderManager.setImage("/resources/static/img/avatar/admin.jpg");
+		orderManager.setPassword(password);
+		orderManager.setDate(date.getTime());
+		Set<Permission> orderPers = new HashSet<Permission>();
+		orderPers.add(perService.findById((long) 4));
+		orderManager.setPermissions(orderPers);
+		userRepository.save(orderManager);
 	}
 }

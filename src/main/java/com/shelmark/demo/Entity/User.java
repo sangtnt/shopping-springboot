@@ -69,7 +69,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<UserReviewPro> reviews;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade= CascadeType.ALL)
 	private List<Product> products;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

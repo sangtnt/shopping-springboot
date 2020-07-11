@@ -51,17 +51,15 @@
 											<i class="fas fa-users"></i>
 										</button>
 								</a></td>
-								<c:if test="${user.products.size()==0 }">
-									<td>
-										<form action="/admin/user/deleteUser" method="POST">
-											<input name="username" value="${user.username }"
-												type="hidden" />
-											<button class="btn btn-danger btn-block" type="submit">
-												<i class="far fa-trash-alt"></i>
-											</button>
-										</form>
-									</td>
-								</c:if>
+								<td>
+									<form action="/admin/user/deleteUser" method="POST">
+										<input name="username" value="${user.username }"
+											type="hidden" />
+										<button class="btn btn-danger btn-block" type="submit">
+											<i class="far fa-trash-alt"></i>
+										</button>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
