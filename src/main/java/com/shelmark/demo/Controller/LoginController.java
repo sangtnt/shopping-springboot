@@ -52,6 +52,12 @@ public class LoginController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView createAcc(@RequestParam String phone, @RequestParam String password,  @RequestParam String gender) {
 		ModelAndView mv = new ModelAndView();
+		User u = userService.findByUsername(phone);
+		if (u!=null) {
+			mv.setViewName("register");
+			mv.addObject("message", "Phone number is used!");
+			return mv;
+		}
 		User user = new User();
 		password = passwordEncoder.encode(password);
 		user.setPassword(password);

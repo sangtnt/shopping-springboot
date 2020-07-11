@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +41,13 @@
 							<div class="text-center">
 								<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
 							</div>
+							<c:if test="${message!=null }">
+								<div class="form-group">
+									<label class="form-check-label" for="inlineRadio1">
+										${message }
+									</label>
+								</div>
+							</c:if>
 							<form action="/register" class="user" method="POST">
 								<div class="form-group">
 									<input required name="phone" type="number"
