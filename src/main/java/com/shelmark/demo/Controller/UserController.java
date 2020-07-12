@@ -88,10 +88,11 @@ public class UserController {
 	@RequestMapping(value = "/createUser", method = RequestMethod.GET)
 	public ModelAndView getNewUserView() {
 		User user = new User();
-		ModelAndView model = new ModelAndView();
-		model.setViewName("createUser");
-		model.addObject("user", user);
-		return model;
+		ModelAndView mv = new ModelAndView();
+		List<Permission> pers = perService.findAll();
+		mv.addObject("pers", pers);
+		mv.setViewName("createUser");
+		return mv;
 	}
 
 	@Autowired
@@ -106,7 +107,8 @@ public class UserController {
 							@RequestParam String email,
 							@RequestParam String gender,
 							@RequestParam String address,
-							@RequestParam MultipartFile file
+							@RequestParam MultipartFile file,
+							@RequestParam Set<Long> pers
 	) {
 		User user = new User();
 		user.setUsername(username);
@@ -124,6 +126,7 @@ public class UserController {
 			img += gender+".png";
 		}
 		user.setImage(img);
+		user.setPermissions(perService.findPermissionsByListId(pers));
 		userService.save(user);
 		return "redirect:/admin/user";
 	}

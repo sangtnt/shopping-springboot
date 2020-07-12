@@ -1,6 +1,9 @@
 package com.shelmark.demo.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,14 @@ public class PermissionService {
 	
 	public Permission findById(Long id) {
 		return permissionRepo.findById(id).get();
+	}
+	
+	public Set<Permission> findPermissionsByListId(Set<Long> listId) {
+		Set<Permission> pers = new HashSet<Permission>();
+		for (Long i: listId) {
+			pers.add(permissionRepo.findById(i).get());
+		}
+		return pers;
 	}
 	
 	public List<Permission> findAll() {
