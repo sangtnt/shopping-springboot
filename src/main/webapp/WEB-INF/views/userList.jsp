@@ -55,6 +55,13 @@
 										</button>
 								</a></td>
 
+<<<<<<< HEAD
+								
+								<td><a href="/admin/user/editUser?username=${user.username}"><i
+						class="far fa-edit"></i></a></td>
+								
+								
+=======
 								<td><a
 									href="/admin/user/editUser?username=${user.username}"><button
 											type="button" class="btn btn-outline-dark">
@@ -62,6 +69,7 @@
 										</button></a></td>
 
 
+>>>>>>> branch 'master' of https://phamquangthang119@bitbucket.org/tansangyoyo/project-shopping.git
 								<c:if test="${user.products.size()==0 }">
 									<td>
 										<form action="/admin/user/deleteUser" method="POST">
@@ -73,6 +81,20 @@
 										</form>
 									</td>
 								</c:if>
+<<<<<<< HEAD
+
+								<td>
+									<form action="/admin/user/deleteUser" method="POST">
+										<input name="username" value="${user.username }"
+											type="hidden" />
+										<button class="btn btn-danger btn-block" type="submit">
+											<i class="far fa-trash-alt"></i>
+										</button>
+									</form>
+								</td>
+
+=======
+>>>>>>> branch 'master' of https://phamquangthang119@bitbucket.org/tansangyoyo/project-shopping.git
 							</tr>
 						</c:forEach>
 					</tbody>
