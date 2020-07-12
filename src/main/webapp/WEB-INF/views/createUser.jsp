@@ -1,14 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container-fluid">
-	<form enctype="multipart/form-data" action="/admin/user/createUser" method="post">
+	<form enctype="multipart/form-data" action="/admin/user/createUser"
+		method="post">
 		<div class="form-group">
 			<label for="username">User Name</label> <input type="text"
-				class="form-control" name="username" />
+				class="form-control" name="username" required />
 		</div>
 
 		<div class="form-group">
+			<label for=fullname>Full Name</label> <input type="text"
+				class="form-control" name="fullname" required />
+		</div>
+		
+		<div class="form-group">
 			<label for=password>Password</label> <input type="password"
-				class="form-control" name="password" />
+				class="form-control" name="password" required />
 		</div>
 
 		<div class="form-group">
@@ -18,19 +24,19 @@
 
 		<div class="form-group">
 			<label for="phone">Phone</label> <input type="text"
-				class="form-control" name="phone" />
+				class="form-control" name="phone" required />
 		</div>
 
 		<div class="form-group">
 			<label for="gender">Gender</label> <select class="form-control"
-				name="gender">
+				name="gender" required>
 				<option value="male">Male</option>
 				<option value="female">Female</option>
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="pers">Permission</label> <select multiple class="form-control"
-				name="pers">
+			<label for="pers">Permission</label> <select multiple
+				class="form-control" name="pers" required>
 				<c:forEach var="per" items="${pers }">
 					<option value="${per.id }">${per.permissionName }</option>
 				</c:forEach>

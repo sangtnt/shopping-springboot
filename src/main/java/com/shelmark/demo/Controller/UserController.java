@@ -87,7 +87,6 @@ public class UserController {
 
 	@RequestMapping(value = "/createUser", method = RequestMethod.GET)
 	public ModelAndView getNewUserView() {
-		User user = new User();
 		ModelAndView mv = new ModelAndView();
 		List<Permission> pers = perService.findAll();
 		mv.addObject("pers", pers);
@@ -107,6 +106,7 @@ public class UserController {
 							@RequestParam String email,
 							@RequestParam String gender,
 							@RequestParam String address,
+							@RequestParam String fullname,
 							@RequestParam MultipartFile file,
 							@RequestParam Set<Long> pers
 	) {
@@ -118,6 +118,7 @@ public class UserController {
 		user.setDate(date.getTime());
 		user.setEmail(email);
 		user.setGender(gender);
+		user.setFullname(fullname);
 		user.setAddress(address);
 		String img ="/resources/static/img/avatar/";
 		if (!file.isEmpty()) {
@@ -134,23 +135,41 @@ public class UserController {
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
 	public ModelAndView getEditView(@RequestParam("username") String username) {
 		User user = userService.getUsername(username);
-		ModelAndView model = new ModelAndView();
-		model.setViewName("editUser");
-		model.addObject("user", user);
-		return model;
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("editUser");
+		mv.addObject("user", user);
+		List<Permission> pers = perService.findAll();
+		mv.addObject("pers", pers);
+		return mv;
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
-	public String editUser(@ModelAttribute("user") User userModel, HttpServletRequest request, Model model) {
-		if (userModel.getUsername() == null) {
-			String errorMessage = userService.saveUser(userModel);
-			model.addAttribute("errorMessage", errorMessage);
-			if (errorMessage != null) {
-				return "createUser";
-			}
+	public String editUser(
+			@RequestParam String username,
+			@RequestParam String phone,
+			@RequestParam String email,
+			@RequestParam String gender,
+			@RequestParam String address,
+			@RequestParam String fullname,
+			@RequestParam MultipartFile file,
+			@RequestParam Set<Long> pers
+	) {
+		User user = userService.findByUsername(username);
+		Date date = new Date();
+		user.setDate(date.getTime());
+		user.setEmail(email);
+		user.setGender(gender);
+		user.setFullname(fullname);
+		user.setAddress(address);
+		String img;
+		if (!file.isEmpty()) {
+			img ="/resources/static/img/avatar/"+ imgService.uploadFile(uploadRootPath + "/avatar", file);
+			user.setImage(img);
 		} else {
-			userService.saveUser(userModel);
+			img ="";
 		}
+		user.setPermissions(perService.findPermissionsByListId(pers));
+		userService.save(user);
 		return "redirect:/admin/user";
 	}
 }
