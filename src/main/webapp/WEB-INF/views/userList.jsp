@@ -28,9 +28,12 @@
 							<th>Email</th>
 							<th>Gender</th>
 							<th>Phone Number</th>
-							<!-- <th colspan="2">
-								<button class="btn btn-outline-success btn-block">Add new</button>
-							</th> -->
+							<th colspan="3">
+								<a href="/admin/user/createUser">
+									<button class="btn btn-outline-success btn-block">Add new</button>
+								</a>
+							</th>
+							
 						</tr>
 					</thead>
 					<tfoot>
@@ -51,12 +54,14 @@
 											<i class="fas fa-users"></i>
 										</button>
 								</a></td>
-<<<<<<< HEAD
-								
-								<td><a href="/admin/user/editUser?username=${user.username}"><i
-						class="far fa-edit"></i></a></td>
-								
-								
+
+								<td><a
+									href="/admin/user/editUser?username=${user.username}"><button
+											type="button" class="btn btn-outline-dark">
+											<i class="far fa-edit"></i>
+										</button></a></td>
+
+
 								<c:if test="${user.products.size()==0 }">
 									<td>
 										<form action="/admin/user/deleteUser" method="POST">
@@ -68,17 +73,6 @@
 										</form>
 									</td>
 								</c:if>
-=======
-								<td>
-									<form action="/admin/user/deleteUser" method="POST">
-										<input name="username" value="${user.username }"
-											type="hidden" />
-										<button class="btn btn-danger btn-block" type="submit">
-											<i class="far fa-trash-alt"></i>
-										</button>
-									</form>
-								</td>
->>>>>>> 15ed26bf5e5c82b4ec2512a71a1719dc5cf3dbcb
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -86,6 +80,5 @@
 			</div>
 		</div>
 	</div>
-<a href="/admin/user/createUser">Create</a>
 </div>
 <!-- /.container-fluid -->
