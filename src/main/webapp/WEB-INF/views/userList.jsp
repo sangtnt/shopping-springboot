@@ -58,7 +58,7 @@
 											type="button" class="btn btn-outline-dark">
 											<i class="far fa-edit"></i>
 										</button></a></td>
-								<c:if test="${user.products.size()==0 }">
+								<c:if test="${user.products.size()==0&&user.orders.size()==0 }">
 									<td>
 										<form action="/admin/user/deleteUser" method="POST">
 											<input name="username" value="${user.username }"
@@ -69,7 +69,7 @@
 										</form>
 									</td>
 								</c:if>
-								<c:if test="${user.products.size()>0&&user.status==true}">
+								<c:if test="${(user.orders.size()>0||user.products.size()>0)&&user.status==true}">
 									<td>
 										<a href="/admin/user/deactivateUser?username=${user.username }">
 											<button class="btn btn-warning btn-block" type="button">
@@ -78,7 +78,7 @@
 										</a>
 									</td>
 								</c:if>
-								<c:if test="${user.products.size()>0&&user.status==false}">
+								<c:if test="${(user.orders.size()>0||user.products.size()>0)&&user.status==false}">
 									<td>
 										<a href="/admin/user/activateUser?username=${user.username }">
 											<button class="btn btn-success btn-block" type="button">

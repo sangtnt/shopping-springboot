@@ -3,7 +3,7 @@
 	<form enctype="multipart/form-data" action="/admin/user/createUser"
 		method="post">
 		<div class="form-group">
-			<label for="username">User Name</label> <input type="text"
+			<label for="username">Username</label> <input type="text"
 				class="form-control" name="username" required />
 		</div>
 
@@ -19,7 +19,7 @@
 
 		<div class="form-group">
 			<label for="email">Email</label> <input type="text"
-				class="form-control" name="email" />
+				class="form-control" name="email" required/>
 		</div>
 
 		<div class="form-group">
@@ -44,7 +44,7 @@
 		</div>
 		<div class="form-group">
 			<label for="address">Address</label> <input type="text"
-				class="form-control" name="address" />
+				class="form-control" name="address"/>
 		</div>
 		<div class="form-group">
 			<label>Image</label> <input name="file" id="myfile" type="file"

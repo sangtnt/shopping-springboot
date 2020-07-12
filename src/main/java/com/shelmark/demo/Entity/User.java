@@ -53,9 +53,9 @@ public class User {
 	private Long date;
 	
 	@Column(name= "USER_STATUS", columnDefinition = "boolean default true")
-	private Boolean status;
+	private Boolean status=true;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(
 			name = "USER_PERMISSION", 
 			joinColumns = { 

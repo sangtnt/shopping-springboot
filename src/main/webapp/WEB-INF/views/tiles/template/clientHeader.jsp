@@ -48,7 +48,7 @@
 			<li>
 				<c:if test="${sessionScope.user!=null }">
 					<a href=""><i class="fa fa-user"></i>
-						${sessionScope.user.username }</a>
+						${sessionScope.user.fullname }</a>
 				</c:if>
 			</li>
 			<li><i class="fa fa-user"></i><a href="#">Seller</a></li>
@@ -68,7 +68,7 @@
 							<c:if test="${sessionScope.user!=null }">
 								<li>
 									<a href="">
-										<i class="fa fa-user"></i>${sessionScope.user.username }
+										<i class="fa fa-user"></i>${sessionScope.user.fullname }
 									</a>
 								</li>
 							</c:if>

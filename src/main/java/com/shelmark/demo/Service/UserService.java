@@ -85,6 +85,7 @@ public class UserService {
 		admin.setUsername("admin");
 		admin.setImage("/resources/static/img/avatar/admin.jpg");
 		admin.setPassword(password);
+		admin.setFullname("ADMIN");
 		Date date = new Date();
 		admin.setDate(date.getTime());
 		Set<Permission> pers = new HashSet<Permission>();
@@ -100,6 +101,7 @@ public class UserService {
 		proManager.setUsername("proManager");
 		proManager.setImage("/resources/static/img/avatar/admin.jpg");
 		proManager.setPassword(password);
+		proManager.setFullname("PRODUCT MANAGER");
 		proManager.setDate(date.getTime());
 		Set<Permission> proPers = new HashSet<Permission>();
 		proPers.add(perService.findById((long) 3));
@@ -114,6 +116,7 @@ public class UserService {
 		orderManager.setUsername("orderManager");
 		orderManager.setImage("/resources/static/img/avatar/admin.jpg");
 		orderManager.setPassword(password);
+		orderManager.setFullname("ORDER MANAGER");
 		orderManager.setDate(date.getTime());
 		Set<Permission> orderPers = new HashSet<Permission>();
 		orderPers.add(perService.findById((long) 4));

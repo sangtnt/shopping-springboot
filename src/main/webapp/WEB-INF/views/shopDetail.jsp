@@ -29,22 +29,14 @@
 							</div>
 
 							<h3 class="profile-username text-center">
-								<c:if test="${user.fullname !=''}">
-											${user.fullname }
-										</c:if>
-								<c:if test="${user.fullname ==''}">
-											${user.username }
-										</c:if>
+								${user.fullname }
 							</h3>
-
 							<ul class="list-group list-group-unbordered mb-3">
 								<li class="list-group-item"><b>Products</b> <a
 									class="float-right">${user.products.size() }</a></li>
 								<li class="list-group-item"><b>Reports</b> <a
 									class="float-right">${user.reviews.size() }</a></li>
 							</ul>
-
-							<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
 						</div>
 						<!-- /.card-body -->
 					</div>
@@ -56,7 +48,7 @@
 						<div class="card-header p-2">
 							<ul class="nav nav-pills">
 								<li class="nav-item"><a class="nav-link active"
-									href="#activity" data-toggle="tab">Activity</a></li>
+									href="#activity" data-toggle="tab">Products</a></li>
 							</ul>
 						</div>
 						<!-- /.card-header -->

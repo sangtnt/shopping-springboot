@@ -1,5 +1,6 @@
 package com.shelmark.demo.Controller;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +54,12 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView createAcc(@RequestParam String phone, @RequestParam String password,  @RequestParam String gender) {
+	public ModelAndView createAcc(@RequestParam String phone, 
+			@RequestParam String password,  
+			@RequestParam String gender,
+			@RequestParam String email,
+			@RequestParam String fullname
+		) {
 		ModelAndView mv = new ModelAndView();
 		User u = userService.findByUsername(phone);
 		if (u!=null) {
@@ -65,8 +71,12 @@ public class LoginController {
 		password = passwordEncoder.encode(password);
 		user.setPassword(password);
 		user.setUsername(phone);
+		user.setFullname(fullname);
+		user.setEmail(email);
 		user.setPhone(phone);
 		user.setGender(gender);
+		Date date= new Date();
+		user.setDate(date.getTime());
 		user.setImage("/resources/static/img/avatar/"+gender+".png");
 		Set<Permission> pers = user.getPermissions();
 		pers.add(perService.findById((long) 2));

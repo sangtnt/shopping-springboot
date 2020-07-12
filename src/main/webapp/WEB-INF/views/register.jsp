@@ -55,6 +55,16 @@
 										placeholder="Phone Number">
 								</div>
 								<div class="form-group">
+									<input required name="email" type="email"
+										class="form-control form-control-user" id="exampleInputEmail"
+										placeholder="Email">
+								</div>
+								<div class="form-group">
+									<input required name="fullname" type="text"
+										class="form-control form-control-user" id="exampleInputEmail"
+										placeholder="Full Name">
+								</div>
+								<div class="form-group">
 									<input required name="password" type="password"
 										class="form-control form-control-user" id="exampleInputEmail"
 										placeholder="Password">

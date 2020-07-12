@@ -55,12 +55,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 			.successHandler(authenticationSuccessHandler)
 			.and()
-			.logout()
-			.permitAll()
+			.logout().deleteCookies("JSESSIONID")
 			.logoutSuccessUrl("/login")
 			.and()
 			.csrf()
 			.disable();
+		http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(1296000);
 	}
 
 }

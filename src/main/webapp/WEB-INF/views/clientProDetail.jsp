@@ -184,7 +184,7 @@
 										<img class="img-user" src="${user.image }" width="50px"
 											height="50px">
 										<div class="review-right">
-											<div class="review-username">${user.username }</div>
+											<div class="review-username">${user.fullname }</div>
 											<div class="review-star">
 												<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 													class="fa fa-star"></i> <i class="fa fa-star"></i> <i
