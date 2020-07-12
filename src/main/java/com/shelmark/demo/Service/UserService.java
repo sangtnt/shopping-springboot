@@ -47,8 +47,6 @@ public class UserService {
 		return null;
 		
 	}
-	
-<<<<<<< HEAD
 	public String  deleteId(String username) {
 		userRepository.deleteById(username);
 		return null;
@@ -67,8 +65,7 @@ public class UserService {
 		User user = userRepository.getOne(username);
 
 		return user;
-		
-=======
+	}
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
@@ -112,6 +109,5 @@ public class UserService {
 		orderPers.add(perService.findById((long) 4));
 		orderManager.setPermissions(orderPers);
 		userRepository.save(orderManager);
->>>>>>> 15ed26bf5e5c82b4ec2512a71a1719dc5cf3dbcb
 	}
 }
