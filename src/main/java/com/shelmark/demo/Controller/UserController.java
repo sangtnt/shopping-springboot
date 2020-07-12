@@ -103,17 +103,6 @@ public class UserController {
 		return "redirect:/admin/user";
 	}
 	
-	@RequestMapping(value = "/admin/deleteUser", method = RequestMethod.GET)
-	public String deleteUser(@RequestParam("username") String username) {
-		User user = userService.findByUsername(username);
-		String errorMessage = userService.delete(user);
-		ModelAndView model = new ModelAndView();
-		model.setViewName("deleteCategory");
-
-		return "redirect:/admin/user";
-
-	}
-	
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
 	public ModelAndView getEditView(@RequestParam("username") String username) {
 		User user = userService.getUsername(username);

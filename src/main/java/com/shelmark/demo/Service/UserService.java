@@ -1,6 +1,5 @@
 package com.shelmark.demo.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -47,6 +46,7 @@ public class UserService {
 		return null;
 		
 	}
+
 	public String  deleteId(String username) {
 		userRepository.deleteById(username);
 		return null;
@@ -67,7 +67,7 @@ public class UserService {
 		return user;
 	}
 	@Autowired
-	BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public void createDefaultAdmin() {
 		String password = passwordEncoder.encode("123456");

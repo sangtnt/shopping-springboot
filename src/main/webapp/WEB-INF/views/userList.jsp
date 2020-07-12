@@ -28,9 +28,12 @@
 							<th>Email</th>
 							<th>Gender</th>
 							<th>Phone Number</th>
-							<!-- <th colspan="2">
-								<button class="btn btn-outline-success btn-block">Add new</button>
-							</th> -->
+							<th colspan="3">
+								<a href="/admin/user/createUser">
+									<button class="btn btn-outline-success btn-block">Add new</button>
+								</a>
+							</th>
+							
 						</tr>
 					</thead>
 					<tfoot>
@@ -52,11 +55,21 @@
 										</button>
 								</a></td>
 
+<<<<<<< HEAD
 								
 								<td><a href="/admin/user/editUser?username=${user.username}"><i
 						class="far fa-edit"></i></a></td>
 								
 								
+=======
+								<td><a
+									href="/admin/user/editUser?username=${user.username}"><button
+											type="button" class="btn btn-outline-dark">
+											<i class="far fa-edit"></i>
+										</button></a></td>
+
+
+>>>>>>> branch 'master' of https://phamquangthang119@bitbucket.org/tansangyoyo/project-shopping.git
 								<c:if test="${user.products.size()==0 }">
 									<td>
 										<form action="/admin/user/deleteUser" method="POST">
@@ -68,6 +81,7 @@
 										</form>
 									</td>
 								</c:if>
+<<<<<<< HEAD
 
 								<td>
 									<form action="/admin/user/deleteUser" method="POST">
@@ -79,6 +93,8 @@
 									</form>
 								</td>
 
+=======
+>>>>>>> branch 'master' of https://phamquangthang119@bitbucket.org/tansangyoyo/project-shopping.git
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -86,6 +102,5 @@
 			</div>
 		</div>
 	</div>
-<a href="/admin/user/createUser">Create</a>
 </div>
 <!-- /.container-fluid -->
