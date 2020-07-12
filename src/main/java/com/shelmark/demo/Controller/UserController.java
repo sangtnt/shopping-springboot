@@ -1,6 +1,7 @@
 package com.shelmark.demo.Controller;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -65,17 +66,18 @@ public class UserController {
 	@RequestMapping(value = "/addPermission", method = RequestMethod.GET)
 	public ModelAndView addPer(@RequestParam String username) {
 		List<Permission> pers = perService.findAll();
+		User user = userService.findByUsername(username);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("decentralization");
 		mv.addObject("pers", pers);
-		mv.addObject("username", username);
+		mv.addObject("user", user);
 		return mv;
 	}
 
 	@RequestMapping(value = "/addPermission", method = RequestMethod.POST)
 	public String addPermission(@RequestParam String username, @RequestParam List<Long> per) {
 		User user = userService.findByUsername(username);
-		Set<Permission> newPers = user.getPermissions();
+		Set<Permission> newPers = new HashSet<Permission>();
 		for (Long p : per) {
 			Permission permission = perService.findById(p);
 			newPers.add(permission);
@@ -142,6 +144,22 @@ public class UserController {
 		mv.addObject("pers", pers);
 		return mv;
 	}
+	
+	@RequestMapping(value = "/deactivateUser", method = RequestMethod.GET)
+	public String deactivate(@RequestParam("username") String username) {
+		User user = userService.getUsername(username);
+		user.setStatus(false);
+		userService.save(user);
+		return "redirect:/admin/user";
+	}
+	
+	@RequestMapping(value = "/activateUser", method = RequestMethod.GET)
+	public String activate(@RequestParam("username") String username) {
+		User user = userService.getUsername(username);
+		user.setStatus(true);
+		userService.save(user);
+		return "redirect:/admin/user";
+	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public String editUser(
@@ -161,6 +179,7 @@ public class UserController {
 		user.setGender(gender);
 		user.setFullname(fullname);
 		user.setAddress(address);
+		user.setPhone(phone);
 		String img;
 		if (!file.isEmpty()) {
 			img ="/resources/static/img/avatar/"+ imgService.uploadFile(uploadRootPath + "/avatar", file);

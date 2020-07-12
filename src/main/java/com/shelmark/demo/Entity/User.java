@@ -40,7 +40,7 @@ public class User {
 	@Column(name="USER_GENDER", nullable=true)
 	private String gender;
 	
-	@Column(name="USER_BALANCE", nullable=true)
+	@Column(name="USER_BALANCE", nullable=true, columnDefinition="Decimal(10) default 0")
 	private Long balance;
 	
 	@Column(name= "USER_IMAGE", nullable=true)
@@ -51,6 +51,9 @@ public class User {
 	
 	@Column(name= "USER_DATE", nullable=true)
 	private Long date;
+	
+	@Column(name= "USER_STATUS", columnDefinition = "boolean default true")
+	private Boolean status;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -69,7 +72,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<UserReviewPro> reviews;
 	
-	@OneToMany(mappedBy="user", cascade= CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade= CascadeType.ALL)
 	private List<Product> products;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
@@ -233,4 +236,14 @@ public class User {
 		}
 		return false;
 	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+	
+	
 }

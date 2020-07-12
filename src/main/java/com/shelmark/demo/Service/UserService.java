@@ -33,6 +33,16 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 	
+	public List<User> findByFullname(String fullname){
+		return userRepository.findByFullname(fullname);
+	}
+	public List<User> findByEmail(String email){
+		return userRepository.findByEmail(email);
+	}
+	public List<User> findByPhone(String phone){
+		return userRepository.findByPhone(phone);
+	}
+	
 	public void save(User user){
 		userRepository.save(user);
 	}

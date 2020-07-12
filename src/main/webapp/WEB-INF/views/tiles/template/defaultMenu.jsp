@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Topbar -->
 <nav
 	class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -10,16 +10,32 @@
 	</button>
 
 	<!-- Topbar Search -->
-	<form
+	<form method="get" action="/admin/search"
 		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-		<div class="input-group">
-			<input type="text" class="form-control bg-light border-0 small"
-				placeholder="Search for..." aria-label="Search"
-				aria-describedby="basic-addon2">
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<select name="catForSearch" class="custom-select"
+					id="inputGroupSelect01">
+					<c:forEach var="per" items="${permissionForSearch }">
+						<c:if test="${per.permissionName.equals('ADMIN') }">
+							<option value="user">User</option>
+							<option value="permission">Permission</option>
+						</c:if>
+						<c:if test="${per.permissionName.equals('PRODUCT MANAGER') }">
+							<option value="category">Category</option>
+							<option value="product">Product</option>
+						</c:if>
+						<c:if test="${per.permissionName.equals('ORDER MANAGER') }">
+							<option value="order">Order</option>
+						</c:if>
+					</c:forEach>
+				</select>
+			</div>
+			<input name="searchText" type="text" class="form-control"
+				placeholder="Search for..."
+				aria-label="Text input with dropdown button" required>
 			<div class="input-group-append">
-				<button class="btn btn-primary" type="button">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
+				<button class="btn btn-outline-secondary" type="submit">Search</button>
 			</div>
 		</div>
 	</form>

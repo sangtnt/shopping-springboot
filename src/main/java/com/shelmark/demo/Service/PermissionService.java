@@ -32,6 +32,10 @@ public class PermissionService {
 		return permissionRepo.findAll();
 	}
 	
+	public List<Permission> findByName(String name) {
+		return permissionRepo.findByName(name);
+	}
+	
 	public void save(Permission per) {
 		permissionRepo.save(per);
 	}

@@ -63,13 +63,13 @@ public class Order {
 	@Column(name="ORDER_SUBTOTAL")
 	private Double subTotal;
 	
-	@Column(name="ORDER_DISCOUNT")
+	@Column(name="ORDER_DISCOUNT", columnDefinition="Decimal(10) default 0")
 	private Double discount;
 	
-	@Column(name="ORDER_ADDITIONALFEES")
+	@Column(name="ORDER_ADDITIONALFEES", columnDefinition="Decimal(10) default 0")
 	private Double additionalFees;
 	
-	@Column(name="ORDER_SHIPPING")
+	@Column(name="ORDER_SHIPPING", columnDefinition="Decimal(10) default 0")
 	private Double shipping;
 	
 	@Column(name="ORDER_GRANDTOTAL")

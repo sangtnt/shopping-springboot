@@ -52,6 +52,14 @@ public class ProductService {
 		return proRepository.findById(id).get();
 	}
 	
+	public List<Product> findByName(String name) {
+		return proRepository.findByName(name);
+	}
+	
+	public List<Product> findByCatName(String catName) {
+		return proRepository.findByCatName(catName);
+	}
+	
 	public void delete(Product pro) {
 		proRepository.delete(pro);
 	}

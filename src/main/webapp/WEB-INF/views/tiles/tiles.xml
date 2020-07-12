@@ -83,4 +83,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/editUser.jsp" />
 	</definition>
+	<definition name="searchPage" extends="base-definition">
+		<put-attribute name="body"
+			value="/WEB-INF/views/searchPage.jsp" />
+	</definition>
+	<definition name="admin404" extends="base-definition">
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin404.jsp" />
+	</definition>
 </tiles-definitions>

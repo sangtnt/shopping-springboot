@@ -39,14 +39,20 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         logger.info("userName: " + userName);
         HttpSession session = request.getSession();
         String referer = (String) session.getAttribute("referer");
-        session.setAttribute("user", user);
-        SetupSession.setHeader(user.getCartItems().size() ,user.getProLiked().size(), request);
-        Set<Permission> pers = user.getPermissions();
-        for (Permission p : pers) {
-        	if (p.getPermissionName().equals("ADMIN")||p.getPermissionName().equals("PRODUCT MANAGER")||p.getPermissionName().equals("ORDER MANAGER")) {
-        		referer="/admin";
-        		break;
-        	}
+        if(user.getStatus()) {
+            session.setAttribute("user", user);
+            SetupSession.setHeader(user.getCartItems().size() ,user.getProLiked().size(), request);
+            Set<Permission> pers = user.getPermissions();
+            session.setAttribute("permissionForSearch", pers);
+            for (Permission p : pers) {
+            	if (p.getPermissionName().equals("ADMIN")||p.getPermissionName().equals("PRODUCT MANAGER")||p.getPermissionName().equals("ORDER MANAGER")) {
+            		referer="/admin";
+            		break;
+            	}
+            }
+        }
+        else {
+        	referer="/logout";
         }
         redirectStrategy.sendRedirect(request, response, referer);
     }

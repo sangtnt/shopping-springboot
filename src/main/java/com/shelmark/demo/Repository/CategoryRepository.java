@@ -11,4 +11,7 @@ import com.shelmark.demo.Entity.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 	@Query(value="SELECT * FROM category LIMIT :start, :limit", nativeQuery=true)
 	List<Category> getCatsByPage(Integer start, Integer limit);
+	
+	@Query("SELECT c FROM Category c WHERE c.name LIKE %?1%")
+	List<Category> findByName(String name);
 }

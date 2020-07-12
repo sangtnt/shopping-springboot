@@ -50,13 +50,13 @@ public class Product {
 	@OneToMany(mappedBy = "product")
 	private List<UserRatePro> ratings;
 	
-	@Column(name="PRO_SOLD")
+	@Column(name="PRO_SOLD", columnDefinition="Decimal(10) default 0")
 	private Long sold;
 	
 	@Column(name="PRO_RATING")
 	private Long rating;
 	
-	@Column(name="PRO_SHIPPING")
+	@Column(name="PRO_SHIPPING", columnDefinition="Decimal(10) default 0")
 	private String shipping;
 	
 	@Column(name="PRO_BRAND")

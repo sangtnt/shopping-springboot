@@ -69,6 +69,24 @@
 										</form>
 									</td>
 								</c:if>
+								<c:if test="${user.products.size()>0&&user.status==true}">
+									<td>
+										<a href="/admin/user/deactivateUser?username=${user.username }">
+											<button class="btn btn-warning btn-block" type="button">
+												Deactivate
+											</button>
+										</a>
+									</td>
+								</c:if>
+								<c:if test="${user.products.size()>0&&user.status==false}">
+									<td>
+										<a href="/admin/user/activateUser?username=${user.username }">
+											<button class="btn btn-success btn-block" type="button">
+												Activate
+											</button>
+										</a>
+									</td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -38,4 +38,9 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	@Query(value="SELECT * FROM product WHERE pro_quantity>0 ORDER BY pro_research DESC LIMIT 12", nativeQuery=true)
 	List<Product> getAllMostResearch ();
 	
+	@Query("SELECT p FROM Product p WHERE p.name LIKE %?1%")
+	List<Product> findByName (String name);
+	
+	@Query("SELECT p FROM Product p WHERE p.cat.name LIKE %?1%")
+	List<Product> findByCatName (String catName);
 }

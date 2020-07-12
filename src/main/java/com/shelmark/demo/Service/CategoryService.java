@@ -16,6 +16,10 @@ public class CategoryService {
 	public List<Category> getAllCategory() {
 		return catRepository.findAll();
 	}
+	
+	public List<Category> findByName(String name) {
+		return catRepository.findByName(name);
+	}
 
 	public List<Category> getCatsByPage(Integer start, Integer limit) {
 		return catRepository.getCatsByPage(start, limit);
