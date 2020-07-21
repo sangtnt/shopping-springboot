@@ -79,7 +79,7 @@ public class User {
 	private Set<ShoppingCart> cartItems;
 
 	@OneToMany(mappedBy = "user")
-	private List<UserRatePro> ratings;
+	private Set<UserRatePro> ratings;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "USER_USERNAME") }, inverseJoinColumns = {
@@ -212,11 +212,11 @@ public class User {
 		this.date = date;
 	}
 
-	public List<UserRatePro> getRatings() {
+	public Set<UserRatePro> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(List<UserRatePro> ratings) {
+	public void setRatings(Set<UserRatePro> ratings) {
 		this.ratings = ratings;
 	}
 

@@ -72,7 +72,6 @@
 							</div>
 
 							<button type="submit" class="primary-btn">ADD TO CART</button>
-
 							<c:if test="${user!=null }">
 								<c:if test="${ user.checkProLiked(pro)}">
 									<a href="/auth/like?proId=${pro.id }" class="heart-icon"><span
@@ -89,6 +88,73 @@
 							</c:if>
 						</form>
 					</c:if>
+					<h1>Let's Rate us</h1>
+					<form method="post" action="/auth/rating">
+						<input type="hidden" name="proId" value="${pro.id }" />
+						<fieldset class="rating">
+							<button class="btn btn-danger">Rate!</button>
+							<c:set var="test" value="${ 0}" />
+							<c:forEach var="rate" items="${pro.ratings }">
+								<c:if test="${rate.user.equals(user) }">
+									<c:if test="${(rate.rating==5) }">
+										<input type="radio" id="star5" name="rating" value="5" checked />
+										<label class="full" for="star5" title="Awesome - 5 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating!=5) }">
+										<input type="radio" id="star5" name="rating" value="5" />
+										<label class="full" for="star5" title="Awesome - 5 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating==4) }">
+										<input type="radio" id="star4" name="rating" value="4" checked />
+										<label class="full" for="star4" title="Pretty good - 4 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating!=4 )}">
+										<input type="radio" id="star4" name="rating" value="4" />
+										<label class="full" for="star4" title="Pretty good - 4 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating==3) }">
+										<input type="radio" id="star3" name="rating" value="3" checked />
+										<label class="full" for="star3" title="Meh - 3 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating!=3) }">
+										<input type="radio" id="star3" name="rating" value="3" />
+										<label class="full" for="star3" title="Meh - 3 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating==2) }">
+										<input type="radio" id="star2" name="rating" value="2" checked />
+										<label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating!=2) }">
+										<input type="radio" id="star2" name="rating" value="2" />
+										<label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+									</c:if>
+									<c:if test="${(rate.rating==1) }">
+										<input type="radio" id="star1" name="rating" value="1" checked />
+										<label class="full" for="star1"
+											title="Sucks big time - 1 star"></label>
+									</c:if>
+									<c:if test="${(rate.rating!=1) }">
+										<input type="radio" id="star1" name="rating" value="1" />
+										<label class="full" for="star1"
+											title="Sucks big time - 1 star"></label>
+									</c:if>
+									<c:set var="test" value="${ 1}" />
+								</c:if>
+							</c:forEach>
+							<c:if test="${test==0 }">
+								<input type="radio" id="star5" name="rating" value="5" />
+								<label class="full" for="star5" title="Awesome - 5 stars"></label>
+								<input type="radio" id="star4" name="rating" value="4" />
+								<label class="full" for="star4" title="Pretty good - 4 stars"></label>
+								<input type="radio" id="star3" name="rating" value="3" />
+								<label class="full" for="star3" title="Meh - 3 stars"></label>
+								<input type="radio" id="star2" name="rating" value="2" />
+								<label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+								<input type="radio" id="star1" name="rating" value="1" />
+								<label class="full" for="star1" title="Sucks big time - 1 star"></label>
+							</c:if>
+						</fieldset>
+					</form>
 					<ul>
 						<li><b>Availability</b> <c:if test="${pro.quantity>1 }">
 								<span id="pro_quantity">${pro.quantity }</span> items
@@ -99,13 +165,13 @@
 							</c:if></li>
 						<li><b>Shipping</b> <span>${pro.shipping }</span></li>
 						<li><b>Origin</b> <span>${pro.origin }</span></li>
-						<li><b>Share on</b>
+						<!-- <li><b>Share on</b>
 							<div class="share">
 								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
 									class="fa fa-twitter"></i></a> <a href="#"><i
 									class="fa fa-instagram"></i></a> <a href="#"><i
 									class="fa fa-pinterest"></i></a>
-							</div></li>
+							</div></li> -->
 					</ul>
 				</div>
 			</div>
@@ -166,9 +232,23 @@
 											<div class="review-right product__details__text">
 												<div class="review-username">${review.user.username }</div>
 												<div class="product__details__rating">
-													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-														class="fa fa-star"></i>
+													<c:set var="test" value="${ 0}" />
+													<c:forEach var="rate" items="${pro.ratings }">
+														<c:if test="${rate.user.equals(review.user) }">
+															<c:forEach begin="1" end="${rate.rating }">
+																<i class="fa fa-star"></i>
+															</c:forEach>
+															<c:forEach begin="${rate.rating+1 }" end="5">
+																<i class="fa fa-star-o"></i>
+															</c:forEach>
+															<c:set var="test" value="${ 1}" />
+														</c:if>
+													</c:forEach>
+													<c:if test="${test==0 }">
+														<c:forEach begin="1" end="5">
+															<i class="fa fa-star-o"></i>
+														</c:forEach>
+													</c:if>
 												</div>
 												<c:if test="${!review.image.equals('') }">
 													<img height="50px" alt="" src="${review.image }">
@@ -202,7 +282,7 @@
 														type="file" class="form-control">
 												</div>
 												<div class="form-group">
-													<img id="catImg" src="${pro.image }" height="200px" />
+													<img id="catImg" src="" alt="" height="200px" />
 												</div>
 												<div class="review-submit">
 													<button class="btn btn-primary">Submit</button>

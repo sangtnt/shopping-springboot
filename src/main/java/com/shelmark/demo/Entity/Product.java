@@ -48,7 +48,7 @@ public class Product {
 	private Long date;
 	
 	@OneToMany(mappedBy = "product")
-	private List<UserRatePro> ratings;
+	private Set<UserRatePro> ratings;
 	
 	@Column(name="PRO_SOLD", columnDefinition="Decimal(10) default 0")
 	private Long sold;
@@ -215,11 +215,11 @@ public class Product {
 		this.user = user;
 	}
 
-	public List<UserRatePro> getRatings() {
+	public Set<UserRatePro> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(List<UserRatePro> ratings) {
+	public void setRatings(Set<UserRatePro> ratings) {
 		this.ratings = ratings;
 	}
 

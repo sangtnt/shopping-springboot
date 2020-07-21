@@ -23,7 +23,7 @@ public class UserRatePro {
 	
 	@ManyToOne
 	@JoinColumn(name="PRO_ID", nullable=false)
-	private User product;
+	private Product product;
 	
 	@Column(name="rating")
 	private Long rating;
@@ -44,11 +44,11 @@ public class UserRatePro {
 		this.user = user;
 	}
 
-	public User getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public void setProduct(User product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 

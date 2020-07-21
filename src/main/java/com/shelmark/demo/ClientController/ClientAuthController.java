@@ -20,8 +20,10 @@ import com.shelmark.demo.Entity.Order_Detail;
 import com.shelmark.demo.Entity.Product;
 import com.shelmark.demo.Entity.ShoppingCart;
 import com.shelmark.demo.Entity.User;
+import com.shelmark.demo.Entity.UserRatePro;
 import com.shelmark.demo.Entity.UserReviewPro;
 import com.shelmark.demo.Repository.OrderDetailRepository;
+import com.shelmark.demo.Repository.UserRateProRepository;
 import com.shelmark.demo.Repository.UserReviewProRepository;
 import com.shelmark.demo.Service.ImageService;
 import com.shelmark.demo.Service.OrderService;
@@ -246,6 +248,33 @@ public class ClientAuthController {
 		reviewPro.setProduct(pro);
 		reviewPro.setReview(review);
 		userReviewPro.save(reviewPro);
+		String referer = request.getHeader("referer");
+		return "redirect:" + referer;
+	}
+	
+	@Autowired
+	private UserRateProRepository uRateProRepo;
+	
+	@RequestMapping(value = "/rating", method = RequestMethod.POST)
+	public String rate(@RequestParam Long proId, @RequestParam Long rating, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		User u = (User) session.getAttribute("user");
+		User user = userService.findByUsername(u.getUsername());
+		Product pro = proService.findById(proId);
+		UserRatePro uRatePro = uRateProRepo.findByUser(user);
+		if(uRatePro!=null) {
+			uRatePro.setRating(rating);
+			uRateProRepo.save(uRatePro);
+		}
+		else{
+			UserRatePro uR = new UserRatePro();
+			uR.setProduct(pro);
+			uR.setRating(rating);
+			uR.setUser(user);
+			uRateProRepo.save(uR);
+		}
+		pro.setRating();
+		proService.save(pro);
 		String referer = request.getHeader("referer");
 		return "redirect:" + referer;
 	}
