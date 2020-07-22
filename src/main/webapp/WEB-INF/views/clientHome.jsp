@@ -52,7 +52,8 @@
 			<c:forEach var="pro" items="${pros }">
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="featured__item">
-						<div class="featured__item__pic set-bg" data-setbg="${pro.image }">
+						<div class="featured__item__pic set-bg">
+							<a href="/product/proDetail?proId=${pro.id }"><img src="${pro.images.get(0).image }"></a>
 							<ul class="featured__item__pic__hover">
 								<li><a href="/auth/like?proId=${pro.id }"><i class="fa fa-heart"></i></a></li>
 								<li>
@@ -119,7 +120,7 @@
 							</c:if>
 							<a href="/product/proDetail?proId=${item.id }" class="latest-product__item">
 								<div class="latest-product__item__pic">
-									<img src="${item.image }" alt="">
+									<img src="${item.images.get(0).image }" alt="">
 								</div>
 								<div class="latest-product__item__text">
 									<h6>${item.name }</h6>
@@ -151,7 +152,7 @@
 							</c:if>
 							<a href="/product/proDetail?proId=${item.id }" class="latest-product__item">
 								<div class="latest-product__item__pic">
-									<img src="${item.image }" alt="">
+									<img src="${item.images.get(0).image }" alt="">
 								</div>
 								<div class="latest-product__item__text">
 									<h6>${item.name }</h6>
@@ -183,7 +184,7 @@
 							</c:if>
 							<a href="/product/proDetail?proId=${item.id }" class="latest-product__item">
 								<div class="latest-product__item__pic">
-									<img src="${item.image }" alt="">
+									<img src="${item.images.get(0).image }" alt="">
 								</div>
 								<div class="latest-product__item__text">
 									<h6>${item.name }</h6>

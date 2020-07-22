@@ -124,7 +124,15 @@ public class ClientAuthController {
 		User user = userService.findByUsername(u.getUsername());
 		int i = 0;
 		for (ShoppingCart item : user.getCartItems()) {
-			item.setQuantity(cart.get(i));
+			if(cart.get(i)<=item.getProduct().getQuantity()&&cart.get(i)>=1) {
+				item.setQuantity(cart.get(i));
+			}
+			else if(cart.get(i)<1){
+				item.setQuantity((long) 1);
+			}
+			else {
+				item.setQuantity(item.getProduct().getQuantity());
+			}
 			item.setTotal();
 			cartService.save(item);
 			i++;
@@ -261,12 +269,19 @@ public class ClientAuthController {
 		User u = (User) session.getAttribute("user");
 		User user = userService.findByUsername(u.getUsername());
 		Product pro = proService.findById(proId);
-		UserRatePro uRatePro = uRateProRepo.findByUser(user);
-		if(uRatePro!=null) {
-			uRatePro.setRating(rating);
-			uRateProRepo.save(uRatePro);
+		List<UserRatePro> uRatePro = uRateProRepo.findByUser(user);
+		boolean test=false;
+		if(uRatePro.size()>0) {
+			for(UserRatePro uR:uRatePro) {
+				if(uR.getProduct().equals(pro)) {
+					uR.setRating(rating);
+					uRateProRepo.save(uR);
+					test=true;
+					break;
+				}
+			}
 		}
-		else{
+		if(!test) {
 			UserRatePro uR = new UserRatePro();
 			uR.setProduct(pro);
 			uR.setRating(rating);

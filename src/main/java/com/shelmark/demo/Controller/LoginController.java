@@ -79,7 +79,7 @@ public class LoginController {
 		user.setDate(date.getTime());
 		user.setImage("/resources/static/img/avatar/"+gender+".png");
 		Set<Permission> pers = user.getPermissions();
-		pers.add(perService.findById((long) 2));
+		pers.add(perService.findByName("USER").get(0));
 		user.setPermissions(pers);
 		userService.save(user);
 		mv.setViewName("login");

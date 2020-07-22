@@ -2,6 +2,9 @@ package com.shelmark.demo.ClientController;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +32,10 @@ public class ClientHomeController {
 		mv.addObject("bestSeller", bestSeller);
 		mv.setViewName("clientHome");
 		return mv;
+	}
+	@RequestMapping(value="/back", method=RequestMethod.GET)
+	public String back(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		return "redirect:"+session.getAttribute("referer");
 	}
 }

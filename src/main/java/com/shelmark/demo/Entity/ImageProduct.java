@@ -1,47 +1,37 @@
 package com.shelmark.demo.Entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="category")
-public class Category {
+@Table(name="image_product")
+public class ImageProduct {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="CAT_ID")
+	@Column(name="IMAGE_ID")
 	private Long id;
 	
-	@Column(name="CAT_NAME")
-	private String name;
-	
-	@Column(name="CAT_IMAGE")
+	@Column(name="IMAGE")
 	private String image;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="PRO_ID", nullable=false)
+	private Product product;
 
 	public Long getId() {
 		return id;
 	}
-	
-	@OneToMany(mappedBy="cat", cascade= CascadeType.REMOVE)
-	List<Product> products;
-	
+
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getImage() {
@@ -52,12 +42,12 @@ public class Category {
 		this.image = image;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	
+
 }

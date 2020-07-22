@@ -26,11 +26,12 @@
 				<div class="product__details__pic">
 					<div class="product__details__pic__item">
 						<img class="product__details__pic__item--large"
-							src="${pro.image }" alt="">
+							src="${pro.images.get(0).image }" alt="">
 					</div>
 					<div class="product__details__pic__slider owl-carousel">
-						<img data-imgbigurl="img/product/details/product-details-2.jpg"
-							src="${pro.image }" alt="">
+						<c:forEach var="image" items="${pro.images }">
+							<img data-imgbigurl="${image.image }" src="${image.image }" alt="">
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -88,7 +89,7 @@
 							</c:if>
 						</form>
 					</c:if>
-					<h1>Let's Rate us</h1>
+					<h4>Let's Rate us</h4>
 					<form method="post" action="/auth/rating">
 						<input type="hidden" name="proId" value="${pro.id }" />
 						<fieldset class="rating">
@@ -320,7 +321,9 @@
 			<c:forEach items="${relatedPros }" var="item">
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="product__item">
-						<div class="product__item__pic set-bg" data-setbg="${item.image }">
+						<div class="product__item__pic set-bg" data-setbg="">
+							<a href="/product/proDetail?proId=${pro.id }"><img
+								src="${item.images.get(0).image }"></a>
 							<ul class="product__item__pic__hover">
 								<li><a href="/auth/like?proId=${pro.id }"><i
 										class="fa fa-heart"></i></a></li>
@@ -333,7 +336,7 @@
 								</li>
 							</ul>
 						</div>
-						<div class="product__item__text">
+						<div class="featured__item__text">
 							<h6>
 								<a href="/product/proDetail?proId=${item.id }">${item.name }</a>
 							</h6>

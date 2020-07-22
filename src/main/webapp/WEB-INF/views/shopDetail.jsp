@@ -28,9 +28,7 @@
 									src="${user.image }" alt="User profile picture">
 							</div>
 
-							<h3 class="profile-username text-center">
-								${user.fullname }
-							</h3>
+							<h3 class="profile-username text-center">${user.fullname }</h3>
 							<ul class="list-group list-group-unbordered mb-3">
 								<li class="list-group-item"><b>Products</b> <a
 									class="float-right">${user.products.size() }</a></li>
@@ -61,7 +59,10 @@
 												<div class="col-lg-3 col-md-4 col-sm-6">
 													<div class="featured__item">
 														<div class="featured__item__pic set-bg">
-															<img src="${pro.image }" height="100%" class="col-lg-12">
+															<a href="/product/proDetail?proId=${pro.id }"> <img
+																src="${pro.images.get(0).image }" height="100%"
+																class="col-lg-12">
+															</a>
 															<ul class="featured__item__pic__hover">
 																<li><a href="#"><i class="fa fa-heart"></i></a></li>
 																<li>

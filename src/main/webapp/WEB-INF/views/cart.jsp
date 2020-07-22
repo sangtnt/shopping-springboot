@@ -38,8 +38,8 @@
 								<tbody>
 									<c:forEach items="${user.cartItems}" var="item">
 										<tr>
-											<td class="shoping__cart__item"><img
-												src="${item.product.image }" alt="">
+											<td class="shoping__cart__item"><a href="/product/proDetail?proId=${item.product.id }"><img width="110px" height="110px"
+												src="${item.product.images.get(0).image }" alt=""></a>
 												<h5>${item.product.name }</h5></td>
 											<td class="shoping__cart__price">$${item.product.getDiscountPrice() }</td>
 											<td class="shoping__cart__quantity">

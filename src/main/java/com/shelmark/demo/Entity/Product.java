@@ -29,16 +29,16 @@ public class Product {
 	@Column(name="PRO_ID")
 	private Long id;
 	
-	@Column(name="PRO_NAME")
+	@Column(name="PRO_NAME", length=1000)
 	private String name;
 	
-	@Column(name="PRO_IMAGE")
-	private String image;
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<ImageProduct> images;
 	
 	@Column(name="PRO_PRICE")
 	private Double price;
 	
-	@Column(name="PRO_DESCRIPTION")
+	@Column(name="PRO_DESCRIPTION", length=100000)
 	private String description;
 	
 	@Column(name="PRO_QUANTITY")
@@ -47,7 +47,7 @@ public class Product {
 	@Column(name="PRO_DATE")
 	private Long date;
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade= CascadeType.REMOVE)
 	private Set<UserRatePro> ratings;
 	
 	@Column(name="PRO_SOLD", columnDefinition="Decimal(10) default 0")
@@ -75,20 +75,20 @@ public class Product {
 	@JoinColumn(name="CAT_ID", nullable=false)
 	private Category cat;
 	
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "product", cascade= CascadeType.REMOVE)
 	private Set<ShoppingCart> cartItems = new HashSet<ShoppingCart>();
 	
 	@ManyToOne
 	@JoinColumn(name="USER_USERNAME", nullable=false)
 	private User user;
 	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade= CascadeType.REMOVE)
 	private List<Order_Detail> order_details;
 	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade= CascadeType.REMOVE)
 	private List<UserReviewPro> reviews;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "PRO_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_USERNAME") })
 	private Set<User> userLiked;
@@ -109,12 +109,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getImage() {
-		return image;
+	public List<ImageProduct> getImages() {
+		return images;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImages(List<ImageProduct> images) {
+		this.images = images;
 	}
 
 	public Double getPrice() {
@@ -276,4 +276,5 @@ public class Product {
 	public void setDiscount(Long discount) {
 		this.discount = discount;
 	}
+	
 }

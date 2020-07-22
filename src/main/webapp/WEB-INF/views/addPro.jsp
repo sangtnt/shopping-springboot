@@ -33,8 +33,9 @@
 				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlSelect1">Category</label> 
-			<select name="catId" class="form-control" id="exampleFormControlSelect1" required>
+			<label for="exampleFormControlSelect1">Category</label> <select
+				name="catId" class="form-control" id="exampleFormControlSelect1"
+				required>
 				<c:forEach var="item" items="${cats}">
 					<c:if test="${item.id == pro.cat.id}">
 						<option value="${item.id }" selected>${item.name }</option>
@@ -45,14 +46,16 @@
 				</c:forEach>
 			</select>
 		</div>
-		<div class="form-group">
-			<label>Image</label> <input name="file" id="myfile" type="file"
-				class="form-control">
+		<div id="file-group" class="form-group">
+			<label>Image</label> <input name="file" id="myProFile" type="file"
+				class="form-control" multiple required>
 		</div>
-		<div class="form-group">
-			<img id="catImg" height="200px" />
+		<div id="img-group" class="form-group">
+			<c:forEach var="image" items="${pro.images }">
+				<img src="${image.image }" height="200px" />
+			</c:forEach>
 		</div>
-		<button type="submit" class="btn btn-primary">Edit</button>
+		<button type="submit" class="btn btn-primary">Add</button>
 		<a href="/admin/product"><button type="button"
 				class="btn btn-danger">Cancel</button></a>
 	</form>

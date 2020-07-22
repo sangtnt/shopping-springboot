@@ -87,6 +87,17 @@
 			}
 			reader.readAsDataURL(input.files[0]);
 		})
+		$('#myProFile').change(function() {
+			var input = this;
+			$("#img-group").empty();
+			for (var i=0; i<input.files.length; i++){
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('<img height="200px">').attr('src', e.target.result).appendTo("#img-group");
+				}
+				reader.readAsDataURL(input.files[i]);
+			}
+		})
 	</script>
 </body>
 </html>

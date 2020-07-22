@@ -12,7 +12,8 @@
 			<c:forEach var="pro" items="${pros }">
 				<div class="col-lg-3 col-md-4 col-sm-6">
 					<div class="featured__item">
-						<div class="featured__item__pic set-bg" data-setbg="${pro.image }">
+						<div class="featured__item__pic set-bg" data-setbg="">
+						<a href="/product/proDetail?proId=${pro.id }"><img src="${pro.images.get(0).image }"></a>
 							<ul class="featured__item__pic__hover">
 								<li><a href="/auth/like?proId=${pro.id }"><i
 										class="fa fa-heart"></i></a></li>

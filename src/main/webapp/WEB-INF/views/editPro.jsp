@@ -60,12 +60,14 @@
 				</c:forEach>
 			</select>
 		</div>
-		<div class="form-group">
-			<label>Image</label> <input name="file" id="myfile" type="file"
-				class="form-control">
+		<div id="file-group" class="form-group">
+			<label>Image</label> <input name="file" id="myProFile" type="file"
+				class="form-control" multiple required>
 		</div>
-		<div class="form-group">
-			<img id="catImg" src="${pro.image }" height="200px" />
+		<div id="img-group" class="form-group">
+			<c:forEach var="image" items="${pro.images }">
+				<img src="${image.image }" height="200px" />
+			</c:forEach>
 		</div>
 		<button type="submit" class="btn btn-primary">Edit</button>
 		<a href="/admin/product"><button type="button"

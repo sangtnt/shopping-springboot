@@ -10,6 +10,6 @@ import com.shelmark.demo.Entity.Permission;
 
 @Repository
 public interface PermissionRepository  extends JpaRepository<Permission, Long>{
-	@Query("SELECT p FROM Permission p WHERE p.permissionName=?1")
-	public List<Permission> findByName(String name);
+
+	public List<Permission> findByPermissionName(String name);
 }

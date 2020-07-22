@@ -184,8 +184,6 @@ public class UserController {
 		if (!file.isEmpty()) {
 			img ="/resources/static/img/avatar/"+ imgService.uploadFile(uploadRootPath + "/avatar", file);
 			user.setImage(img);
-		} else {
-			img ="";
 		}
 		user.setPermissions(perService.findPermissionsByListId(pers));
 		userService.save(user);

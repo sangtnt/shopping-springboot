@@ -53,8 +53,10 @@
 											<tbody>
 												<c:forEach items="${order.order_details}" var="item">
 													<tr>
-														<td class="shoping__cart__item"><img
-															src="${item.product.image }" alt=""> <input
+														<td class="shoping__cart__item"><a
+															href="/product/proDetail?proId=${item.product.id }"><img
+																width="110px" height="110px"
+																src="${item.product.images.get(0).image }" alt=""></a> <input
 															name="proId" value="${item.product.id }" type="hidden">
 															<input name="quantity" value="${item.quantity }"
 															type="hidden">
@@ -77,7 +79,8 @@
 									<div class="shoping__cart__btns">
 										<c:if test="${order.status==0 ||order.status==1 }">
 											<a href="/order/cancelOrder?orderId=${order.id }">
-												<button type="button" class="primary-btn cart-btn cart-btn-right">Cancel</button>
+												<button type="button"
+													class="primary-btn cart-btn cart-btn-right">Cancel</button>
 											</a>
 										</c:if>
 										<button type="submit"

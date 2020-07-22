@@ -949,6 +949,9 @@ ol {
 }
 
 .featured__item__text h6 {
+	white-space: nowrap;
+ 	 overflow: hidden;
+  	text-overflow: ellipsis;
 	margin-bottom: 10px;
 }
 
@@ -1014,8 +1017,9 @@ ol {
 }
 
 .latest-product__item__pic img {
+	display:block;
+	width: 110px !important; 
 	height: 110px;
-	width: 110px;
 }
 
 .latest-product__item__text {
@@ -1024,6 +1028,9 @@ ol {
 }
 
 .latest-product__item__text h6 {
+	white-space: nowrap;
+ 	 overflow: hidden;
+  	text-overflow: ellipsis;
 	color: #252525;
 	margin-bottom: 8px;
 }
@@ -1940,6 +1947,10 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item h5 {
+	width: 300px;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 	color: #1c1c1c;
 	display: inline-block;
 }
@@ -3562,8 +3573,6 @@ span.outer, h5.outer {
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
 
 /****** Style Star Rating Widget *****/
 

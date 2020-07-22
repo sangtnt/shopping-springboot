@@ -89,7 +89,7 @@ public class UserService {
 		Date date = new Date();
 		admin.setDate(date.getTime());
 		Set<Permission> pers = new HashSet<Permission>();
-		pers.add(perService.findById((long) 1));
+		pers.add(perService.findByName("ADMIN").get(0));
 		admin.setPermissions(pers);
 		userRepository.save(admin);
 	}
@@ -104,7 +104,7 @@ public class UserService {
 		proManager.setFullname("PRODUCT MANAGER");
 		proManager.setDate(date.getTime());
 		Set<Permission> proPers = new HashSet<Permission>();
-		proPers.add(perService.findById((long) 3));
+		proPers.add(perService.findByName("PRODUCT MANAGER").get(0));
 		proManager.setPermissions(proPers);
 		userRepository.save(proManager);
 	}
@@ -119,7 +119,7 @@ public class UserService {
 		orderManager.setFullname("ORDER MANAGER");
 		orderManager.setDate(date.getTime());
 		Set<Permission> orderPers = new HashSet<Permission>();
-		orderPers.add(perService.findById((long) 4));
+		orderPers.add(perService.findByName("ORDER MANAGER").get(0));
 		orderManager.setPermissions(orderPers);
 		userRepository.save(orderManager);
 	}

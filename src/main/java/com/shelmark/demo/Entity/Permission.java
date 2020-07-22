@@ -2,6 +2,7 @@ package com.shelmark.demo.Entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Permission {
 	@Column(name = "PERSMISSION_NAME", length = 20)
 	private String permissionName;
 
-	@ManyToMany()
+	@ManyToMany(cascade= CascadeType.REMOVE)
 	@JoinTable(name = "USER_PERMISSION", joinColumns = { @JoinColumn(name = "PERMISSION_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "USER_USERNAME") })
 	private Set<User> users;
@@ -32,7 +33,7 @@ public class Permission {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 

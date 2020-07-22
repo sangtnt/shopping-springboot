@@ -55,7 +55,7 @@ public class User {
 	@Column(name= "USER_STATUS", columnDefinition = "boolean default true")
 	private Boolean status=true;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "USER_PERMISSION", 
 			joinColumns = { 
@@ -66,22 +66,22 @@ public class User {
 			})
 	private Set<Permission> permissions;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade= CascadeType.REMOVE)
 	private List<Order> orders;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade= CascadeType.REMOVE)
 	private List<UserReviewPro> reviews;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade= CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="user", cascade= CascadeType.REMOVE)
 	private List<Product> products;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade= CascadeType.REMOVE)
 	private Set<ShoppingCart> cartItems;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade= CascadeType.REMOVE)
 	private Set<UserRatePro> ratings;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "USER_LIKE_PRO", joinColumns = { @JoinColumn(name = "USER_USERNAME") }, inverseJoinColumns = {
 			@JoinColumn(name = "PRO_ID") })
 	private Set<Product> proLiked;

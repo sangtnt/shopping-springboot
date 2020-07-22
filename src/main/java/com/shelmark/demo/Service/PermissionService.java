@@ -1,6 +1,5 @@
 package com.shelmark.demo.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class PermissionService {
 	}
 	
 	public List<Permission> findByName(String name) {
-		return permissionRepo.findByName(name);
+		return permissionRepo.findByPermissionName(name);
 	}
 	
 	public void save(Permission per) {

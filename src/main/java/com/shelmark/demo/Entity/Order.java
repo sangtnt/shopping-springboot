@@ -36,7 +36,7 @@ public class Order {
 	@JoinColumn(name="USER_USERNAME")
 	private User user;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade=CascadeType.REMOVE)
 	private List<Order_Detail> order_details;
 	
 	@Column(name="ORDER_ADDRESS")

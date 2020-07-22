@@ -12,12 +12,21 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageService {
 
 	public String uploadFile(String uploadRootPath, MultipartFile file) {
+		String filename = file.getOriginalFilename();
+		filename= filename.replace("\\", "-");
+		String[] parts=filename.split("-");
+		if(parts.length>0) {
+			filename=parts[parts.length-1];
+		}
 		try {
+			if(filename.contains(System.getProperty("user.dir"))) {
+				filename=filename.replace(System.getProperty("user.dir"),"");
+			}
             InputStream fis = file.getInputStream();
             byte[] data = new byte[fis.available()];
             fis.read(data);
 
-            FileOutputStream out = new FileOutputStream(new File(uploadRootPath + "/" + file.getOriginalFilename()));
+            FileOutputStream out = new FileOutputStream(new File(uploadRootPath + "/" + filename));
 
             out.write(data);
             out.close();
@@ -26,8 +35,8 @@ public class ImageService {
             System.out.println("That bai");
         }
 
-        System.out.println("Thanh cong : " + uploadRootPath + file.getOriginalFilename());
+        System.out.println("Thanh cong : " + uploadRootPath + filename);
 
-        return  file.getOriginalFilename();
+        return filename;
 	}
 }
