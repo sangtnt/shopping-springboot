@@ -21,10 +21,6 @@
 				class="form-control" id="exampleInputEmail1" required>
 		</div>
 		<div class="form-group">
-			<label>Shipping</label> <input name="proShipping" type="text"
-				class="form-control" id="exampleInputEmail1" required>
-		</div>
-		<div class="form-group">
 			<label>Brand</label> <input name="proBrand" type="text"
 				class="form-control" id="exampleInputEmail1" required>
 		</div>

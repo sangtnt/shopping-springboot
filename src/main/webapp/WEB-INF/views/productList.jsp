@@ -26,7 +26,6 @@
 							<th>Name</th>
 							<th>Price</th>
 							<th>Quantity</th>
-							<th>Shipping</th>
 							<th>Brand</th>
 							<th>Origin</th>
 							<th>Category</th>
@@ -46,7 +45,6 @@
 								<td>${pro.name}</td>
 								<td>${pro.price }</td>
 								<td>${pro.quantity}</td>
-								<td>${pro.shipping}</td>
 								<td>${pro.brand}</td>
 								<td>${pro.origin}</td>
 								<td>${pro.cat.name}</td>

@@ -56,9 +56,6 @@ public class Product {
 	@Column(name="PRO_RATING")
 	private Long rating;
 	
-	@Column(name="PRO_SHIPPING", columnDefinition="Decimal(10) default 0")
-	private String shipping;
-	
 	@Column(name="PRO_BRAND")
 	private String brand;
 	
@@ -179,14 +176,6 @@ public class Product {
 
 	public void setSold(Long sold) {
 		this.sold = sold;
-	}
-
-	public String getShipping() {
-		return shipping;
-	}
-
-	public void setShipping(String shipping) {
-		this.shipping = shipping;
 	}
 
 	public List<UserReviewPro> getReviews() {

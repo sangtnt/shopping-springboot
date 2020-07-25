@@ -72,8 +72,6 @@
 									</a>
 								</li>
 							</c:if>
-							<li><i class="fa fa-user"></i><a class="seller-link"
-								href="#">Seller</a></li>
 						</ul>
 					</div>
 				</div>

@@ -71,7 +71,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="col-lg-6">
+				<!-- <div class="col-lg-6">
 					<div class="shoping__continue">
 						<div class="shoping__discount">
 							<h5>Discount Codes</h5>
@@ -81,7 +81,7 @@
 							</form>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="col-lg-6">
 					<div class="shoping__checkout">
 						<h5>Cart Total</h5>

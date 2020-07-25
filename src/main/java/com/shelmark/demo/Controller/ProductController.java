@@ -82,7 +82,7 @@ public class ProductController {
 	private ImageProductRepository imgProRepo;
 	@RequestMapping(value = "/editPro", method = RequestMethod.POST)
 	public String editPro(@RequestParam Long proId, @RequestParam String proName, @RequestParam String proDescription,
-			@RequestParam String proBrand, @RequestParam String proOrigin, @RequestParam String proShipping,
+			@RequestParam String proBrand, @RequestParam String proOrigin,
 			@RequestParam Double proPrice, @RequestParam Long proQuantity, @RequestParam Long discount,
 			@RequestParam Long catId, @RequestParam List<MultipartFile> file) {
 		Product pro = proService.findById(proId);
@@ -94,7 +94,6 @@ public class ProductController {
 		pro.setBrand(proBrand);
 		pro.setDiscount(discount);
 		pro.setOrigin(proOrigin);
-		pro.setShipping(proShipping);
 		Date date = new Date();
 		Long milis = date.getTime();
 		pro.setDate(milis);
@@ -125,7 +124,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/addPro", method = RequestMethod.POST)
 	public String addProduct(@RequestParam String proName, @RequestParam String proDescription,
-			@RequestParam String proBrand, @RequestParam String proOrigin, @RequestParam String proShipping,
+			@RequestParam String proBrand, @RequestParam String proOrigin,
 			@RequestParam Double proPrice, @RequestParam Long proQuantity, @RequestParam Long discount, @RequestParam Long catId,
 			@RequestParam List<MultipartFile> file, HttpServletRequest request) {
 		Product pro = new Product();
@@ -136,7 +135,6 @@ public class ProductController {
 		pro.setCat(catService.getCatById(catId));
 		pro.setBrand(proBrand);
 		pro.setOrigin(proOrigin);
-		pro.setShipping(proShipping);
 		pro.setDiscount(discount);
 		Date date = new Date();
 		Long milis = date.getTime();

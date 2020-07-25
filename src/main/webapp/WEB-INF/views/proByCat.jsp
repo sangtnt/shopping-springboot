@@ -137,7 +137,7 @@
 								<li>
 									<form action="/auth/addToCart" method="post">
 										<input name="quantity" value="1" type="hidden"> <input
-											name="proId" value="${pro.id }" type="hidden"> <a><i
+											name="proId" value="${item.id }" type="hidden"> <a><i
 											class="addToCart fa fa-shopping-cart"></i></a>
 									</form>
 								</li>

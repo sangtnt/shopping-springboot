@@ -164,7 +164,6 @@
 							</c:if> <c:if test="${pro.quantity==0 }">
 								<span id="pro_quantity"><samp>Sold out</samp></span>
 							</c:if></li>
-						<li><b>Shipping</b> <span>${pro.shipping }</span></li>
 						<li><b>Origin</b> <span>${pro.origin }</span></li>
 						<!-- <li><b>Share on</b>
 							<div class="share">

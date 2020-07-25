@@ -23,10 +23,6 @@
 				value="${pro.quantity }" required>
 		</div>
 		<div class="form-group">
-			<label>Shipping</label> <input name="proShipping" type="text"
-				class="form-control" value="${pro.shipping }" id="exampleInputEmail1" required>
-		</div>
-		<div class="form-group">
 			<label>Brand</label> <input name="proBrand" type="text"
 				class="form-control" value="${pro.brand }" id="exampleInputEmail1" required>
 		</div>
