@@ -93,6 +93,12 @@ public class Product {
 			@JoinColumn(name = "USER_USERNAME") })
 	private Set<User> userLiked;
 	
+	public Product() {
+		this.discount=(long) 0;
+		this.sold=(long) 0;
+		this.rating=(long) 0;
+		this.research=(long) 0;
+	}
 	public Long getId() {
 		return id;
 	}

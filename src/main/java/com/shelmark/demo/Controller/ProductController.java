@@ -98,8 +98,8 @@ public class ProductController {
 		Date date = new Date();
 		Long milis = date.getTime();
 		pro.setDate(milis);
-		imgProRepo.deleteByProductId(pro.getId());
 		if (file.size() > 0&&!file.get(0).isEmpty()) {
+			imgProRepo.deleteByProductId(pro.getId());
 			List<ImageProduct> images = new ArrayList<>();
 			for (MultipartFile f : file) {
 				String img = imgService.uploadFile(uploadRootPath + "/product", f);
@@ -126,7 +126,7 @@ public class ProductController {
 	@RequestMapping(value = "/addPro", method = RequestMethod.POST)
 	public String addProduct(@RequestParam String proName, @RequestParam String proDescription,
 			@RequestParam String proBrand, @RequestParam String proOrigin, @RequestParam String proShipping,
-			@RequestParam Double proPrice, @RequestParam Long proQuantity, @RequestParam Long catId,
+			@RequestParam Double proPrice, @RequestParam Long proQuantity, @RequestParam Long discount, @RequestParam Long catId,
 			@RequestParam List<MultipartFile> file, HttpServletRequest request) {
 		Product pro = new Product();
 		pro.setName(proName);
@@ -137,6 +137,7 @@ public class ProductController {
 		pro.setBrand(proBrand);
 		pro.setOrigin(proOrigin);
 		pro.setShipping(proShipping);
+		pro.setDiscount(discount);
 		Date date = new Date();
 		Long milis = date.getTime();
 		pro.setDate(milis);

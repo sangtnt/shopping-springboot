@@ -78,6 +78,10 @@ public class ClientProductController {
 		List<Product> pros = products.stream().filter(pro -> {
 			return pro.getName().toLowerCase().contains(name.toLowerCase());
 		}).collect(Collectors.toList());
+		List<Product> prosByCat = products.stream().filter(pro -> {
+			return pro.getCat().getName().toLowerCase().contains(name.toLowerCase());
+		}).collect(Collectors.toList());
+		pros.addAll(prosByCat);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pros", pros);
 		mv.addObject("name", name);

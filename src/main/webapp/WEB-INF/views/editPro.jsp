@@ -62,7 +62,7 @@
 		</div>
 		<div id="file-group" class="form-group">
 			<label>Image</label> <input name="file" id="myProFile" type="file"
-				class="form-control" multiple required>
+				class="form-control" multiple>
 		</div>
 		<div id="img-group" class="form-group">
 			<c:forEach var="image" items="${pro.images }">

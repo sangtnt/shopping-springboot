@@ -29,7 +29,6 @@
 							<th>Shipping</th>
 							<th>Brand</th>
 							<th>Origin</th>
-							<th>Date</th>
 							<th>Category</th>
 							<th colspan="2">
 								<a href="/admin/product/addPro">
@@ -50,7 +49,6 @@
 								<td>${pro.shipping}</td>
 								<td>${pro.brand}</td>
 								<td>${pro.origin}</td>
-								<td>${pro.date}</td>
 								<td>${pro.cat.name}</td>
 								<td><a href="/admin/product/editPro?proId=${pro.id }">
 										<button class="btn btn-dark btn-block" type="button">
